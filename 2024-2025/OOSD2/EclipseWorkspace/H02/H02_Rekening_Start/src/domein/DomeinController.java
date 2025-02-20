@@ -3,6 +3,8 @@ package domein;
 import java.util.ArrayList;
 import java.util.List;
 
+import dtos.BeheerskostDTO;
+
 public class DomeinController {
 	private KostenRepository kRepo;
 	
@@ -15,7 +17,7 @@ public class DomeinController {
 	public List<BeheerskostDTO> geefInfoBeheersKosten() {
 		List<BeheerskostDTO> beheerskosten = new ArrayList<>();
 		for (Beheerskost kost : kRepo.getKosten()) {
-			beheerskosten.add(new BeheerskostDTO());
+			beheerskosten.add(BeheerskostDTO.maakBeheerskostDTO(kost));
 		}
 		return beheerskosten;
 	}
