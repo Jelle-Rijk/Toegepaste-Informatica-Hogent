@@ -129,3 +129,20 @@ Standaarden:
 *Er zijn nog andere standaarden, maar die komen niet in netacad aan bod*
 
 Om een draadloze verbinding te maken, heb je een WAP (Wireless Access Point) en een Wireless NIC nodig.
+
+
+## Notities - Labs / Packet tracer
+
+<code>route -n get default</code> -> default gateway vinden op Linux / MacOS
+
+Een device op je netwerk heeft een private IPv4-adres, op het internet wordt een public IPv4-adres gebruikt. De router "vertaalt" de adressen. <br> *Dit gebeurt om te besparen op het beperkte aantal IPv4-adressen die voor het internet beschikbaar zijn*
+
+Public IPv4-adres kan je vinden via web browser / zoekmachine.
+
+Hops tracen <br>
+<code>**tracert** *adres*</code> Windows <br>
+<code>**traceroute** *adres*</code> Linux / MacOS
+
+POP = Point of Presence -> Waar de ISP de service / toegang tot internet aanbiedt. Stuk tussen POP en klanten heet "local loop".
+
+IXP (= Internet Exchange Point) of NAP (Network Access Point - verouderde term): Plaats waar meerdere ISPs met elkaar verbonden worden.
