@@ -31,6 +31,13 @@ public class BeheerskostenMapper
 		z1.stortOp(300);
 		z2.stortOp(400);
 		
+		beheerskosten.add(s1);
+		beheerskosten.add(s2);
+		beheerskosten.add(z1);
+		beheerskosten.add(z2);
+		beheerskosten.add(k1);
+		beheerskosten.add(k2);
+		
 		return beheerskosten;
 	}
 }
