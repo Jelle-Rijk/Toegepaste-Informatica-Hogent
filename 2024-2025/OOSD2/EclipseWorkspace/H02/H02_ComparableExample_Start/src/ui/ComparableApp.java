@@ -21,7 +21,7 @@ public class ComparableApp {
 		list.add(new Movie("Return of the Jedi", 8.4, 1999));
 		list.add(new Movie("Return of the Jedi", 8.4, 2015));
 
-		//list.sort(null);
+		list.sort(null);
 		
 		//OF:
 		//Collections.sort(list);

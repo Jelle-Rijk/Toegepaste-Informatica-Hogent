@@ -1,6 +1,8 @@
 package domein;
 
-public class Movie {
+import java.util.Collections;
+
+public class Movie implements Comparable<Movie> {
 
     private double rating;
     private String name;
@@ -25,6 +27,13 @@ public class Movie {
 	public String toString() {
 		return String.format("%s %.2f %d", name, rating, year);
 	}
+
+	@Override
+	public int compareTo(Movie o) {
+		int nameSort = name.compareTo(o.getName());
+		return nameSort == 0 ? Integer.compare(year, o.getYear()): nameSort;
+	}
+	
 }
 
 
