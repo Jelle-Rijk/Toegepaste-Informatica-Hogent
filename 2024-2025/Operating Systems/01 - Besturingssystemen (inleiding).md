@@ -1,4 +1,10 @@
 # Besturingssystemen (Inleiding)
+
+- [Wat is een besturingssysteem?](#wat-is-een-besturingssysteem)
+- [Evolutie van besturingssystemen](#evolutie)
+- [Soorten besturingssystemen](#soorten-besturingssystemen)
+- [Concepten van besturingssystemen](#concepten-van-besturingssystemen)
+
 ## Wat is een besturingssysteem?
 
 Besturingssysteem = programma dat het mogelijk maakt de hardware van een computer te gebruiken.
