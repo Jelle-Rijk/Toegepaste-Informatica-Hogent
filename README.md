@@ -1,10 +1,12 @@
 # Toegepaste-Informatica-Hogent
 
-## Inhoudsopgave
+*De inhoud van deze GitHub repo bestaat uit mijn persoonlijke notities en uitwerkingen van oefeningen. Mocht je deze gebruiken, wees je er dan van bewust dat fouten mogelijk zijn.*
 
 ## Overzicht vakken
 
-### 2024-2025
+- [2024 - 2025](#2024---2025)
+
+### 2024 - 2025
 Semester 1:
 - Computer Systems
 - IT Fundamentals
