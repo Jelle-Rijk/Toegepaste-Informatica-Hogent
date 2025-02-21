@@ -3,7 +3,7 @@ package ui;
 import java.util.Scanner;
 
 import domein.DomeinController;
-import dto.VertoonbaarDTO;
+import dto.VoorstellingDTO;
 
 public class VertoonbaarApplicatie {
 
@@ -46,7 +46,7 @@ public class VertoonbaarApplicatie {
 
 	private void drukOverzichtVoorstellingenAf() {
 		System.out.println("Overzicht voorstellingen:");
-		for (VertoonbaarDTO v : dc.geefAlleVoorstellingen())
+		for (VoorstellingDTO v : dc.geefAlleVoorstellingen())
 		{
 			switch (v.soort())
 			{

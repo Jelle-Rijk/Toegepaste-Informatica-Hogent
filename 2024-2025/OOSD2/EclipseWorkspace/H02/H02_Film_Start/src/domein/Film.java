@@ -3,7 +3,7 @@ package domein;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Film {
+public class Film implements Vertoonbaar {
 
 	private int sterren;
     private String naam;
@@ -66,6 +66,15 @@ public class Film {
 			return false;
 		Film other = (Film) obj;
 		return jaar == other.jaar && Objects.equals(naam, other.naam);
+	}
+
+	@Override
+	public int wordtVertoondInZaal() {
+		if (sterren >= 4)
+			return 1;
+		if (sterren == 3)
+			return 2;
+		return 3;
 	}
 }
 
