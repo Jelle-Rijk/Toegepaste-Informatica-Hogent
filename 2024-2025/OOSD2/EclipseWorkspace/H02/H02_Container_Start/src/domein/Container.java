@@ -1,6 +1,6 @@
 package domein;
 
-public class Container {
+public class Container implements Comparable<Container> {
 
     private String eigenaar;
     private int volume;
@@ -83,6 +83,11 @@ public class Container {
 		} else if (!serialNumber.equals(other.serialNumber))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public int compareTo(Container c) {
+		return serialNumber - c.getSerialNumber();
 	}
 }
 
