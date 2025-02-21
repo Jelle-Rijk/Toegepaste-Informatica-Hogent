@@ -1,3 +1,7 @@
 /Sleutel.class
 /Voorwerp.class
 /Wapen.class
+/Gebouw.class
+/Draagbaar.class
+/DraagbaarRepository.class
+/DomeinController.class

@@ -1,6 +1,6 @@
 package domein;
 
-public class Voorwerp
+public class Voorwerp implements Draagbaar
 {
     private final String naam;
     private double gewicht;
@@ -50,5 +50,10 @@ public class Voorwerp
     public int getNiveau()
     {
         return niveau;
+    }
+    
+    @Override
+    public boolean isDraagbaar() {
+    	return true;
     }
 }
