@@ -41,6 +41,7 @@ public class VerplaatsingPerBusTram extends Verplaatsing
     { 
         return stadslijn; 
     }
+    @Override
     public double berekenPrijs() 
     {
         int aantalHaltes = (int) Math.ceil(getAantalKm());

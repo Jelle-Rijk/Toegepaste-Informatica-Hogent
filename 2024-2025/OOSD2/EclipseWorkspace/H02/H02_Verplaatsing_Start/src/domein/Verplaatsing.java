@@ -1,6 +1,6 @@
 package domein;
 
-public class Verplaatsing
+public abstract class Verplaatsing implements Kost
 {
     private String van;
 	public static final double BTW_PERCENTAGE = 21;
@@ -49,4 +49,9 @@ public class Verplaatsing
     { 
         return aantalKm; 
     }
+
+	@Override
+	public double berekenPrijsZonderBtw() {
+		return (berekenPrijs() / (100 + BTW_PERCENTAGE)) * 100;
+	}
 }

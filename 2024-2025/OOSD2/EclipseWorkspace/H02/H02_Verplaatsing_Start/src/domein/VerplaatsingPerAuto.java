@@ -40,6 +40,7 @@ public class VerplaatsingPerAuto extends Verplaatsing
         return verbruik; 
     }
 
+    @Override
     public double berekenPrijs() 
     {
         return 2 * verbruik * benzineprijs * getAantalKm();
