@@ -26,5 +26,9 @@ public class ComparatorApp {
         //	(2) Roep Collections.sort aan en geef dit 
         //		object mee als tweede parameter 
         //	(3) Print de gesorteerde lijst 
+		Collections.sort(list, new RatingCompare());
+		for (Movie m : list) {
+			System.out.printf("%.2f %s %d%n", m.getRating(), m.getName(), m.getYear());
+		}
     }
 }

@@ -1,8 +1,5 @@
 package ui;
 
-import java.util.List;
-
-import domein.Beheerskost;
 import domein.DomeinController;
 import dtos.BeheerskostDTO;
 
@@ -37,8 +34,6 @@ public class KostenApplicatie {
 	}
 
 	private String geefDetailsRekening(String titel, BeheerskostDTO dto) {
-		String houder = dto.houder();
-		double saldo = dto.saldo();
 		String rekeningNr = String.format("%012d", dto.rekeningNummer());
 		String details = String.format("%s met rekeningnummer %s-%s-%s%nstaat op naam van %s%nen bevat %.2f euro.", titel,
 				rekeningNr.substring(0, 2), rekeningNr.substring(3, 9), rekeningNr.substring(10), dto.houder(), dto.saldo());
