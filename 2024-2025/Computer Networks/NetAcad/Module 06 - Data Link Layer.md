@@ -20,7 +20,7 @@ In de MAC sublaag wordt de data ook verder ingekapseld met:
 - Addressing: Source en destination address voor devices op hetzelfde medium.
 - Error detection: Voegt data toe voor foutdetectie aan het einde van de frame.
 
-Deze video legt de layer goed uit:
+Deze video legt de layer goed uit: <br>
 [![https://www.youtube.com/watch?v=BOkH_B_8rcs](https://img.youtube.com/vi/BOkH_B_8rcs/0.jpg)](https://www.youtube.com/watch?v=BOkH_B_8rcs)
 
 ### Toegang verschaffen tot media
@@ -33,7 +33,65 @@ Een packet kan hops maken wanneer het een pad binnen een lokaal netwerk volgt. B
 - Kapselt het frame opnieuw in
 - Stuurt het nieuwe frame opnieuw door
 
-
 ## Topologieën
+
+Twee soorten:
+- Fysieke: Geeft aan welke apparaten fysiek met elkaar verbonden zijn en vaak ook waar ze staan.
+- Logische: Virtuele connecties, dit is wat de data link layer "ziet". Toont vaak de IP-adressen van devices.
+
+### WAN-topologieën
+
+- Point-to-Point: Permanente link tussen twee endpoints.
+- Hub and Spoke: Alle nodes zijn verbonden met een centrale node. Data tussen eindpunten moet altijd door de centrale node.
+- Mesh: Elke node is verbonden met elke andere node.
+
+-> Combinatie van topologieën = hybrid topology
+
+In een point-to-point topologie moet in de WAN niet gecheckt worden waar de data heen moet. De data wordt direct naar de volgende node gestuurd. In een LAN moet het end device checken of de data voor dat device is, zo niet moet de data naar de volgende node gestuurd worden.
+
+### Lan-topologieën
+
+- Star: De end devices verbinden met een centraal intermediary device (vb. Ethernet Switch)
+- Extended star: Zelfde als star, maar meerdere centrale devices worden met elkaar verbonden.
+
+Voordeel: Heel scalable en makkelijk te installeren.
+
+*Bus- en ring-topologieën zijn verouderd.*
+
+### Duplex Communication
+
+- Half-duplex communicatie: Eén device op het netwerk kan ontvangen of verzenden.
+- Full-duplex communicatie: Meerdere devices kunnen tegelijkertijd op het netwerk ontvangen en verzenden.
+
+-> Belangrijk dat NIC's in dezelfde duplex mode werken.
+
+### Access control methods
+
+Multiaccess network = netwerk waarin twee of meer end devices tegelijkertijd toegang kunnen vragen tot het netwerk.
+
+Regels nodig:
+- Contention-based acccess: Alle nodes zijn half-duplex. Als meerdere devices tegelijk iets versturen, treden regels in werking.
+- Controlled access: Elk apparaat krijgt een bepaald time slot om iets op het netwerk te zetten (was zo bij ring-topologieën). Het moet zijn beurt afwachten (= inefficiënt)
+
+**Moderne Ethernet-netwerken werken full-duplex waardoor er geen access method nodig is.**
+
+### Contention-based access
+
+
+
+CSMA (= Carrier Sense Multiple Access): Een end device checkt of het iets ontvangt, als het niets ontvangt, gaat het ervan uit dat het netwerk vrij is. Als devices dat tegelijk doen, kunnen collisions ontstaan.
+
+CSMA/CD = CSMA with Collision Detection -> vooral voor oude bus-topologie
+
+Als er een collision gebeurt, detecteren beide apparaten dit, daarna versturen ze de data opnieuw.
+
+CSMA/CA = CSMA with Collision Avoidance -> WLANs
+
+Het draadloze device wacht eerst tot het niets ontvangt (=CSMA). Het stuurt dan uit hoe lang het over de transmissie zal doen. De andere apparaten vangen dit op waardoor ze weten hoe lang het medium in gebruik is.
+
+In een WLAN stuurt de ontvanger altijd een acknowledgment naar de zender om te laten weten dat hij het frame ontvangen heeft.
+
+
+
 
 ## Data Link Frame
