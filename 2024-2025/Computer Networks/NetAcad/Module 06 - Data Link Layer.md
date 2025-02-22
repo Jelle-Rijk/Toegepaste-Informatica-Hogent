@@ -20,9 +20,8 @@ In de MAC sublaag wordt de data ook verder ingekapseld met:
 - Addressing: Source en destination address voor devices op hetzelfde medium.
 - Error detection: Voegt data toe voor foutdetectie aan het einde van de frame.
 
-<video controls>
-<source src="https://www.youtube.com/watch?v=BOkH_B_8rcs"/>
-https://www.youtube.com/watch?v=BOkH_B_8rcs</video>
+Deze video legt de layer goed uit:
+[![https://www.youtube.com/watch?v=BOkH_B_8rcs](https://img.youtube.com/vi/BOkH_B_8rcs/0.jpg)](https://www.youtube.com/watch?v=BOkH_B_8rcs)
 
 ### Toegang verschaffen tot media
 
