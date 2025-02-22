@@ -9,8 +9,9 @@
 - Beheert de manier waarop data op het fysieke medium wordt geplaatst.
 - Voert foutdetectie uit.
 
-### IEEE 802 LAN/MAN Data Link Sublayers (WIP)
-Deze standaard is specifiek voor Ethernet LAN, WLAN, WPAN (Wireless Personal Area Networks). Het schrijf twee sublagen voor:
+### IEEE 802 LAN/MAN Data Link Sublayers
+
+Deze standaard is specifiek voor Ethernet LAN, WLAN, WPAN (Wireless Personal Area Networks). Het schrijft twee sublagen voor:
 - Logical Link Control (LLC): Communiceert tussen de hogere softwarelagen en de lagere hardwarelaag. Het voegt de Layer 2 data toe aan het packet.
 - Media Access Control (MAC): Implementeert deze laag in de hardware. Het bestuurt de NIC.
 
@@ -19,9 +20,13 @@ In de MAC sublaag wordt de data ook verder ingekapseld met:
 - Addressing: Source en destination address voor devices op hetzelfde medium.
 - Error detection: Voegt data toe voor foutdetectie aan het einde van de frame.
 
-### Toegang verschaffen tot media (WIP)
+https://www.youtube.com/watch?v=BOkH_B_8rcs
 
-Een packet kan hops maken wanneer het een pad volgt. Bij elke hop die niet tussen twee serial links is, doet de MAC het volgende in layer 2:
+### Toegang verschaffen tot media
+
+De MAC sublayer voorkomt "botsingen" op het netwerk. Dit is niet nodig bij serial links.
+
+Een packet kan hops maken wanneer het een pad binnen een lokaal netwerk volgt. Bij elke hop doet de MAC het volgende:
 - Aanvaardt het frame
 - Ontkapselt het frame
 - Kapselt het frame opnieuw in
