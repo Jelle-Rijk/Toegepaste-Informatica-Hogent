@@ -95,3 +95,28 @@ In een WLAN stuurt de ontvanger altijd een acknowledgment naar de zender om te l
 
 
 ## Data Link Frame
+
+Elke frame bestaat uit drie delen:
+- Header: Frame start, addressering (source en destination op het medium - MAC), type (welk layer 3 protocol de data is), control (vb. Quality of Service)
+- Data: Bevat de data van de hogere lagen.
+- Trailer: Foutdetectie en frame stop
+
+Niet alle protocollen voegen alle velden toe, maar elk protocol kapselt wel het packet van de hogere lagen in.
+
+**Foutdetectie**: De verzendende node berekent een CRC (cyclic redundancy check - zie ITFUN) en plaatst de waarde daarvan in het frame check sequence field (FCS).
+
+### Layer 2 addressen
+
+-> Zijn de fysieke addressen, uniek voor elk device.
+
+Worden enkel gebruikt voor lokale aflevering van het packet. Bij elke hop neemt de node het frame, decodeert het, vervangt het source adres door het eigen layer 2 adres en het destination adres door het adres van de volgende node.
+
+Als het frame naar een nieuw netwerk gaat, accepteert de router de frame, ontkapselt het de data en leest het de layer 3 adressen om te weten waar het packet naartoe moet. Als de router een pad gevonden heeft, maakt het opnieuw een frame en stuurt het door naar de volgende router.
+
+### LAN- en WAN-frames
+
+LANs gebruiken Ethernet, WLAN gebruikt IEEE 802.11.
+
+WAN gebruikt traditioneel andere protocollen (vb. Point-to-Point Protocol - PPP of High-Level Data Link Control - HDLC). Deze worden nu ook vervangen door Ethernet.
+
+In TCP/IP hangen de layer 2 protocollen af van de logische topologie en het fysieke medium dat gebruikt wordt.
