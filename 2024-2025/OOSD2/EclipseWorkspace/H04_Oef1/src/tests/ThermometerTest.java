@@ -23,13 +23,6 @@ class ThermometerTest {
 		assertEquals(DEFAULT_TEMP, t.getAantalGraden());
 	}
 	
-//	SETTER
-	@Test
-	void setAantalGraden() {
-		t.setAantalGraden(52);
-		assertEquals(52, t.getAantalGraden());
-	}
-	
 //	CONVERTEER NAAR CELSIUS
 	@Test
 	void converteerNaarCelsius_DefaultTemp_Returnt0() {
@@ -37,7 +30,7 @@ class ThermometerTest {
 	}
 	@Test
 	void converteerNaarCelsius_100F_Returnt37() {
-		t.setAantalGraden(100);
+		t.stelAantalGradenIn("100");
 		assertEquals(37, t.converteerNaarCelsius());
 	}
 

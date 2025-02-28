@@ -3,6 +3,7 @@ package ui;
 import java.util.Scanner;
 
 import domein.DomeinController;
+import exceptions.BuitenBereikException;
 
 public class ThermometerApplicatie {
 	private DomeinController dc;
@@ -19,15 +20,12 @@ public class ThermometerApplicatie {
 		do {
 			try {
 				System.out.printf("Geef een gehele temperatuur in °F uit het interval [%d,%d]: ", minF, maxF);
-				int tempF = Integer.parseInt(s.nextLine());
-				if (tempF > maxF || tempF < minF) {
-					throw new IndexOutOfBoundsException();
-				}
-				valid = true;
+				String tempF = s.nextLine();
 				dc.updateTemperatuur(tempF);
-			} catch (IndexOutOfBoundsException e) {
-				System.out.printf("De waarde van temperatuur moet uit het interval [%d,%d] komen!%n", minF, maxF);
-			} catch (IllegalArgumentException e) {
+				valid = true;
+			} catch (BuitenBereikException e) {
+				System.out.printf("Waarde van temperatuur moet uit het interval [%d,%d] komen!%n", minF, maxF);
+			} catch (NumberFormatException e) {
 				System.out.println("De invoer moet een geheel getal zijn!");
 			}
 		} while (!valid);

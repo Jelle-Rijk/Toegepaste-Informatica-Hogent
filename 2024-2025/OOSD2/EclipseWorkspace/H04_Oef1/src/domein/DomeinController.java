@@ -3,10 +3,10 @@ package domein;
 public class DomeinController {
 	private Thermometer t;
 
-	public void updateTemperatuur(int tempF) {
+	public void updateTemperatuur(String tempF) {
 		if (t == null)
 			t = new Thermometer();
-		t.setAantalGraden(tempF);
+		t.stelAantalGradenIn(tempF);
 	}
 
 	public int geefTemperatuurInCelsius() {
