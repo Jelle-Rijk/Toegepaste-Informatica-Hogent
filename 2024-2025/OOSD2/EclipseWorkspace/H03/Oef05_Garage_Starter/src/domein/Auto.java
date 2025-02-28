@@ -1,6 +1,6 @@
 package domein;
 
-public class Auto {
+public class Auto implements Comparable<Auto> {
 
 	private String nummerplaat;
 	private String merk;
@@ -52,6 +52,24 @@ public class Auto {
 
 	public void voegOnderhoudToe() {
 		this.aantalOnderhoudsbeurten++;
+	}
+
+
+	@Override
+	public int compareTo(Auto o) {
+		return nummerplaat.compareTo(o.getNummerplaat());
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null)
+			return false;
+		if (getClass() != o.getClass())
+			return false;
+		Auto andereAuto = (Auto) o;
+		return nummerplaat.equals(andereAuto.getNummerplaat());
 	}
 
 }
