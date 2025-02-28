@@ -20,6 +20,13 @@ public class DomeinController {
 	public Collection<ContainerDTO> geefAlleContainersGesorteerdOpSerienummer() {
 		return zetContainersOmNaatContainerDTOs(containerRepo.geefAlleContainersGesorteerdOpSerienummer());
 	}
+	
+	public Collection<ContainerDTO> geefAlleContainersGesorteerdOpSerienummerReferentie(){
+		return zetContainersOmNaatContainerDTOs(containerRepo.geefAlleContainersGesorteerdOpSerienummerReferentie());
+	}
+	public Collection<ContainerDTO> geefAlleContainersGesorteerdOpAflopendSerienummer(){
+		return zetContainersOmNaatContainerDTOs(containerRepo.geefAlleContainersGesorteerdOpAflopendSerienummer());
+	}
 
 	public Collection<ContainerDTO> geefAlleContainersGesorteerdOpMassa() {
 		return zetContainersOmNaatContainerDTOs(containerRepo.geefAlleContainersGesorteerdOpMassa());

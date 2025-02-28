@@ -21,6 +21,10 @@ public class ContainerApp {
 		toonContainers("Containers bij sorteren op eigenaar", dc.geefAlleContainersGesorteerdOpEigenaar());
 		toonContainers("Containers bij sorteren op volume en dan op eigenaar",
 				dc.geefAlleContainersGesorteerdOpVolumeEnEigenaar());
+		toonContainers("Containers bij sorteren op serienummer",
+				dc.geefAlleContainersGesorteerdOpSerienummerReferentie());
+		toonContainers("Containers bij sorteren op serienummer (aflopend)",
+				dc.geefAlleContainersGesorteerdOpAflopendSerienummer());
 		voegContainersToe();
 	}
 
