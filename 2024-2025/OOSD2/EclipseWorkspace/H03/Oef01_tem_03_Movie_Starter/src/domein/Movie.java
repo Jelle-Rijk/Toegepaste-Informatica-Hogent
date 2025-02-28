@@ -65,4 +65,12 @@ public class Movie implements Comparable<Movie> {
 		int compareName = name.compareTo(m.name);
 		return compareName != 0 ? compareName : year - m.year;
 	}
+
+	public static int compareRating(Movie m1, Movie m2) {
+		return Double.compare(m1.getRating(), m2.getRating()) * -1;
+	}
+
+	public static int compareName(Movie m1, Movie m2) {
+		return m1.getName().compareTo(m2.getName());
+	}
 }
