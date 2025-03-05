@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -36,6 +37,7 @@ public class OverzichtsScherm extends BorderPane {
 		overzichtsPane = buildGridPane();
 		setCenter(overzichtsPane);
 		toonContainers(-1);
+		
 	}
 
 	private GridPane buildGridPane() {
@@ -64,7 +66,30 @@ public class OverzichtsScherm extends BorderPane {
 
 	private MenuBar buildMenuBar() {
 		MenuBar menuBar = new MenuBar();
-		// TODO
+		
+//		Containermenu maken
+		Menu containerMenu = new Menu("Containers");
+		MenuItem overzichtMI = new MenuItem("Overzicht");
+		overzichtMI.setOnAction(e -> show());
+		MenuItem toevoegenMI = new MenuItem("Toevoegen");
+		toevoegenMI.setOnAction(e -> voegContainerToe());
+		MenuItem exitMI = new MenuItem("Exit CTRL-X");
+		
+//		Sorteermenu maken
+		Menu sorteerMenu = new Menu("Sorteren");
+		String[] sorteerOpties = new String[] {"serienummer", "eigenaar", "massa", "volume"};
+		for (int i = 0; i < sorteerOpties.length; i++) {
+			MenuItem sorteerMI = new MenuItem(String.format("Op %s", sorteerOpties[i]));
+			final int sorteersleutel = i;
+			sorteerMI.setOnAction(e -> toonContainers(sorteersleutel));
+			sorteerMenu.getItems().add(sorteerMI);
+		}
+		
+		containerMenu.getItems().addAll(overzichtMI, toevoegenMI, exitMI);
+		
+		
+		
+		menuBar.getMenus().addAll(containerMenu, sorteerMenu);
 		return menuBar;
 	}
 

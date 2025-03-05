@@ -11,6 +11,7 @@ import domein.DomeinController;
 import dto.DraagbaarDTO;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -36,6 +37,12 @@ public class OverzichtsScherm extends VBox {
 		lblTitel.setFont(Font.font("Montserrat", FontWeight.NORMAL, 20));
 		HBox hboxButtons = new HBox();
 		// TODO -buttons aan hboxButtons toevoegen
+		for (DraagbaarType d : DraagbaarType.values()) {
+			Button newButton = new Button(String.format("Voeg %s toe", d.name().toLowerCase()));
+			hboxButtons.getChildren().add(newButton);
+			newButton.setOnAction(e -> voegDraagbaarToe(d));
+		}
+
 		hboxButtons.setAlignment(Pos.CENTER);
 		hboxButtons.setSpacing(10);
 		txaOverzicht = new TextArea(geefOverzichtVanAlleItems());

@@ -2,9 +2,11 @@ package gui;
 
 import domein.DomeinController;
 import dto.BeheerskostDTO;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
@@ -39,6 +41,12 @@ public class DetailPaneel extends GridPane {
 		lblDetails = new Label("Details:");
 		lblDetails.setFont(lettertype);
 
+		Button btnStort = new Button("storten");
+		btnStort.setOnAction(e -> verwerkBedrag(TransactieType.STORTEN));
+		Button btnHaalAf = new Button("afhalen");
+		btnHaalAf.setOnAction(e -> verwerkBedrag(TransactieType.AFHALEN));
+		GridPane.setHalignment(btnHaalAf, HPos.RIGHT);
+
 		txfRekeningNr = new TextField();
 		txfRekeningNr.setEditable(false);
 		txfSaldo = new TextField();
@@ -56,6 +64,8 @@ public class DetailPaneel extends GridPane {
 		this.add(lblHouder, 0, 3);
 		this.add(txfHouder, 1, 3, 2, 1);
 		this.add(txfBedrag, 0, 4, 3, 1);
+		this.add(btnStort, 0, 5);
+		this.add(btnHaalAf, 2, 5);
 		GridPane.setMargin(lblDetails, new Insets(0, 0, 10, 0));
 		GridPane.setMargin(txfBedrag, new Insets(10, 0, 0, 0));
 
@@ -65,11 +75,19 @@ public class DetailPaneel extends GridPane {
 	}
 
 	private void verwerkBedrag(TransactieType transactieType) {
-		double bedrag = Double.parseDouble(txfBedrag.getText());
-		switch (transactieType) {
-		case STORTEN -> dc.stortOpGeselecteerdeRekening(bedrag);
-		case AFHALEN -> dc.haalAfVanGeselecteerdeRekening(bedrag);
+		try {
+			double bedrag = Double.parseDouble(txfBedrag.getText());
+			switch (transactieType) {
+			case STORTEN -> dc.stortOpGeselecteerdeRekening(bedrag);
+			case AFHALEN -> dc.haalAfVanGeselecteerdeRekening(bedrag);
+			}
+			geefFeedback(AlertType.INFORMATION, "Het saldo van deze rekening werd aangepast.");
+		} catch (NumberFormatException e) {
+			geefFeedback(AlertType.WARNING, "Dit is geen geldig bedrag!");
+		} catch (IllegalArgumentException e) {
+			geefFeedback(AlertType.WARNING, e.getMessage());
 		}
+
 	}
 
 	public void updateScherm() {

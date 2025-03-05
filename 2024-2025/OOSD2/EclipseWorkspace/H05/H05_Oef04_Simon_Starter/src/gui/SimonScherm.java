@@ -64,7 +64,15 @@ public class SimonScherm extends GridPane {
 	}
 
 	private void verwerkGekozenKleurVanSpeler(Kleur kleur) {
-		// TODO
+		dc.kiesKleur(kleur);
+		if (dc.isGoedGeraden()) {
+			if (dc.isReeksVolledigGeraden()) {
+				alertKleurJuistGeraden();
+				toonNieuweKleurScherm.toonVolgendeKleur();
+				getScene().setRoot(toonNieuweKleurScherm);
+			}
+		} else
+			alertEindeSpel(kleur);
 	}
 
 	private void alertEindeSpel(Kleur gekozenKleur) {

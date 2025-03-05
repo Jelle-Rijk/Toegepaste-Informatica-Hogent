@@ -14,7 +14,7 @@ public class Gebouw implements Draagbaar {
 
 	private void controleerNaam(String naam) {
 		if (naam == null || naam.equals(""))
-			throw new IllegalArgumentException("naam moet ingevuld worden!");
+			throw new IllegalArgumentException("Naam moet ingevuld worden!");
 	}
 
 	public String getNaam() {
@@ -27,7 +27,7 @@ public class Gebouw implements Draagbaar {
 
 	public final void setHoogte(double hoogte) {
 		if (hoogte < 3)
-			throw new IllegalArgumentException("hoogte moet minstens 3 meter zijn!");
+			throw new IllegalArgumentException("Hoogte moet minstens 3 meter zijn!");
 		this.hoogte = hoogte;
 	}
 

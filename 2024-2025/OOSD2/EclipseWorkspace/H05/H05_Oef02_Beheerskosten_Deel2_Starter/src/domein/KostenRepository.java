@@ -23,8 +23,11 @@ public class KostenRepository {
 	}
 
 	public List<Rekening> geefRekeningen() {
-		// TODO Retourneer alle Rekeningen
-		return new ArrayList<>();
+		List<Rekening> rekeningen = new ArrayList<>();
+		for (Beheerskost kost : kosten)
+			if (kost instanceof Rekening r)
+				rekeningen.add(r);
+		return rekeningen;
 	}
 
 	public Rekening geefRekening(int index) {

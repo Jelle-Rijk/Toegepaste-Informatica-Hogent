@@ -1,8 +1,10 @@
 package gui;
 
 import domein.DomeinController;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
@@ -19,7 +21,15 @@ public class OverschrijfPaneel extends VBox {
 	}
 
 	private void buildGui() {
-		// TO DO
+		txfBedrag = new TextField();
+		txfBedrag.setPromptText("bedrag");
+		Button btnOverschrijven = new Button("overschrijven");
+		btnOverschrijven.setPrefWidth(100);
+		btnOverschrijven.setOnAction(e -> verwerkBedrag());
+		
+		this.setSpacing(10);
+		this.setAlignment(Pos.CENTER);
+		this.getChildren().addAll(txfBedrag, btnOverschrijven);
 	}
 
 	private void verwerkBedrag() {

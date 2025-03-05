@@ -39,10 +39,12 @@ public class ToonNieuweKleurScherm extends VBox {
 	}
 
 	public void toonVolgendeKleur() {
-		// TODO
+		dc.voegNieuweKleurAanKleurenreeksToe();
+		lblNieuweKleur.setText(dc.geefNieuweKleurUitKleurenreeks().toString());
+	
 	}
 
 	public void springNaarSimonScherm() {
-		// TODO
+		getScene().setRoot(simonScherm);
 	}
 }
