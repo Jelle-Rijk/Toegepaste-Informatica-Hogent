@@ -11,7 +11,7 @@ public class Kaart {
 
 	public Kaart(String image) {
 		this.image = image;
-		faceUp = false;
+		faceUp = true;
 		kolom = GEEN_PLAATS;
 		rij = GEEN_PLAATS;
 	}

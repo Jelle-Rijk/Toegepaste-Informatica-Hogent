@@ -1,14 +1,20 @@
 package gui;
 
 import domein.DomeinController;
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -38,7 +44,10 @@ public class PuzzelPaneel extends GridPane {
 	}
 
 	private void toonAantalClicks() {
-		// TODO
+		lblClicks = new Label(String.format("# clicks: %d", dc.geefAantalClicks()));
+		lblClicks.getStyleClass().addAll("styledText", "smallText");
+		mijnContainer.setBottom(lblClicks);
+		BorderPane.setAlignment(lblClicks, Pos.CENTER);
 	}
 
 	private void toonPuzzel() {
@@ -81,6 +90,18 @@ public class PuzzelPaneel extends GridPane {
 	}
 
 	private void alertEindeSpel() {
-		// TODO
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Congratulations!");
+		alert.setHeaderText(String.format("You solved the sliding puzzle after %d clicks!", dc.geefAantalClicks()));
+		alert.setContentText("Do you want to play again?");
+		
+		Button btnYes = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+		Button btnNo = (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL);
+		btnYes.setText("Yes");
+		btnYes.setOnAction(e -> mijnContainer.kiesThemaEnInstellingen());
+		btnNo.setText("No");
+		btnNo.setOnAction(e -> Platform.exit());
+		
+		alert.showAndWait();
 	}
 }

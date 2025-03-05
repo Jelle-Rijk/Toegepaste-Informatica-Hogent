@@ -29,7 +29,7 @@ public class WelkomScherm extends StackPane {
 	}
 
 	private void gaNaarSpelScherm() {
-		// TODO
+		getScene().setRoot(new SpelScherm(dc));
 	}
 
 }

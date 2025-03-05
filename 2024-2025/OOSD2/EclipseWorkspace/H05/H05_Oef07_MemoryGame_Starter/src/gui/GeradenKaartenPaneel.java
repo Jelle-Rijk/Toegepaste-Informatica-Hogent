@@ -1,7 +1,9 @@
 package gui;
 
 import domein.DomeinController;
+import dto.KaartDTO;
 import javafx.geometry.Insets;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
@@ -23,6 +25,15 @@ public class GeradenKaartenPaneel extends HBox {
 	}
 
 	public void toonGeradenKaarten() {
-		// TODO
+		getChildren().clear();
+		for (KaartDTO dto : dc.geefGeradenKaarten()) {
+			ImageView ivKaartje = new ImageView();
+			String imgPath = KaartenPaneel.PAD_NAAR_IMAGES + dto.image();
+			Image imgKaartje = new Image(getClass().getResourceAsStream(imgPath));
+			ivKaartje.setImage(imgKaartje);
+			ivKaartje.setFitWidth(50);
+			ivKaartje.setFitHeight(50);
+			voegKaartjeToe(ivKaartje);
+		}
 	}
 }

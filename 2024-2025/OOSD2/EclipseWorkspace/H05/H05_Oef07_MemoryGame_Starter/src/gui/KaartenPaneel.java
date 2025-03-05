@@ -1,16 +1,21 @@
 package gui;
 
 import domein.DomeinController;
+import domein.MemoryGame;
 import dto.KaartDTO;
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 public class KaartenPaneel extends GridPane {
 	public static final String PAD_NAAR_IMAGES = "/images/masks/";
@@ -30,6 +35,17 @@ public class KaartenPaneel extends GridPane {
 		setBackground(new Background(new BackgroundImage(imgWelkom, null, null, null, null)));
 		setAlignment(Pos.CENTER);
 		// TODO: Grid definieren met gepaste row- en columnconstraints
+		for (int i = 0; i < MemoryGame.AANTAL_RIJEN; i++) {
+			RowConstraints row = new RowConstraints();
+			row.setPrefHeight(120);
+			getRowConstraints().add(row);
+		}
+		for (int i = 0; i < MemoryGame.AANTAL_KOLOMMEN; i++) {
+			ColumnConstraints col = new ColumnConstraints();
+			col.setPrefWidth(120);
+			getColumnConstraints().add(col);
+		}
+
 		toonKaartenOpTafel();
 	}
 
@@ -89,6 +105,18 @@ public class KaartenPaneel extends GridPane {
 	}
 
 	private void vraagOmNogEensTeSpelen() {
-		// TODO
+		getChildren().clear();
+		Button btnPlayAgain = new Button("PLAY AGAIN");
+		btnPlayAgain.setAlignment(Pos.CENTER);
+		btnPlayAgain.getStyleClass().addAll("styledText", "smallText");
+		btnPlayAgain.setOnAction(e -> spelScherm.startSpel());
+		add(btnPlayAgain, 1, 1, 2, 2);
+
+		Button btnExit = new Button("EXIT");
+		btnExit.setAlignment(Pos.CENTER);
+		btnExit.getStyleClass().addAll("styledText", "smallText");
+		btnExit.setOnAction(e->Platform.exit());
+		add(btnExit, 3, 1, 2, 2);
+
 	}
 }

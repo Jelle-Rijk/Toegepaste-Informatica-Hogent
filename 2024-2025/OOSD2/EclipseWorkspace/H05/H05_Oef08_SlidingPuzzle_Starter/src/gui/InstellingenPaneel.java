@@ -16,7 +16,16 @@ public class InstellingenPaneel extends VBox {
 	}
 
 	private void toonKeuzesMoeilijkheidsgraad() {
-		// TODO
+		Label lblDifficulty = new Label("Difficulty");
+		lblDifficulty.getStyleClass().add("settingsText");
+		tglMoeilijkheidsgraad = new ToggleGroup();
+		getChildren().add(lblDifficulty);
+		for (Moeilijkheidsgraad diff : Moeilijkheidsgraad.values()) {
+			RadioButton rbtnDiff = new RadioButton(String.format("%s", diff.name().toLowerCase()));
+			rbtnDiff.setToggleGroup(tglMoeilijkheidsgraad);
+			rbtnDiff.setSelected(diff.name().equals("EASY"));
+			getChildren().add(rbtnDiff);
+		}
 	}
 
 	private void toonKeuzesAantalStukken() {
@@ -40,7 +49,7 @@ public class InstellingenPaneel extends VBox {
 	}
 
 	public Moeilijkheidsgraad geefMoeilijkheidsgraad() {
-		// TODO
-		return null;
+		RadioButton selectedRadioButton = (RadioButton) tglMoeilijkheidsgraad.getSelectedToggle();
+		return Moeilijkheidsgraad.valueOf(selectedRadioButton.getText().toUpperCase());
 	}
 }

@@ -1,0 +1,5 @@
+.headerButton {
+	-fx-background-color: black;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}

@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import domein.DomeinController;
 import dto.ContainerDTO;
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,7 +12,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -55,6 +58,7 @@ public class OverzichtsScherm extends BorderPane {
 		for (Button button : buttons) {
 			grid.add(button, col, 0);
 			// TODO styleClass geven aan button
+			button.getStyleClass().add("headerButton");
 			GridPane.setHalignment(button, HPos.CENTER);
 			final int sorteerSleutel = col;
 			button.setOnAction(evt -> toonContainers(sorteerSleutel));
@@ -73,10 +77,13 @@ public class OverzichtsScherm extends BorderPane {
 		overzichtMI.setOnAction(e -> show());
 		MenuItem toevoegenMI = new MenuItem("Toevoegen");
 		toevoegenMI.setOnAction(e -> voegContainerToe());
-		MenuItem exitMI = new MenuItem("Exit CTRL-X");
+		MenuItem exitMI = new MenuItem("Exit");
+		exitMI.setAccelerator(KeyCombination.keyCombination("Ctrl+x"));
+		exitMI.setOnAction(e -> Platform.exit());
+		containerMenu.getItems().addAll(overzichtMI, toevoegenMI,new SeparatorMenuItem(), exitMI);
 		
 //		Sorteermenu maken
-		Menu sorteerMenu = new Menu("Sorteren");
+		sorteerMenu = new Menu("Sorteren");
 		String[] sorteerOpties = new String[] {"serienummer", "eigenaar", "massa", "volume"};
 		for (int i = 0; i < sorteerOpties.length; i++) {
 			MenuItem sorteerMI = new MenuItem(String.format("Op %s", sorteerOpties[i]));
@@ -85,7 +92,6 @@ public class OverzichtsScherm extends BorderPane {
 			sorteerMenu.getItems().add(sorteerMI);
 		}
 		
-		containerMenu.getItems().addAll(overzichtMI, toevoegenMI, exitMI);
 		
 		
 		
@@ -94,11 +100,14 @@ public class OverzichtsScherm extends BorderPane {
 	}
 
 	public void show() {
-		// TODO
+		sorteerMenu.setDisable(false);
+		setCenter(overzichtsPane);
+		toonContainers(gekozenSortering);
 	}
 
 	private void voegContainerToe() {
-		// TODO
+		sorteerMenu.setDisable(true);
+		setCenter(new ToevoegScherm(dc, this));
 	}
 
 	private void toonContainers(int sorteerSleutel) {

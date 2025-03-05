@@ -21,10 +21,14 @@ public class SpelScherm extends BorderPane {
 	}
 
 	public void kiesThemaEnInstellingen() {
-		// TODO
+		getChildren().clear();
+		setLeft(instellingenPaneel);
+		setCenter(themaPaneel);
 	}
 
 	public void maakPuzzel() {
-		// TODO
+		getChildren().clear();
+		dc.maakPuzzel(themaPaneel.getThema(), instellingenPaneel.geefAantalStukken(), instellingenPaneel.geefMoeilijkheidsgraad());
+		setCenter(new PuzzelPaneel(dc, this));
 	}
 }
