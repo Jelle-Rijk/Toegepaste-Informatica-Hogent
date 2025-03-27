@@ -40,7 +40,30 @@ Voordelen:
 
 ## Docker
 
-Start altijd met een Dockerfile, die ga je builden (= image). <br> Als je de image uitvoert, spreken we van een **container**.
+Start altijd met een Dockerfile, die ga je builden (= **image**). <br> Als je de image uitvoert, spreken we van een **container**.
 
+DockerHub is een centrale repository op het internet met verschillende Dockerfiles.
 
 ## Docker Compose
+
+Om Docker netwerken beter te beheren, gebruik je Docker Compose.
+
+Config gebeurt in docker-compose.yml, dus niet meer op CLI.<br> Alle containers in de YAML-file kunnen makkelijk met één commando gestart en gestopt worden.
+
+|Taak|Commando|
+|----|--------|
+|Containers starten| `docker compose up`|
+|Containers stoppen|`docker compose down`|
+|Draaiende compose projecten zien|`docker compose ls`|
+|Gebruikte images weergeven|`docker compose images`|
+|Lijst draaiende containers|`docker compose ps` optie -a voor gestopte containers|
+
+De containernaam is de naam van de service die je geeft in het docker-compose.yml bestand. Docker-netwerken hebben een ingebouwd DNS, je hoeft geen IP=adressen te gebruiken.
+
+Een van de voordelen van Docker-netwerken is dat je databases ontoegankelijk maakt voor buitenaf. Dit is belangrijk om volgende redenen:
+- Beveiliging: Minder kans op datalekken of gegevensverlies. Enkel de website heeft toegang tot de database.
+- Beperken van netwerkverkeer: Verbetert de prestaties
+
+Door de database op een local network te zetten met de website in Docker Compose, is de database van de buitenwereld afgeschermd.
+
+-> Probeer nooit localhost te gebruiken in docker-compose.yml
