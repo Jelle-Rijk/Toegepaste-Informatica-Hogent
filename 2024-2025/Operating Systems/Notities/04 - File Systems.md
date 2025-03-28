@@ -1,5 +1,15 @@
 # File Systems
 
+- [Persistente opslag](#persistente-opslag)
+- [Files](#files)
+- [Directories](#directories)
+- [Mappenstructuur](#mappenstructuur)
+- [File systems](#file-systems-1)
+- [Partities](#partities)
+- [Booten](#booten)
+- [Populaire file systems](#populaire-file-systems)
+- [Opslag in Docker](#opslag-in-docker)
+
 ## Persistente opslag
 
 Doel = data bewaren na afsluiten van proces, grote hoeveelheden data opslaan en data delen tussen processen
