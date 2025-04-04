@@ -57,4 +57,4 @@ RS en RA worden gebruikt voor router discovery en SLAAC.
 
 Zender van een message stuurt een NS met een speciaal multicast-address. Ontvangers kunnen checken of de NS voor hen is zonder die naar het OS door te sturen. De ontvanger stuurt een NA via ICMPv6 terug.
 
-![Bekijk deze video voor een goede uitleg.](https://www.youtube.com/watch?v=A3LFt7CHpgs)
+[Bekijk deze video voor een goede uitleg.](https://www.youtube.com/watch?v=A3LFt7CHpgs)
