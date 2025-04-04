@@ -1,0 +1,40 @@
+# JavaFX
+
+## Structuur van main method
+
+### Main method
+
+```java
+public class Main extends Application {
+    public static void main(String[] args) {
+        launch(args); // Static method uit Application, roept start() aan achter de schermen.
+    }
+}
+```
+
+### Start method
+
+```java
+public void start(Stage stage) throws Exception {
+    Scene scene = new Scene();
+
+    stage.show(); // Zorgt ervoor dat het scherm zichtbaar wordt.
+}
+```
+
+## Stages en Scenes
+
+JavaFX stages zijn opgebouwd uit verschillende onderdelen.
+
+- Stage: Venster waarin je werkt.
+  - Scene: Een oppervlak waarop je content kan weergeven.
+    - Scene-Graph: Tree van nodes
+      - Root node: node aan de root van de tree (verplicht voor elke scene-graph)
+      - Leaf node: node aan het einde van de tree
+      - Branch node: node ergens tussen root en leaves
+
+## Klassen
+
+### Group
+
+Group is hetzelfde als een Pane, maar heeft geen eigen grootte. Dit betekent dat een Group de grootte aanneemt van het kleinste vierkant dat het kan maken rond al z'n children.
