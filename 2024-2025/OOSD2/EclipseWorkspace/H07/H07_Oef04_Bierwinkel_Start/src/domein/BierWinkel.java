@@ -1,6 +1,9 @@
 package domein;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 public class BierWinkel {
 	private final Collection<Bier> bieren;
@@ -16,7 +19,7 @@ public class BierWinkel {
 	 *         het opegegeven percentage hebben
 	 */
 	public int geefAantalBierenMetMinAlcoholPercentage(double percentage) {
-		return 0;
+		return (int) bieren.stream().filter(b -> b.getAlcoholgehalte() >= percentage).count();
 	}
 
 	/**
@@ -25,28 +28,28 @@ public class BierWinkel {
 	 *         dan of gelijk aan het opegegeven percentage hebben
 	 */
 	public Collection<Bier> geefAlleBierenMetMinAlcoholPercentage(double percentage) {
-		return null;
+		return bieren.stream().filter(b -> b.getAlcoholgehalte() >= percentage).toList();
 	}
 
 	/**
 	 * @return een wijzigbare lijst met de namen van alle bieren
 	 */
 	public Collection<String> geefNamenBieren() {
-		return null;
+		return bieren.stream().map(Bier::getNaam).collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	/**
 	 * @return het bier met het hoogste alcoholpercentage
 	 */
 	public Bier geefBierMetHoogsteAlcoholPercentage() {
-		return null;
+		return bieren.stream().max(Comparator.comparing(Bier::getAlcoholgehalte)).orElse(null);
 	}
 
 	/**
 	 * @return het bier met het laagste alcoholpercentage
 	 */
 	public Bier geefBierMetLaagsteAlcoholPercentage() {
-		return null;
+		return bieren.stream().min(Comparator.comparing(Bier::getAlcoholgehalte)).orElse(null);
 	}
 
 	/**
@@ -55,14 +58,15 @@ public class BierWinkel {
 	 *         alfabetisch op naam gesorteerd
 	 */
 	public Collection<Bier> geefBierenGesorteerdOpAlcoholGehalteEnNaam() {
-		return null;
+		return bieren.stream()
+				.sorted(Comparator.comparing(Bier::getAlcoholgehalte).reversed().thenComparing(Bier::getNaam)).toList();
 	}
 
 	/**
 	 * @return een wijzigbare lijst met unieke namen van brouwerijen
 	 */
 	public Collection<String> geefAlleNamenBrouwerijen() {
-		return null;
+		return bieren.stream().map(Bier::getBrouwerij).distinct().collect(Collectors.toList());
 	}
 
 	/**
@@ -71,7 +75,8 @@ public class BierWinkel {
 	 *         bevatten
 	 */
 	public Collection<String> geefAlleNamenBrouwerijenMetWoord(String woord) {
-		return null;
+		return bieren.stream().map(Bier::getBrouwerij).distinct().filter(b -> b.contains(woord))
+				.collect(Collectors.toList());
 	}
 
 }

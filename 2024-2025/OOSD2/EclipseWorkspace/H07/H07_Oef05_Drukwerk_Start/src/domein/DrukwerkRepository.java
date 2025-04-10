@@ -1,7 +1,12 @@
 package domein;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import persistentie.DrukwerkMapper;
 
 public class DrukwerkRepository {
@@ -22,7 +27,7 @@ public class DrukwerkRepository {
 	 */
 	public Collection<Drukwerk> geefDrukwerkenVolgensOplage(int oplage)
 	{
-		return null;
+		return lijst.stream().filter(d -> d.getOplage() <= oplage).distinct().collect(Collectors.toList());
 	}
 	
 	/** TODO
@@ -31,7 +36,7 @@ public class DrukwerkRepository {
 	 */
 	public double geefGemiddeldePrijs()
 	{
-		return 0;
+		return lijst.stream().filter(d -> d.getPrijs() != d.GEEN_PRIJS).mapToDouble(Drukwerk::getPrijs).average().getAsDouble();
 	}
 	
 	/** TODO 
@@ -41,16 +46,16 @@ public class DrukwerkRepository {
 	 */
 	public List<Drukwerk> sorteerDrukwerken()
 	{
-		return null;	
+		return lijst.stream().sorted(Comparator.comparing(Drukwerk::getInfo).reversed().thenComparing(Drukwerk::getOplage)).toList();	
 	}
 
 
 	/** TODO
-	 * Voeg alle nieuwe releases (zie DrukwerkMapper) toe in lijst in één instructie.
+	 * Voeg alle nieuwe releases (zie DrukwerkMapper) toe in lijst in ï¿½ï¿½n instructie.
 	 */
 	public void voegNieuweReleasesToe() 
 	{
-				
+		lijst.addAll(Arrays.stream(drukwerkMapper.geefNieuweReleases()).toList());
 	}
 	
 	/** TODO
@@ -58,7 +63,7 @@ public class DrukwerkRepository {
 	 */
 	public Drukwerk geefHoogsteOplageNieuweReleases()
 	{
-		return null;
+		return Arrays.stream(drukwerkMapper.geefNieuweReleases()).max(Comparator.comparing(Drukwerk::getOplage)).orElse(null);
 	}
 
 

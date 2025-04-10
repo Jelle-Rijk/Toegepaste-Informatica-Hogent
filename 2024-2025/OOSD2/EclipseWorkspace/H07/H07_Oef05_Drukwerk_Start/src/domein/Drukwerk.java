@@ -1,6 +1,8 @@
 package domein;
 
-public class Drukwerk implements Werk{
+import java.util.Objects;
+
+public class Drukwerk implements Werk {
 
 	private String info;
 	private long oplage;
@@ -16,8 +18,8 @@ public class Drukwerk implements Werk{
 		return info;
 	}
 
-    private void setInfo(String info) {
-		if (info == null || info.isBlank() )
+	private void setInfo(String info) {
+		if (info == null || info.isBlank())
 			throw new IllegalArgumentException("Geen correcte info!");
 		this.info = info;
 	}
@@ -36,7 +38,7 @@ public class Drukwerk implements Werk{
 		return prijs;
 	}
 
-	private void setPrijs(double prijs) { 
+	private void setPrijs(double prijs) {
 		if (prijs < GEEN_PRIJS)
 			throw new IllegalArgumentException("Prijs kan niet negatief zijn.");
 		this.prijs = prijs;
@@ -53,15 +55,29 @@ public class Drukwerk implements Werk{
 	}
 
 	@Override
-	public int geefPublicatiejaar() 
-	{
+	public int geefPublicatiejaar() {
 		return Integer.parseInt(info.substring(info.length() - 4));
 	}
 
-	/** TODO - 2 Drukwerk-objecten zijn dezelfde als hun waarden van al hun attributen dezelfde zijn */
-	
-	
-	
-	
+	/**
+	 * TODO - 2 Drukwerk-objecten zijn dezelfde als hun waarden van al hun
+	 * attributen dezelfde zijn
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(info, oplage, prijs);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null)
+			return false;
+		if (o.getClass() != getClass())
+			return false;
+		Drukwerk d = (Drukwerk) o;
+		return info.equals(d.info) && oplage == d.oplage && prijs == d.prijs;
+	}
 
 }

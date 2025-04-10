@@ -36,7 +36,7 @@ public class DomeinController {
 	 * Je mag gebruik maken van toString om een element om te zetten naar een String. 	
 	 */
 	private String zetOmNaarString(Collection<Drukwerk> lijst) {
-		return null;
+		return lijst.stream().map(Drukwerk::toString).collect(Collectors.joining("\n"));
 	}
 
 	public void voegNieuweReleasesToe() {
