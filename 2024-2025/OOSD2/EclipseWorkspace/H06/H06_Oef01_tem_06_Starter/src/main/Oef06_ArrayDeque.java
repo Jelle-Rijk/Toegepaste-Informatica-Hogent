@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayDeque;
 import java.util.Scanner;
 
 /**
@@ -37,16 +38,24 @@ public class Oef06_ArrayDeque {
 
 		// declareer en initializeer stack en queue
 		// ----------------------------------------
+		ArrayDeque queue = new ArrayDeque<String>();
+		ArrayDeque stack = new ArrayDeque<String>();
+		
 
 		System.out.println("Start invoer: ");
 		for (int aantal = 1; aantal <= 10; aantal++) {
 			// lees woord en plaats het in de stack en de queue
+			String input = in.nextLine();
+			queue.add(input);
+			stack.push(input);
 		}
 
 		// druk hoofding
 		System.out.printf("%20s%20s%n%n", "Stack", "Queue");
 
 		// zolang containers niet ledig, druk een regel met betreffende woord
-		// ------------------------------------------------------------------
+		while(stack.size() > 0) {
+			System.out.printf("%20s%20s%n", stack.pop(), queue.poll());
+		}
 	}
 }

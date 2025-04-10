@@ -5,13 +5,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import persistentie.StripfiguurMapper;
 
 public class StripfiguurRepository {
-	private final List<Stripfiguur> stripfiguren;
+	private List<Stripfiguur> stripfiguren;
 	private final StripfiguurMapper mapper;
 
 	public StripfiguurRepository() {
@@ -19,9 +20,6 @@ public class StripfiguurRepository {
 		stripfiguren = new ArrayList<>(Arrays.asList(mapper.geefStripfiguren()));
 	}
 
-	/**
-	 * @return alle stripfiguren uit de lijst stripfiguren
-	 */
 	public Collection<Stripfiguur> geefAlleStripfiguren() {
 		return stripfiguren;
 	}
@@ -30,8 +28,7 @@ public class StripfiguurRepository {
 	 * @return alle stripfiguren uit de lijst stripfiguren, gesorteerd op naam
 	 */
 	public Collection<Stripfiguur> geefStripfigurenGesorteerdOpNaam() {
-		Collections.sort(stripfiguren, (s1, s2) -> s1.getNaam().compareTo(s2.getNaam()));
-		return stripfiguren;
+		return stripfiguren.stream().sorted(Comparator.comparing(Stripfiguur::getNaam)).toList();
 	}
 
 	/**
@@ -39,46 +36,38 @@ public class StripfiguurRepository {
 	 *         grootte
 	 */
 	public Collection<Stripfiguur> geefStripfigurenAflopendGesorteerdOpGrootte() {
-		stripfiguren.sort(Comparator.comparing(Stripfiguur::getGrootte).reversed());
-		return stripfiguren;
+		return stripfiguren.stream().sorted(Comparator.comparing(Stripfiguur::getGrootte).reversed()).toList();
 	}
 
 	/**
-	 * Tip: maak gebruik van een Set datastructuur
+	 * Tip: gebruik van Collector om de stream elementen in een Set te verzamelen
 	 * 
 	 * @return alle stripfiguren uit de lijst stripfiguren zonder dubbels
 	 */
 	public Collection<Stripfiguur> geefStripfigurenZonderDubbels() {
-		return new HashSet<Stripfiguur>(stripfiguren);
+		return stripfiguren.stream().collect(Collectors.toSet());
 	}
 
 	/**
-	 * Tip: maak gebruik van de shuffle methode
+	 * Tip: maak gebruik van de intermediate limit operation
 	 * 
 	 * @return drie willekeurige stripfuren uit de lijst stripfiguren
 	 */
 	public Collection<Stripfiguur> geefDrieWillekeurigeStripfiguren() {
 		Collections.shuffle(stripfiguren);
-		return stripfiguren.subList(0, 3);
-	}
-
-	/**
-	 * Voeg een nieuwe stripfiguur toe aan de lijst stripfiguren
-	 * 
-	 * @param naam    de naam van de nieuwe stripfiguur
-	 * @param grootte de grootte van de nieuwe stripfiguur
-	 */
-	public void voegStripfiguurToe(String naam, double grootte) {
-		stripfiguren.add(new Stripfiguur(naam, grootte));
+		return stripfiguren.stream().limit(3).toList();
 	}
 
 	/**
 	 * Voegt extra stripfiguren toe aan de lijst met stripfiguren
 	 * 
-	 * Tip: haal via de mapper de extra stripfiguren op en voeg ze in bulk toe aan
-	 * de lijst stripfiguren
+	 * Tip: haal via de mapper de extra stripfiguren op en gebruik de static Stream
+	 * methode concat. Zorg dat de lijst wijzigbaar blijft door gebruik te maken van
+	 * de toList Collector
+	 * 
 	 */
 	public void voegExtraStripfigurenToe() {
-		stripfiguren.addAll(Arrays.asList(mapper.geefExtraStripfiguren()));
+		stripfiguren = Stream.concat(stripfiguren.stream(), Arrays.stream(mapper.geefExtraStripfiguren())).collect(Collectors.toList());
 	}
+
 }

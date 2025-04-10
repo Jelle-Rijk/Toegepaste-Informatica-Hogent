@@ -1,7 +1,12 @@
 package domein;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class Garage {
 	private List<Onderhoud> onderhouden;
@@ -12,6 +17,7 @@ public class Garage {
 	 * @param onderhouden de onderhouden die in de lijst moeten komen
 	 */
 	public Garage(Collection<Onderhoud> onderhouden) {
+		this.onderhouden = new ArrayList<>(onderhouden);
 	}
 
 	/**
@@ -22,7 +28,10 @@ public class Garage {
 	 * te hebben
 	 */
 	public Collection<Auto> geefAlleAutosInOnderhoud() {
-		return null;
+		Set<Auto> autos = new HashSet<>();
+		for (Onderhoud onderhoud : onderhouden)
+			autos.add(onderhoud.getAuto());
+		return autos;
 	}
 
 	public Collection<Onderhoud> getOnderhouden() {
@@ -35,7 +44,7 @@ public class Garage {
 	 * 
 	 */
 	public void sorteerOnderhouden() {
-
+		onderhouden.sort(Comparator.comparing(Onderhoud::getAuto).thenComparing(Onderhoud::getBegindatum));
 	}
 
 	/**
@@ -51,7 +60,19 @@ public class Garage {
 	 */
 
 	public void voegAaneengrenzendeOnderhoudenSamen() {
-
+		sorteerOnderhouden();
+		Iterator<Onderhoud> it = onderhouden.iterator();
+		Onderhoud currentOnderhoud = null;
+		Onderhoud nextOnderhoud = null;
+		while (it.hasNext()) {
+			currentOnderhoud = nextOnderhoud;
+			nextOnderhoud = it.next();
+			if (currentOnderhoud != null && currentOnderhoud.isAangrenzendMet(nextOnderhoud)) {
+				currentOnderhoud.setEinddatum(nextOnderhoud.getEinddatum());
+				it.remove();
+				nextOnderhoud = currentOnderhoud;
+			}			
+		}
 	}
 
 }

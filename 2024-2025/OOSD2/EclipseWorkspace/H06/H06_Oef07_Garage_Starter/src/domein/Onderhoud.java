@@ -51,7 +51,7 @@ public class Onderhoud {
 	 */
 
 	public boolean isAangrenzendMet(Onderhoud anderOnderhoud) {
-		return false;
+		return auto.equals(anderOnderhoud.getAuto()) && einddatum.plusDays(1).equals(anderOnderhoud.begindatum);
 	}
 
 }
