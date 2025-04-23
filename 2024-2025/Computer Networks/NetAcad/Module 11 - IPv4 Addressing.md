@@ -61,3 +61,38 @@ Extra voordelen:
 Kan je maken door enkele host bits te gebruiken als network bits.
 
 -> Hoe meer bits je gebruikt om subnets te definiëren, hoe minder hosts op je netwerk kunnen zitten.
+
+In een typisch bedrijfsnetwerk heb je binnen het netwerk volgende onderdelen:
+
+- Intranet: Alleen toegankelijk binnen de organisatie (via private IPv4-adressen)
+- DMZ: Resources die via het web toegankelijk zijn (via public IPv4-adressen)
+
+Voor deze onderdelen moet subnetting verschillend aangepakt worden.
+
+Voor het intranet kan je het 10.0.0.0 adres gebruiken en dat subnetten volgens de normale werkwijze.
+
+## Variable Subnet Length Masking (VLSM)
+
+Omdat de devices in de DMZ publiek toegankelijk moeten zijn, hebben ze public IPv4 adressen nodig. Deze zijn schaars. Je moet hier gebruik maken van Variable Subnet Length Masking (VLSM) om de publieke IP's zo efficiënt mogelijk te gebruiken. Bij klassiek subnetten zijn alle subnets even groot, dan zouden veel public IPv4-adressen ongebruikt gaan.
+
+Subnets hoeven niet even groot te zijn, maar ze mogen niet overlappen. <br>
+-> vb. Je kan je netwerk in vier subnets opsplitsen en dan het laatste subnet verder opsplitsen.
+
+[Deze video legt het VLSM-proces gemakkelijk uit.](https://www.youtube.com/watch?v=OD2vG5st4zI)
+
+> **Tip** <br>
+> Als je subnets maakt met VLSM is het gemakkelijker om eerst de grote subnets en daarna de kleinere uit te werken.
+
+## Structured design
+
+Hoe je subnets het beste indeelt is afhankelijk van veel factoren (vb. is het intranet of DMZ? - Verwacht je groei? Welke hosts hebben statische IP's nodig?)
+
+De verschillende soorten devices die adressen nodig hebben en welke adressen je best toewijst:
+
+- End User Clients: Best via DHCP (dan leasen ze een IP en komt het daarna weer vrij)
+- Servers en andere apparaten: Voorspelbare statische IP-adressen.
+- Web-toegankelijke servers: Publiek toegankelijke servers hebben een public IPv4-adres nodig. Als de servers enkel intern toegankelijk moeten zijn via het web, maak je een VPN aan en verbind je met een private IPv4-adres.
+- Intermediary devices: Statische, voorspelbare IP-adressen.
+- Gateway: Statisch IP-adres. Router interfaces krijgen meestal het hoogste of laagste host adres
+
+Probeer een logica in je adressen te stoppen -> beter voor de documentatie en maintenance.
