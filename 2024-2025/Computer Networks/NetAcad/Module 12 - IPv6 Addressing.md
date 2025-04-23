@@ -84,7 +84,77 @@ Een link-local adres kan je configureren door `link-local` als parameter toe te 
 
 ## Dynamic Addressing for IPv6 GUAs
 
+Meeste devices krijgen hun IPv6 GUAs dynamisch via RA (Router Advertisement) en RS (Router Solicitation).
+
+De RS en RA messages worden verzonden via ICMPv6. De RA messages worden elke 200 seconden door de routers naar alle devices op het netwerk gestuurd. Routers sturen ook een RA als ze een ICMPv6 RS message krijgen van een ander device.
+
+Om RA messages te zenden, moet je IPv6 routing enablen in global config mode met `ipv6 unicast-routing`.
+
+Een ICMPv6 RA-message kan het volgende bevatten:
+
+- Netwerk prefix en prefix length: vertelt host tot welk netwerk het behoort.
+- Default Gateway Address - Source LLA IPv6 address van de RA message (= LLA van de interface van de router)
+- DNS addresses and domain name
+
+Het host apparaat kan ervoor kiezen om af te wijken van de informatie die het ontvangt in de RA-message.
+
+**Er zijn drie methodes om de GUA te bepalen:**
+
+### Methode 1 - SLAAC
+
+SLAAC (StateLess Address Auto Configuration) -> De host ontvangt alle informatie van de router.
+<br> Dit proces is stateless omdat de informatie nergens centraal wordt opgeslagen (vb. DHCPv6 server)
+
+De GUA wordt als volgt samengesteld:
+
+- Prefix -> gekregen van de RA-message
+- Interface ID -> bepaald door operating system (ofwel EUI-64 ofwel random 64-bit nummer)
+
+#### EUI-64 vs. Randomly generated
+
+EUI-64 (Extended Unique Identifier 64): Gebruikt het MAC-adres (48 bits) van het device en voegt 16 bits in het midden toe om een 64 bit interface ID te krijgen.
+
+Het MAC-adres bestaat uit:
+
+- 24 bits Organizationally Unique Identifier (OUI) - uniek per vendor
+- 24 bits Device Identifier - om uniek device te bepalen
+
+De EUI-64 interface ID wordt als volgt opgebouwd:
+<br> OUI van het MAC-adres - fffe (hexadecimaal) - Device Identifier van MAC-adres
+
+Privacy-concerns -> Je kan het MAC-adres zien in het IP.
+
+Daarom is er een alternatief gebaseerd op een random number. -> Om ervoor te zorgen dat het IPv6 adres dan uniek is, zoekt het device zijn eigen adres met een Duplicate Address Detection (DAD). Als het geen respons krijgt, is het adres uniek. <br>
+Op Windows is random number de default manier, maar je kan ook EUI-64 instellen
+
+### Methode 2 - SLAAC + Stateless DHCPv6
+
+Devices doen het volgende:
+
+- Ze maken hun eigen IPv6 GUA met SLAAC (en EUI-64 / random number)
+- Ze zetten de router LLA als default gateway
+- Ze contacteren een DHCPv6 server voor adressen en domeinnamen
+
+**Let op!** Stateless DHCPv6-servers kennen geen GUAs toe.
+
+### Methode 3 - Stateful DHCPv6
+
+Devices doen het volgende:
+
+De RA-message bevestigt enkel dat die de default gateway is en geeft een DHCPv6-serveradres mee
+
+- Ze zetten de router LLA als default gateway
+- Ze halen hun GUA, DNS server address, domeinnaam en andere informatie bij een DHCPv6 server.
+
 ## Dynamic Addressing for IPv6 LLAs
+
+LLA wordt gegenereerd aan de hand van het prefix fe80::/10 en een interface ID op basis van EUI-64 of Randomly Generated Number.
+
+In Windows wordt dezelfde methode als voor de GUA gehanteerd om de interface ID te bepalen.
+
+Cisco routers maken automatisch een LLA aan als je ze een GUA geeft. Dit doen ze op basis van EUI-64.
+
+Nadeel: Moeilijk te onthouden / lange addressen. Daarom krijgen routers meestal toch een statisch LLA.
 
 ## IPv6 Multicast Addresses
 
