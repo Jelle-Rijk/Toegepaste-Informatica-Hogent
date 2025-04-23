@@ -185,7 +185,7 @@ Nieuw aangemaakte processen en het draaiende proces, kunnen direct in Ready/Susp
 Processen worden weggeschreven naar SSD/HDD om RAM vrij te maken.
 
 - Windows: In `pagefile.sys` en `swapfile.sys` op C:\
-- Linux; Aparte swap partitie
+- Linux: Aparte swap partitie
 
 Swappen = intensief en vertraagt systeem enorm.
 
