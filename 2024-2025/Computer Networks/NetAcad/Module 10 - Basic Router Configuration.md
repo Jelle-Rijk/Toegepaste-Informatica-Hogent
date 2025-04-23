@@ -31,6 +31,7 @@ Routers configureren loopt gelijkaardig aan het configureren van Switches (zie h
 | Wachtwoorden beveiligen                        | <code> exit <br> service-password-encryption</code>                                                    |
 | Banner instellen                               | <code> banner motd <i>delimiter message delimiter</i> </code>                                          |
 | Configuratie opslaan                           | <code> end <br> copy running-config startup-config </code>                                             |
+| IPv6 routing enablen                           | <code> ipv6 unicast-routing </code>                                                                    |
 
 ## Interfaces configureren
 
