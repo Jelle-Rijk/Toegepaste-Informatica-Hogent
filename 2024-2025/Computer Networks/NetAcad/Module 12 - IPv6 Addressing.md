@@ -57,6 +57,9 @@ Daarnaast bestaan er nog enkele speciale unicast-adressen:
 - Unique local: fc00::/7 - fdff::/7
 - Embedded IPv4
 
+> **Verschil LLA en Unique Local**
+> LLA's kunnen niet geroutet worden, ze blijven dus op de local link. Unique Locals kunnen wel geroutet worden, maar enkel binnen één domein (dus niet globaal)
+
 ### GUA
 
 - Global Routing Prefix: Geeft aan tot welk netwerk het IP behoort -> toegewezen door ISP.
@@ -158,4 +161,33 @@ Nadeel: Moeilijk te onthouden / lange addressen. Daarom krijgen routers meestal 
 
 ## IPv6 Multicast Addresses
 
+Starten altijd met ff00::/8 (dus ffxx)
+
+**Well-known Multicast Addresses**
+
+- ff02::1 -> Multicast groep voor alle IPv6-apparaten
+- ff02::2 -> Multicast groep voor alle IPv6-enabled routers
+
+**Solicited-Node Multicast Addresses**
+Worden bepaald door de Ethernet NIC.
+
 ## Subnet an IPv6 Network
+
+Verhoog het subnet ID met 1. -> veel gemakkelijker dan in IPv4 omdat het ingebouwd zit in het adres.
+<br> _Je kan nog steeds subnetten zoals in IPv4, maar dit wordt eigenlijk nooit gedaan._
+
+In IPv6 is er geen schaarste aan IP-addressen, je kan 65563 subnets hebben. Daarom kan je dus gewoon IPs "verspillen".
+
+# Speciale Adressen - Samengevat
+
+| Type                           | Adres                               |
+| ------------------------------ | ----------------------------------- |
+| GUA (= Global Unicast Address) | beginnen met 2 of 3                 |
+| Documentatie (dus ongebruikt)  | begint met 2001:db8 (2001:db8::/32) |
+| LLA (Link-local Address)       | begint met fe80 - febf (fe80::/10)  |
+| Loopback                       | ::1/128                             |
+| Unique Local                   | begint met fc - fd                  |
+| Unspecified                    | ::                                  |
+| Multicast                      | begint met ff (ff00::/8)            |
+| Multicast ALL-NODES            | ff02::1                             |
+| Multicast ALL-ROUTERS          | ff02::2                             |
