@@ -1,3 +1,10 @@
+<h1> Continuïteit en waardecreatie </h1>
+
+- [Business](#business)
+  - [De continuïteitskring](#de-continuïteitskring)
+  - [Waardecreatie](#waardecreatie)
+- [Management](#management)
+
 # Business
 
 ## De continuïteitskring
@@ -35,13 +42,13 @@ Als een bedrijf de belofte niet nakomt heeft dit gevolgen voor het imago van het
 
 Het managementproces bestaat uit 7 stappen:
 
-1. Macro-omgevingsanalyse
-2. Sectoranalyse
-3. Analyse van de organisatie
-4. SWOT-analyse
-5. Strategiekeuze
-6. Waardeaanbod
-7. Opvolging
+1. [Macro-omgevingsanalyse](./Deel%202%20-%20Macro-omgevingsanalyse.md)
+2. [Sectoranalyse](./Deel%203%20-%20Sectoranalyse.md)
+3. [Analyse van de organisatie](./Deel%204%20-%20Analyse%20van%20de%20organisatie.md)
+4. [SWOT-analyse](./Deel%205%20-%20SWOT-analyse.md)
+5. [Strategiekeuze](./Deel%206%20-%20Strategiekeuze.md)
+6. [Waardeaanbod](./Deel%207%20-%20Waardeaanbod.md)
+7. [Opvolging](./Deel%208%20-%20Opvolging.md)
 
 De PDCA-cyclus (zelfde als binnen het onderwijs) kan helpen bij management:
 

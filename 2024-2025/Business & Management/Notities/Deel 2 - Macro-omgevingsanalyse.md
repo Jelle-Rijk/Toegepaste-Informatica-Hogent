@@ -1,3 +1,12 @@
+<h1> Macro-omgevingsanalyse </h1>
+
+- [Omschrijving](#omschrijving)
+- [DESTEP-model](#destep-model)
+- [Maatschappelijk Verantwoord Ondernemen (MVO)](#maatschappelijk-verantwoord-ondernemen-mvo)
+  - [Maturiteitsniveaus](#maturiteitsniveaus)
+  - [10 R-Strategieën voor circulaire economie](#10-r-strategieën-voor-circulaire-economie)
+- [Duurzame ontwikkelingsdoelen VN](#duurzame-ontwikkelingsdoelen-vn)
+
 # Omschrijving
 
 Maatchappelijke tendensen in kaart proberen te brengen. Beschrijft krachten (kansen of bedreigingen) die de werking van het bedrijf beïnvloaden.
