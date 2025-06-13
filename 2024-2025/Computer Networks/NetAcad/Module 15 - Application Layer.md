@@ -21,7 +21,7 @@ Protocollen op deze laag:
 | FTP                                     | TCP        | 20 en 21                 | Files verzenden over een netwerk                                     |
 | TFTP (Trivial File Transfer Protocol)   | UDP        | 69                       | Zelfde als FTP, minder overhead maar minder reliable                 |
 | HTTP                                    | TCP        | 80 en 8080               | Webpagina's / video / tekst / afbeeldingen over het web              |
-| HHTPS                                   | TCP of UDP | 443                      | Zelfde als HTTP maar met encryptie                                   |
+| HTTPS                                   | TCP of UDP | 443                      | Zelfde als HTTP maar met encryptie                                   |
 
 ### Presentatielaag
 
@@ -50,16 +50,16 @@ Gnutella-protocol: Gebruikers kunnen volledige files met anderen delen.
 ### Web
 
 URL = Uniform Resource Locator <br>
-URI = Uniform Resource Identiefier
+URI = Uniform Resource Identifier
 
 Werking van HTTP:
 
 1. Browser neemt de URL (protocol, servernaam en filename)
 2. Browser gebruikt een DNS-server om de servernaam naar een IP-adres te vertalen en stuurt die server een GET-request voor de filename
 3. Webserver stuurt de HTML-code terug
-4. Browser ontcijferd de HTML-code en formatteert de webpagina
+4. Browser ontcijfert de HTML-code en formatteert de webpagina
 
-HTTP en HTTPS gebruiker drie message types:
+HTTP en HTTPS gebruiken drie message types:
 
 - GET: De client doet een verzoek om data
 - POST: De client wil data uploaden
@@ -102,7 +102,7 @@ De entries in de DNS-server bevatten de naam, het adres en het type van de entry
 - AAAA - End Device (IPv6)
 - MX - Mail exchange
 
-DNS messages zijn als volgt opgebouwd: Question - Anser - Authority - Additional (vb. foutcodes)
+DNS messages zijn als volgt opgebouwd: Question - Answer - Authority - Additional (vb. foutcodes)
 
 DNS gebruikt een hiërarchie. Als de DNS-server een request krijgt voor een entry buiten zijn zone, stuurt die het naar de volgende zone door. Als het wel voor zijn zone bestemd is, stuurt de DNS-server het request door naar het deelgebied. De domeinen komen terug in de link.
 
@@ -114,7 +114,7 @@ Je kan DNS testen door manueel queries te sturen (via het commando `nslookup`). 
 
 DHCP (= Dynamic Host Configuration Protocol) wijst automatisch IPv4-adressen, subnet masks en gateways toe. Handig als de gebruikers vaak veranderen. DHCP leaset adressen aan gebruikers.
 
-Meestal gebruik je DHCP voor general-purpose hosts en statische addressering voor netwerk devices, routers, switches, servers, printers, etc.
+Meestal gebruik je DHCP voor general-purpose hosts en statische adressering voor netwerk devices, routers, switches, servers, printers, etc.
 
 _DHCPv6 wijst geen default gateway toe! (Gebeurt via Router Advertisement van de router)_
 
@@ -140,7 +140,7 @@ Voordat de lease verloopt, moet de client die vernieuwen met een DHCPREQUEST
 SMB messages hebben drie functies:
 
 - Sessies starten, stoppen en authenticaten
-- File- en printertoegang regeln
+- File- en printertoegang regelen
 - Applicaties toestaan om berichten te verzenden naar / ontvangen van andere devices.
 
 Verschil met FTP is dat de connectie long-term is.
