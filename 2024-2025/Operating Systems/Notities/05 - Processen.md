@@ -1,10 +1,29 @@
 # Processen
 
-- [Van programma tot proces](#van-programma-tot-proces)
-- [Opbouw van een proces](#opbouw-van-een-proces)
-- [Soorten processen](#soorten-processen)
-- [Beheer van processen](#beheer-van-processen)
-- [Scheduling](#scheduling)
+- [Processen](#processen)
+  - [Van programma tot proces](#van-programma-tot-proces)
+    - [Interrupts](#interrupts)
+    - [Van binary tot proces](#van-binary-tot-proces)
+  - [Opbouw van een proces](#opbouw-van-een-proces)
+  - [Soorten processen](#soorten-processen)
+    - [Interactief proces](#interactief-proces)
+    - [Automatisch proces](#automatisch-proces)
+    - [Daemons](#daemons)
+  - [Beheer van processen](#beheer-van-processen)
+    - [Ontstaan](#ontstaan)
+    - [Afbraak](#afbraak)
+  - [State](#state)
+    - [2-state scheduling](#2-state-scheduling)
+    - [5-state scheduling](#5-state-scheduling)
+    - [6-state scheduling](#6-state-scheduling)
+    - [7-state scheduling](#7-state-scheduling)
+    - [Swapping](#swapping)
+  - [Scheduling](#scheduling)
+    - [Multiprogramming](#multiprogramming)
+    - [Time sharing](#time-sharing)
+    - [Scheduler](#scheduler)
+      - [Pre-emption](#pre-emption)
+- [Handige links](#handige-links)
 
 ## Van programma tot proces
 
@@ -190,3 +209,57 @@ Processen worden weggeschreven naar SSD/HDD om RAM vrij te maken.
 Swappen = intensief en vertraagt systeem enorm.
 
 ## Scheduling
+
+Uniprogramming -> De CPU behandelt één proces per keer
+
+### Multiprogramming
+
+OS probeert om CPU idle time te minimaliseren en de CPU tijd zo efficiënt mogelijk te gebruiken. <br>
+Processen moeten vaak wachten op I/O -> veel trager dan CPU, dus zet de OS terwijl een ander proces op de CPU.
+
+> CPU utilization = CPU usage time / total time <br> -> Dit moet zo dicht mogelijk bij 100% komen, maar moet nog wat ruimte bieden voor eventuele interrupts
+>
+> CPU idle = CPU idle time / total time <br>
+> -> streven naar 0%
+
+### Time sharing
+
+De CPU wisselt de processen die het uitvoert af om de illusie te creëren dat de processen parallel draaien.
+
+De OS moet een balans vinden:
+
+- Te snel wisselen: OS steekt te veel tijd in het wisselen zelf
+- Te traag wisselen: Gebruiker merkt op dat de processen niet echt tegelijkertijd uitgevoerd worden.
+
+### Scheduler
+
+-> Bepaalt wanneer welk proces de CPU-tijd krijgt
+
+Is sterk afhankelijk van prioriteit, status en volgorde in de wachtrij.
+
+**! In de voorbeelden komt een nieuw proces vaak toe als een running proces onderbroken wordt, we geven dan voorrang in de wachtrij aan het onderbroken proces** -> Komt in de realiteit nauwelijks voor.
+
+> Belangrijke termen
+>
+> **Pre-emption** <br> = onderbreken van huidig proces om plaats te maken voor een ander proces. Dit is belangrijk om monopoliseren van CPU tijd onmogelijk te maken. Dit zorgt wel voor extra overhead.
+>
+> **Starvation** <br> = proces krijgt geen CPU tijd (vb. doordat korte processen voorrang krijgen en er steeds nieuwe korte processen in het systeem komen)
+
+Schedulers worden vaak onderverdeeld in preemptive en non-preemptive
+
+| Categorie      | Naam                    | Afkorting | Omschrijving                                                                                                                                                               | Voordelen                       | Nadelen                                                                                                   |     |
+| -------------- | ----------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------- | --- |
+| Non-preemptive | First Come First Served | FCFS      | Processen worden in de volgorde van de wachtrij afgewerkt.                                                                                                                 | Geen starvation, eenvoudig      | Korte processen moeten lang wachten, monopoliseren mogelijk.                                              |
+| Non-preemptive | Shortest Proces Next    | SPN       | Het kortste proces wordt uit de wachtrij gehaald en volledig afgewerkt.                                                                                                    | Korte processen snel uitgevoerd | Starvation voor lange processen, monopoliseren mogelijk                                                   |
+| Preemptive     | Shortest Remaining Time | SRT       | Als een nieuw proces minder CPU tijd nodig heeft dan het huidige proces op de CPU, wordt het draaiende proces gewisseld.                                                   | Korte processen snel uitgevoerd | Starvation voor lange processen, overhead bij veel wisselen                                               |
+| Preemptive     | Round Robin             | RR        | Elke proces gaat X tijd op de CPU en wordt dan vervangen door het volgende uit de wachtrij. Als het proces niet klaar was, wordt het terug achterin de wachtrij geplaatst. | Eerlijk, geen starvation        | Lengte van tijdslot heel belangrijk, korte processen moeten soms lang wachten, overhead bij veel wisselen |
+
+#### Pre-emption
+
+= onderbreken van huidig proces om plaats te maken voor een ander proces. Dit is belangrijk om monopoliseren van CPU tijd onmogelijk te maken. Dit zorgt wel voor extra overhead.
+
+-> Als het proces nog niet klaar was, gaat het naar de wachtrij.
+
+# Handige links
+
+[Demonstratie snelheid I/O](https://planetscale.com/blog/io-devices-and-latency)
