@@ -22,7 +22,6 @@
     - [Multiprogramming](#multiprogramming)
     - [Time sharing](#time-sharing)
     - [Scheduler](#scheduler)
-      - [Pre-emption](#pre-emption)
 - [Handige links](#handige-links)
 
 ## Van programma tot proces
@@ -253,12 +252,6 @@ Schedulers worden vaak onderverdeeld in preemptive en non-preemptive
 | Non-preemptive | Shortest Proces Next    | SPN       | Het kortste proces wordt uit de wachtrij gehaald en volledig afgewerkt.                                                                                                    | Korte processen snel uitgevoerd | Starvation voor lange processen, monopoliseren mogelijk                                                   |
 | Preemptive     | Shortest Remaining Time | SRT       | Als een nieuw proces minder CPU tijd nodig heeft dan het huidige proces op de CPU, wordt het draaiende proces gewisseld.                                                   | Korte processen snel uitgevoerd | Starvation voor lange processen, overhead bij veel wisselen                                               |
 | Preemptive     | Round Robin             | RR        | Elke proces gaat X tijd op de CPU en wordt dan vervangen door het volgende uit de wachtrij. Als het proces niet klaar was, wordt het terug achterin de wachtrij geplaatst. | Eerlijk, geen starvation        | Lengte van tijdslot heel belangrijk, korte processen moeten soms lang wachten, overhead bij veel wisselen |
-
-#### Pre-emption
-
-= onderbreken van huidig proces om plaats te maken voor een ander proces. Dit is belangrijk om monopoliseren van CPU tijd onmogelijk te maken. Dit zorgt wel voor extra overhead.
-
--> Als het proces nog niet klaar was, gaat het naar de wachtrij.
 
 # Handige links
 

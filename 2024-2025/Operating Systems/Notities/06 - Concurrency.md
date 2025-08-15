@@ -122,7 +122,7 @@ Er zijn drie types bestandssynchronisatie:
 
 ## Deadlocks
 
--> Systeem is in een toestand dat geen voortgang meer mogelijk is.
+-> Systeem is in een toestand waar geen voortgang meer mogelijk is.
 
 Komt voor wanneer 2 of meer processen voor onbepaalde tijd wachten op een gebeurtenis die enkel door één van de wachtende processen veroorzaakt kan worden.
 
