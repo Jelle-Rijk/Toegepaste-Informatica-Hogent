@@ -119,7 +119,7 @@ Een tweede manier om processen te doen ontstaan is "fork en exec". Voorbeeld bij
 - Via exit() -> als proces afgewerkt is of een error optreedt
 - Afgebroken door een ander proces (vb. kill, of een parent proces breekt child processes af)
 
-> Als het proces correct is afgewerkt, geeft je 0 als parameter mee met exit(), anders geef je een error-code mee.
+> Als het proces correct is afgewerkt, geef je 0 als parameter mee met exit(), anders geef je een error-code mee.
 
 Soms gaat het fout, dan krijg je een zombie proces (= proces waarvan enkel nog het PCB bestaat, maar proces wel al afgewerkt is). <br>
 Orphan process = proces dat geen parent meer heeft. <br>
