@@ -24,7 +24,7 @@
 
 4. a. Waar maakt een proces op een UNIX-systeem gebruik van als het een bestandssysteem wil aanspreken?
 
-b. Lweg dit begrip kort uit, leg ook uit waarom dit nuttig is.
+b. Leg dit begrip kort uit, leg ook uit waarom dit nuttig is.
 
 c. Hoe heten de bewerkingen van een bestandssysteem inladen en uitladen op een UNIX-systeem
 
@@ -52,8 +52,8 @@ Wanneer het OS een schrijfbewerking wil doen, schrijft het deze neer in een jour
 
 [] Soft Links
 [] Directories
-[] File Systems
-[X] Sockets
+[X] File Systems
+[] Sockets
 
 8. Wat is het verschil tussen een hard link en een soft link?
 

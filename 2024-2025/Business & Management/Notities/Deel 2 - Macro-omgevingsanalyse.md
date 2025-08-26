@@ -7,7 +7,7 @@
   - [10 R-Strategieën voor circulaire economie](#10-r-strategieën-voor-circulaire-economie)
 - [Duurzame ontwikkelingsdoelen VN](#duurzame-ontwikkelingsdoelen-vn)
 
-# Omschrijving
+## Omschrijving
 
 Maatchappelijke tendensen in kaart proberen te brengen. Beschrijft krachten (kansen of bedreigingen) die de werking van het bedrijf beïnvloaden.
 
@@ -15,7 +15,7 @@ Maatchappelijke tendensen in kaart proberen te brengen. Beschrijft krachten (kan
 
 Kansen en bedreigingen moet je altijd binnen de doelen van de organisatie zien. Een verandering in de maatschappij kan een kans zijn voor het ene bedrijf en een bedreiging voor het andere. Kansen moeten genomen worden en bedreigingen moeten vermeden / verzacht worden.
 
-# DESTEP-model
+## DESTEP-model
 
 Model om op zoek te gaan naar de maatschappelijke ontwikkelingen die invloed hebben op de verschillende bedrijfstakken.
 
@@ -33,7 +33,7 @@ Uitgavenpatroon = waaraan het huishoudbudget wordt besteed
 
 ![Overzicht DESTEP-model](./img/deel_2/DESTEP.png)
 
-# Maatschappelijk Verantwoord Ondernemen (MVO)
+## Maatschappelijk Verantwoord Ondernemen (MVO)
 
 = verantwoordelijkheid van een organisatie voor de effecten van haar besluiten en activiteiten op de maatschappij en het milieu.
 
@@ -45,7 +45,7 @@ Rekening houden met:
 - Consumentenbelangen (vb. geen bedrog)
 - Sociale, ethische en milieukwesties
 
-## Maturiteitsniveaus
+### Maturiteitsniveaus
 
 1. Defensive CSR / Age of Greed: Enkel focus op winst (+ creëren van werkgelegenheid en een inkomen bieden aan gezinnen)
 2. Charitable CSR / Age of Philantropy: Deeltje winst gaat naar goede doelen (vb. donaties)
@@ -63,11 +63,11 @@ Circulaire economie: Producten worden zo lang mogelijk hergebruikt. Er is een fo
 Niveaus 1-4 staan bekend als CSR 1.0. -> Lineaire of recycling economie. <br>
 Niveau 5 staat bekend als CSR 2.0 -> Circulaire economie
 
-## 10 R-Strategieën voor circulaire economie
+### 10 R-Strategieën voor circulaire economie
 
 ![10 R-strategieën](./img/deel_2/10%20R-Stragieën.png)
 
-# Duurzame ontwikkelingsdoelen VN
+## Duurzame ontwikkelingsdoelen VN
 
 VN heeft duurzame ontwikkelingsdoelen vastgelegd in 17 Sustainable Development Goals (SDGs). De SDGs vormen vaker en vaker de leidraad voor dagelijks beleid in organisaties.
 
