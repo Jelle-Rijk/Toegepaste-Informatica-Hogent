@@ -1,5 +1,9 @@
 <h1> SWOT-analyse </h1>
 
+- [SWOT-analyse](#swot-analyse)
+- [Confrontatiematrix](#confrontatiematrix)
+  - [Werkwijze](#werkwijze)
+
 ## SWOT-analyse
 
 In de externe analyse (macro-omgeving en sector) werden kansen en bedreigingen vastgesteld. In de interne analyse werden sterktes en zwaktes vastgesteld. In de SWOT-analyse worden deze conclusies verder geanalyseerd:
