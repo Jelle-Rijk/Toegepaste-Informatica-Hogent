@@ -1,5 +1,13 @@
 <h1> Waardeaanbod </h1>
 
+- [Klantenwaarde](#klantenwaarde)
+- [Strategische bedrijfsprocessen](#strategische-bedrijfsprocessen)
+  - [Inkomende Logistiek - Just-In-Time (JIT)](#inkomende-logistiek---just-in-time-jit)
+  - [Operationele Activiteiten - Productieplanning](#operationele-activiteiten---productieplanning)
+  - [Uitgaande logistiek - Distributiemodellen](#uitgaande-logistiek---distributiemodellen)
+    - [Klassiek distributiemodel](#klassiek-distributiemodel)
+    - [Nieuw distributiemodel](#nieuw-distributiemodel)
+
 ## Klantenwaarde
 
 In deze fase proberen we behoeftebevrediging aan te bieden en de concurrentie te overtreffen door de gekozen strategie concreet te maken. De beste manier om dit te doen is **unieke klantenwaarde** creëren.<br> Dit betekent dat we bestaande of nieuwe producten ontwikkelen om in de behoeften van de klant te blijven voorzien (= business) en plannen, coördineren en controleren we die activiteiten (= management).
