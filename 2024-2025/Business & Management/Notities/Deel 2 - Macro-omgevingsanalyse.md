@@ -9,7 +9,7 @@
 
 ## Omschrijving
 
-Maatchappelijke tendensen in kaart proberen te brengen. Beschrijft krachten (kansen of bedreigingen) die de werking van het bedrijf beïnvloaden.
+Maatchappelijke tendensen in kaart proberen te brengen. Beschrijft krachten (kansen of bedreigingen) die de werking van het bedrijf beïnvloeden.
 
 <span style="color:lightgreen">Kansen</span> en <span style="color:coral">bedreigingen</span> zijn externe ontwikkelingen met een <span style="color:lightgreen">gunstige</span> / <span style="color:coral">remmende</span> invloed op de realisatie van doelstellingen.
 
