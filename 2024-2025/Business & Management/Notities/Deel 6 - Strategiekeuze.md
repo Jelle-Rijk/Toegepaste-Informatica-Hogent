@@ -8,7 +8,7 @@ vb. Niet "maken van koetsen", maar "duurzame mobiliteit" (-> maken van koetsen v
 
 Een missie:
 
-- geeft een **opdracht** en omschrijft de **bestaandsreden**
+- geeft een **opdracht** en omschrijft de **bestaansreden**
 - benoemt **kernwaarden**
 - stuurt de **continuïteitskring**
 - **bakent** de activiteiten van de organisatie **af**
@@ -34,7 +34,7 @@ De missie functioneert als een uitnodiging voor belanghebbenden om mee te werken
 Er moet steeds rekening gehouden worden met de dynamische omgeving om de continuïteit te verzekeren. <br>
 _vb. het is belangrijk af te wegen of je moet inzetten op je sterktes of dat je moet compenseren voor je zwaktes_
 
-## Doelen en doeldstelling
+## Doelen en doelstellingen
 
 **Doel** = **kwalitieve** omschrijving van een beoogd resultaat (vb. marktleider worden)<br>
 **Doelstelling** = **kwantitatieve** omschrijving van het beoogde resultaat (vb. 20% omzetgroei tegen 1/1/2026)

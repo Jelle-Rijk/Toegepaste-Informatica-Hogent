@@ -29,7 +29,7 @@ Onderscheid tussen
 - Primaire activiteiten
 - Ondersteunende activiteiten
 
-De activiteiten stellen de kosten voor de organisatie voor. De marge aan de rechterkant van het model staat voor de opbrengsten die nodig zijn om het voorstaan van een bedrijf te garanderen.
+De activiteiten stellen de kosten voor de organisatie voor. De marge aan de rechterkant van het model staat voor de opbrengsten die nodig zijn om het voortbestaan van een bedrijf te garanderen.
 
 ![Waardeketen van Porter](./img/deel_4/WaardeketenPorter.png)
 
