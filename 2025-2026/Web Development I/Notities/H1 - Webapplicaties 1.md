@@ -76,6 +76,76 @@ Algemeen element (als er geen specifieker bestaat): `<span>`
 | Toegevoegde inhoud           | `<ins>`   |
 | Verwijderde inhoud           | `<del>`   |
 
+### Tabellen
+
+| Elementnaam      | Tag          | Opmerking                                                                             |
+| ---------------- | ------------ | ------------------------------------------------------------------------------------- |
+| Tabel            | `<table>`    |
+| Tabelrij         | `<tr>`       |
+| Cel met hoofding | `<th>`       | binnen een `<tr>`                                                                     |
+| Cel met data     | `<td>`       | binnen een `<tr>`                                                                     |
+| Tabel header     | `<thead>`    |
+| Tabel body       | `<tbody>`    |
+| Tabel footer     | `<tfoot>`    |
+| Bijschrift       | `<caption>`  | Net na `<table>` invoegen                                                             |
+| Kolomgroep       | `<colgroup>` | Hiermee kan je meerdere kolommen groeperen om ze bijvoorbeeld dezelfde stijl te geven |
+| Kolom            | `<col>`      | Te gebruiken binnen een colgroup                                                      |
+
+| Gebruik                       | Attribuut     |
+| ----------------------------- | ------------- |
+| Cel uitspreiden over kolommen | `colspan="2"` |
+| Cel uitspreiden over rijen    | `rowspan="2"` |
+
+Bij toevoegen van een border met CSS krijg je een dubbele rand. <br>
+Oplossing: {border-collapse: collapse;}
+
+### Formulieren
+
+Na het klikken van de submit-button wordt elk onderdeel van het formulier als een name/value-pair naar de server gestuurd.
+
+| Elementnaam             | Tag                                                          | Opmerking                                                                  |
+| ----------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| Formulier               | `<form action="\order" method="post">`                       | action geeft de site aan waar de data naartoe gestuurd wordt               |
+| Input                   | `<input type="text" name="naam" placeholder="voer hier in">` | zie types hieronder                                                        |
+| Dropdown                | `<select>`                                                   | multiple om meerdere keuzes toe te laten, size om meerdere opties te tonen |
+| Keuzeoptie              | `<option value="optie1">     `                               | Child van select                                                           |
+| Knop                    | `<button>`                                                   |
+| Label                   | `<label for="id-van-control">`                               | Je kan de control ook binnen het label zetten i.p.v. for te gebruiken      |
+| Verzameling velden      | `<fieldset>`                                                 |
+| Titel voor verzameling  | `<legend>`                                                   |
+| Uitgebreide tekstinvoer | `<textarea>`                                                 |
+| Vooruitgang             | `<process>`                                                  |
+| Resultaat               | `<output>`                                                   |
+| Schaal                  | `<meter>`                                                    |
+
+Mogelijke types voor input:
+
+- text
+- password
+- date
+- email
+- number (attributen min en max voor min- en max-waarden)
+- search
+- radio (de name van de buttons moet hetzelfde zijn, value attribuut is verplicht, checked attribuut kan een button op geselecteerd zetten)
+- checkbox
+- file (enctype="multipart/form-data" als attribuut bij de form toevoegen)
+- list (verwijst naar een datalist met zelfde id als list-attribuut, waarin `<option>` elementen moeten zitten)
+
+```html
+<input list="bezorgers" id="bezorger" name="bezorger" />
+<datalist id="bezorgers">
+  <option value="Bezorger 1"></option>
+  <option value="Bezorger 2"></option>
+</datalist>
+```
+
+- textarea
+- submit (value-attribuut is ook de tekst op de knop)
+- image
+- hidden (vb. voor security tokens)
+
+Voeg attribuut `required` toe om control verplicht te maken.
+
 ### Speciale karakters
 
 Named character references starten altijd met & en eindigen met ; <br>
