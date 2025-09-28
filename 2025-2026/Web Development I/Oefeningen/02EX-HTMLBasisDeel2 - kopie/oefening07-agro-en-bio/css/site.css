@@ -1,9 +1,0 @@
-article > a {
-  text-decoration: none;
-  display: block;
-  color: inherit;
-}
-
-article > a:hover {
-  background-color: aquamarine;
-}
