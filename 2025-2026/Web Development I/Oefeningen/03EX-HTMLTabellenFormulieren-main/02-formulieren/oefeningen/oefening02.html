@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html lang="nl">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Keuzelijsten</title>
-    <link rel="stylesheet" href="css/main.css">
-</head>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
 
-<body>
+  <body>
     <h1>Maak de juiste keuze.</h1>
-    
-</body>
-
+    <form
+      action="mailto:jelle.rijk@student.hogent.be?Subject=Keuzes"
+      method="post"
+      enctype="text/plain"
+    >
+      <div>
+        <label for="favo-serie">Kies je favoriete serie:</label>
+        <select name="serie" id="favo-serie">
+          <option value="game-of-thrones">Game of Thrones</option>
+          <option value="peaky-blinders">Peaky Blinders</option>
+          <option value="la-casa-de-papel">La Casa de Papel</option>
+          <option value="baby">Baby</option>
+          <option value="vikings">Vikings</option>
+          <option value="norsemen">Norsemen</option>
+        </select>
+      </div>
+      <div>
+        <label for="favo-lector">Kies je favoriete lector:</label>
+        <input list="lector-lijst" name="lector" id="favo-lector" />
+        <datalist id="lector-lijst">
+          <option value="Karine Samyn"></option>
+          <option value="Stefaan Samyn"></option>
+          <option value="Patrick Lauwaerts"></option>
+          <option value="Lotte Vansteenberghe"></option>
+          <option value="Stefaan De Cock"></option>
+        </datalist>
+      </div>
+      <div>
+        <input type="submit" value="Maak je keuze" />
+      </div>
+    </form>
+  </body>
 </html>

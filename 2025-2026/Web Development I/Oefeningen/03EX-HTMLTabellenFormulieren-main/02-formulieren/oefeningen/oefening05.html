@@ -1,15 +1,72 @@
 <!DOCTYPE html>
 <html lang="nl">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Poll</title>
-    <link rel="stylesheet" href="css/main.css">
-</head>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
 
-<body>
+  <body>
     <h1>Poll.</h1>
-    
-</body>
-
+    <form
+      action="mailto:jelle.rijk@student.hogent.be?subject=Poll"
+      method="post"
+      enctype="text/plain"
+    >
+      <fieldset>
+        <legend>Ik volg Web Development I</legend>
+        <div>
+          <input
+            type="radio"
+            name="les"
+            id="0830-1000"
+            value="0830-1000Campus"
+            required
+          />
+          <label for="0830-1000">Op de campus van 08:30-10:00</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="les"
+            id="1100-1230Campus"
+            value="1100-1230Campus"
+          />
+          <label for="1100-1230Campus">Op de campus van 11:00-12:30</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="les"
+            id="1100-1230Online"
+            value="1100-1230Online"
+          />
+          <label for="1100-1230Online">Online van 11:00-12:30</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Examen Web Development I</legend>
+        <div>
+          <input type="radio" name="examen" id="campus-laptop" required />
+          <label for="campus-laptop">Op de campus op laptop</label>
+        </div>
+        <div>
+          <input type="radio" name="examen" id="expo-schriftelijk" />
+          <label for="expo-schriftelijk">In Flanders Expo - schriftelijk</label>
+        </div>
+        <div>
+          <input type="radio" name="examen" id="online-laptop" />
+          <label for="online-laptop">Online op laptop</label>
+        </div>
+        <div>
+          <input type="radio" name="examen" id="online-mondeling" />
+          <label for="online-mondeling">Online mondeling</label>
+        </div>
+      </fieldset>
+      <div>
+        <input type="submit" value="Verstuur" />
+        <input type="reset" value="Clear" />
+      </div>
+    </form>
+  </body>
 </html>

@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html lang="nl">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Aanmelden</title>
-    <link rel="stylesheet" href="css/main.css">
-</head>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
 
-<body>
+  <body>
     <h1>Aanmelden.</h1>
-    
-</body>
 
+    <form action="mailto:jelle.rijk@student.hogent.be" method="post">
+      <div>
+        <label for="email">E-mail:</label>
+        <input
+          type="email"
+          placeholder="naam@server.com"
+          name="email"
+          id="email"
+        />
+      </div>
+      <div>
+        <label for="password">Wachtwoord:</label>
+        <input type="password" name="password" id="password" />
+      </div>
+      <div>
+        <label for="permanent">Aangemeld blijven: </label>
+        <input type="checkbox" name="permanent" id="permanent" />
+      </div>
+      <div>
+        <input type="submit" value="Meld je aan" />
+      </div>
+    </form>
+  </body>
 </html>

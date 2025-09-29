@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html lang="nl">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Afspraak</title>
-    <link rel="stylesheet" href="css/main.css">
-</head>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
 
-<body>
+  <body>
     <h1>Maak je afspraak.</h1>
-    
-</body>
-
+    <form
+      action="mailto:jelle.rijk@student.hogent.be?subject=Afspraak"
+      enctype="text/plain"
+      method="post"
+    >
+      <div>
+        <label for="date">Datum:</label>
+        <input type="date" id="date" name="Datum" required />
+      </div>
+      <div>
+        <label for="time">Tijd:</label>
+        <input type="time" id="time" name="Tijd" required />
+      </div>
+      <div>
+        <label for="reason">Reden afspraak:</label> <br />
+        <textarea
+          name="Info"
+          id="reason"
+          placeholder="Geef hier de reden voor je afspraak in."
+          cols="60"
+          rows="5"
+          required
+        ></textarea>
+      </div>
+      <div><input type="submit" value="Maak afspraak" /></div>
+    </form>
+  </body>
 </html>
