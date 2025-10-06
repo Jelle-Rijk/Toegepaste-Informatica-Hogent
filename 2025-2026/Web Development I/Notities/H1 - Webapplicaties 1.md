@@ -245,6 +245,8 @@ Het title-attribuut zorgt voor een tooltip.
 Kan toegevoegd worden op drie manieren:
 
 - External style sheet (in eigen bestand)
+- Internal style sheet (in `<style>`-element in `<head>`)
+- Via style attribuut van een element (enkel van toepassing op dat specifieke element)
 
 ## Termen
 
@@ -256,20 +258,116 @@ Kan toegevoegd worden op drie manieren:
 
 [Overzicht van emmet-afkortingen](https://docs.emmet.io/cheat-sheet/)
 
-| Naam             | Emmet | Gebruik          | Opmerking |
-| ---------------- | ----- | ---------------- | --------- |
-| font-family      | ff    | lettertype       |
-| background-color | bgc   | achtergrondkleur |
-| font-size        | fz    | lettergrootte    |
+| Naam             | Gebruik                                        |
+| ---------------- | ---------------------------------------------- |
+| background-color | achtergrondkleur                               |
+| background-image | achtergrondafbeelding                          |
+| list-style-\*    | Zaken die te maken hebben met opsommingstekens |
+
+### Tekst
+
+| Naam            | Gebruik                        |
+| --------------- | ------------------------------ |
+| font-family     | lettertype                     |
+| font-size       | lettergrootte                  |
+| text-transform  | Hoofdlettergebruik aanpassen   |
+| text-decoration | Onderlijnen, doorstrepen, etc. |
+| letter-spacing  | Afstand tussen letters         |
+| word-spacing    | Afstand tussen woorden         |
+| text-indent     | Inspringing eerste regel       |
+| text-align      | Uitlijnen                      |
 
 ## Selectors
 
-| Notatie        | Gebruik                       | Opmerking |
-| -------------- | ----------------------------- | --------- |
-| `div`          | Alle elementen van een type   |
-| `.class-name`  | Alle elementen van een klasse |
-| `#id`          | Specifiek element met id      |
-| `div, .class1` | Meerdere selectors            | komma     |
+| Notatie        | Gebruik                                                                | Opmerking                                                                    |
+| -------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `div`          | Alle elementen van een type                                            |
+| `.class-name`  | Alle elementen van een klasse                                          |
+| `#id`          | Specifiek element met id                                               |
+| `div, .class1` | Meerdere selectors                                                     | komma                                                                        |
+| `*`            | Alles                                                                  |
+| `div p`        | Alle p-elementen die afstammen van een div                             | = Descendant combinator                                                      |
+| `div > p`      | Alle p-elementen die directe children zijn van een div                 |
+| `img ~ p`      | Alle p-elementen die na een img komen waarmee ze een parent delen      | = General sibling combinator                                                 |
+| `ìmg + p`      | Alle p-elementen die vlak na een img komen waarmee ze een parent delen | = Adjacent sibling combinator                                                |
+| `a[href]`      | Alle a-elementen die een attribuut href hebben                         | exacte waarde: [attr=value], bevat: [attr*=value], begint met: [attr^=value] |
+
+Pseudo-classes (altijd beginnen met :)
+
+| Notatie                 | Toestand                                             |
+| ----------------------- | ---------------------------------------------------- |
+| `a:link`                | niet bezochte link                                   |
+| `a:visited`             | bezochte link                                        |
+| `a:active`              | actieve link                                         |
+| `a:hover`               | gehoverde link                                       |
+| `p:first-child`         | p-elementen die een eerste child zijn van hun parent |
+| `p:last-child`          | p-elementen die de laatste child zijn van hun parent |
+| `p:only-child`          | p-elementen die het enige child zijn van hun parent  |
+| `p:first-of-type`       | eerste p-element                                     |
+| `p:last-of-type`        | laatste p-element                                    |
+| `p:only-of-type`        | enige p-element                                      |
+| `:nth-child(n)`         | elk n-de child                                       |
+| `:nth-last-child(n)`    | elk n-de child van achter te beginnen                |
+| `p:nth-of-type(n)`      | n-de p-element                                       |
+| `p:nth-last-of-type(n)` | n-de p-element van achter te beginnen                |
+| `:empty`                | leeg element                                         |
+
+![CSS: Hoe n definiëren in selector](./img/opties-css-n.png)
+
+Pseudo-elementen (altijd beginnen met ::)
+
+| Notatie          | Gebruik                    |
+| ---------------- | -------------------------- |
+| `::first-line`   | eerste regel van element   |
+| `::first-letter` | eerste letter van element  |
+| `::before`       | voor de inhoud van element |
+| `::after`        | na de inhoud van element   |
+
+## Handige info
+
+### Shorthands
+
+Shorthands stellen niet-vermelde properties in op hun standaardwaarden. Als je een shorthand property opgeeft na een longhand property, dan overschrijft de default-waarde dus de eerder gedefinieerde waarde.
+
+```css
+. {
+  background-color: red;
+  background: url(...) no-repeat left top;
+  /* Eerste weggelaten waarde in background is de background-color en die zal nu transparant zijn */
+}
+```
+
+### Achtergronden
+
+Als je een afbeelding als achtergrond instelt, is het handig om toch nog een achtergrondkleur in te stellen, zo blijft het contrast behouden als de afbeelding niet inlaadt.
+
+Shorthand = `background: color image-url repeat position (vb. background: #000 url(images/bg.gif) no-repeat left top)`
+
+### Lettertype
+
+De fallback fonts zijn:
+
+![De fallback fonts](./img/fallback-fonts.png)
+
+Voorbeelden van Websafe fonts: Arial, Times New Roman
+
+Default font size = 16px
+
+Lettergrootte kan je instellen met:
+
+- absolute groottes: xx-small, x-small, small, medium (default), large, x-large, xx-large
+- relatieve grootte: larger / smaller (dan parent)
+- lengtematen (vb. pixels)
+- percentage
+
+Best om met em/rem en percentages te werken.
+
+1 em = grootte van letter M in een font.
+
+em -> relatieve grootte t.o.v. parent element <br>
+rem -> relatieve grootte t.o.v. root
+
+Line-height gewoonlijk op 1.5 (= 1.5 \* font-size) voor doorlopende teksten.
 
 # Visual Studio Code tips
 
@@ -286,3 +384,22 @@ Met emmet expansion kan je de naam van een html-element of css property beginnen
 | ! + TAB       | Boilerplate `<head>` en `<body>` |
 | CTRL + Spatie | Suggesties weergeven             |
 | CTRL + :      | Commentaar                       |
+
+# Interessante links
+
+## CSS
+
+Algemeen:
+
+- [MDN - Overzicht selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors)
+
+Kleuren:
+
+- [CSS Gradient - gradients testen](https://cssgradient.io/)
+- [Kleurenthema's van Adobe](https://color.adobe.com/nl/)
+- [MDN - Using color wisely](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Using_color_wisely)
+- [Khan Academy - Pixar Color Science Course](https://www.khanacademy.org/computing/pixar/color)
+
+  Tekst:
+
+- [MDN - Web Safe Fonts](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Text_styling/Fundamentals#web_safe_fonts)
