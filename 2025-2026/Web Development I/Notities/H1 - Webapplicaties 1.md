@@ -254,6 +254,47 @@ Kan toegevoegd worden op drie manieren:
 - declaration: is een stijlregel in de vorm `property:value;`
 - declaration block: de verzameling stijlregels tussen {}
 
+- user agent stylesheet: De stylesheet die door de browser gebruikt wordt.
+- user stylesheet: Stylesheet die door gebruikers zelf toegepast wordt (komt niet vaak voor)
+- author stylesheet: Stylesheet die je zelf schrijft
+
+## Cascade en inheritance
+
+De author stylesheet krijgt voorrang op de user agent stylesheet.
+
+Als beide regels uit dezelfde categorie stylesheet (author of user agent) komen, dan krijgt de specifiekere selector voorrang.
+
+Tekst- en lijstgerelateerde stijlregels worden door descendants overgeërfd. Met de value `inherit` kan je andere stijlregels ook laten erven.
+
+Welke regel er toegepast wordt in de cascade is afhankelijk van de importance, origin en specificity (in die volgorde)
+
+Je kan het keyword `!important` gebruiken na een stijlregel om deze voorrang te geven.
+
+Voorrangsregels (belangrijk naar minder belangrijk):
+
+- Important user agent
+- Important user
+- Important author
+- Normal author
+- Normal user
+- Normal user agent
+
+Is de importance en origin hetzelfde, dan wint de selector met de hoogste specificity bepaald door een waarde in de vorm (0, 0, 0):
+
+- eerste getal: Aantal ID selectors
+- tweede getal: Aantal class, attribute of pseudo-class selectors
+- derde getal: Aantal type selectors en pseudo-elements
+
+Bij zelfde specificity wint de regel die het laatste gedeclareerd is.
+
+### Hoe de browser CSS verwerkt
+
+HTML-elementen worden eerst ingeladen en in de DOM tree gezet. Daarna checkt de browser welke waarde elke CSS-property elk element moet hebben. De browser gebruikt volgende info (gerangschikt naar voorrang)
+
+1. Een toegekende waarde (bij meerdere treden de cascading regels in werking)
+2. Een overgeërfde waarde
+3. Een initial value
+
 ## Properties
 
 [Overzicht van emmet-afkortingen](https://docs.emmet.io/cheat-sheet/)
@@ -276,6 +317,19 @@ Kan toegevoegd worden op drie manieren:
 | word-spacing    | Afstand tussen woorden         |
 | text-indent     | Inspringing eerste regel       |
 | text-align      | Uitlijnen                      |
+
+Je kan fonts via CSS als volgt van een server laden:
+
+```css
+@font-face {
+  font-family: naam_van_font;
+  src: url(pad/naar/font.ttf);
+}
+
+h1 {
+  font-family: naam_van_font;
+}
+```
 
 ## Selectors
 
@@ -403,3 +457,6 @@ Kleuren:
   Tekst:
 
 - [MDN - Web Safe Fonts](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Text_styling/Fundamentals#web_safe_fonts)
+- [Google Fonts](https://fonts.google.com/)
+- [Font Squirrel](https://www.fontsquirrel.com/)
+- [Font Pair](https://fontpair.co/)
