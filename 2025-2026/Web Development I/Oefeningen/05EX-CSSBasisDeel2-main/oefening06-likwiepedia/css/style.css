@@ -1,0 +1,43 @@
+body {
+  font-family: monospace;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+table,
+td,
+th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+  text-align: center;
+}
+
+/* Eerste tabel */
+table:first-of-type tr:nth-of-type(2) {
+  background-color: gold;
+}
+table:first-of-type tr:nth-of-type(3) {
+  background-color: silver;
+}
+table:first-of-type tr:nth-of-type(n + 4) {
+  background-color: peru;
+}
+
+table:nth-of-type(n + 2) tr:first-of-type th:nth-last-of-type(3),
+table:last-of-type tr:nth-of-type(2) td:nth-of-type(2) {
+  background-color: palegreen;
+}
+
+table:nth-of-type(n + 2) tr:first-of-type th:nth-last-of-type(2),
+table:last-of-type tr:nth-of-type(2) td:nth-of-type(3),
+table:last-of-type tr:nth-of-type(3) td:nth-of-type(2) {
+  background-color: lightsteelblue;
+}
+
+table:nth-of-type(n + 2) th:last-of-type,
+table:last-of-type tr:nth-of-type(n + 1) td:last-of-type {
+  background-color: lightpink;
+}
