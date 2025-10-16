@@ -10,6 +10,9 @@
   - [Sequentieel zoeken (lineair zoeken)](#sequentieel-zoeken-lineair-zoeken)
   - [Binair zoeken](#binair-zoeken)
     - [In code](#in-code)
+- [Sorteren](#sorteren)
+  - [Sorteren door selectie](#sorteren-door-selectie)
+    - [In code](#in-code-1)
 
 # Complexiteit
 
@@ -121,4 +124,24 @@ def zoek_binair_recursief(zoekItem, rij, l, r):
     else:
         zoekRecursief(zoekItem, rij, l, m) # zoek links
 
+```
+
+# Sorteren
+
+Sorteren is een belangrijke voorwaarde voor veel andere algoritmes (waaronder binair zoeken).
+
+## Sorteren door selectie
+
+Je zoekt het grootste element en plaatst het achteraan (wisselen met het laatste element). Je doet dit opnieuw met dezelfde rij maar negeert de al gesorteerde elementen. Dit doe je tot je alle elementen hebt gesorteerd.
+
+<figure>
+<img src="./img/selection_sort.png">
+<figcaption> Je loopt van n - 1 tot en met 1 (want als er maar 1 element is, dan is het al gesorteerd). Elke keer neem je de laatste positie. Je zet die positie ook als waarde voor de max. Dan zoek je de max van alle elementen voor dat element. Als je een groter element vindt dan de huidige max, wordt dat de nieuwe max en wordt de index van dat element de nieuwe positie. Als je op het einde komt, verwissel je het element op positie met het element op de laatste positie (i)</figcaption>
+</figure>
+
+### In code
+
+```python
+def selection_sort(a):
+    pass
 ```
