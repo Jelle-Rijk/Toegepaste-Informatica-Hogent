@@ -462,6 +462,20 @@ Text flow kan ingesteld worden met `writing-mode` en `direction`. Omdat de writi
 
 ![Cursor values](./img/cursors.png)
 
+## Flex
+
+`order` bepaalt de volgorde van de elementen in de flexbox.
+
+`flex-grow`/`flex-shrink` bepaalt de groei van een flex-item. Met `flex-basis` bepaal je de initiële grootte. Flex-basis heeft voorrang op de ingestelde width van een item. <br>
+Shorthand `flex: flex-grow flex-shrink flex-basis`
+
+**Absolute flex items** krijgen een flex-basis waarde van `0` (`flex: 1 1 0`). Ze nemen geen ruimte in, dus alle ruimte binnen de container wordt gelijk verdeeld over de items.
+
+**Relatieve flex items** krijgen een flex-basis waarde `content` (`flex: 1 1 content`). De ingenomen ruimte wordt eerst bepaald door de max-content van de flex-items. <br>
+**Relatieve flex items** kunnen ook een flex-basis waarde `auto` hebben (`flex: 1 1 auto`). De ingenomen ruimte wordt dan bepaald door de oorspronkelijke grootte (= ingestelde width of max-content) van de flex-items.
+
+Met `margin: auto` kan je bepalen aan welke kant vrije ruimte terecht komt.
+
 # Visual Studio Code tips
 
 ## Hotkeys
