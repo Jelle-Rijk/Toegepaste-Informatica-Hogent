@@ -2,7 +2,9 @@ html {
   box-sizing: border-box;
 }
 
-*, ::before, ::after {
+*,
+::before,
+::after {
   box-sizing: inherit;
 }
 
@@ -19,3 +21,7 @@ html {
 }
 
 /* Plaats je oplossing hieronder */
+
+.flex-container {
+  justify-content: center;
+}

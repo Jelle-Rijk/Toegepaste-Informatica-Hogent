@@ -2,7 +2,9 @@ html {
   box-sizing: border-box;
 }
 
-*, ::before, ::after {
+*,
+::before,
+::after {
   box-sizing: inherit;
 }
 
@@ -14,3 +16,11 @@ html {
 }
 
 /* Plaats je oplossing hieronder */
+
+.flex-container {
+  display: flex block;
+}
+
+.flex-container > div {
+  flex: 1;
+}
