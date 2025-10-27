@@ -19,7 +19,7 @@ Opdelen in folders (liefst namen van één woord). Bij kleinere websites alle HT
 
 index.html altijd in de root
 
-Resources in apparte mappen -> zoals "images", "css", "styles". Kan soms nog samen in een map "assets"
+Resources in aparte mappen -> zoals "images", "css", "styles". Kan soms nog samen in een map "assets"
 
 # HTML
 
@@ -40,6 +40,8 @@ Reference voor alle HTML-elementen: https://developer.mozilla.org/en-US/docs/Web
 
 Algemeen element (als er geen specifieker bestaat): `<div>`
 
+Nemen de volledige width in. Je kan de width en height instellen via CSS.
+
 | Elementnaam                   | Tag             | Opmerking                            |
 | ----------------------------- | --------------- | ------------------------------------ |
 | Description / Definition list | `<dl>`          |
@@ -56,6 +58,8 @@ Algemeen element (als er geen specifieker bestaat): `<div>`
 ### Inline elementen
 
 Algemeen element (als er geen specifieker bestaat): `<span>`
+
+Op inline elementen nemen altijd de width van de content aan. Je kan de width / height van een inline element niet instellen, dit wordt altijd door de content bepaald.
 
 | Elementnaam                  | Tag       | Opmerking                               |
 | ---------------------------- | --------- | --------------------------------------- |
@@ -422,6 +426,41 @@ em -> relatieve grootte t.o.v. parent element <br>
 rem -> relatieve grootte t.o.v. root
 
 Line-height gewoonlijk op 1.5 (= 1.5 \* font-size) voor doorlopende teksten.
+
+## Box model
+
+> Best practice <br>
+> Stel de hoogte niet manueel in. Als de gebruiker een andere lettergrootte gebruikt, moet de hoogte meestal ook veranderen. <br> _Bij afbeeldingen kan je de hoogte wel manueel instellen._
+
+Top en bottom marges werken niet zoals verwacht bij inline elementen.
+
+`margin: 0 auto` om te centreren werkt enkel bij block-elementen. Je moet dan ook de width instellen.
+
+Percentages van padding en margins worden uitgerekend op basis van de **breedte** van het parent element (ook als je bijvoorbeeld `margin-top: 10%` gebruikt).
+
+Bij twee block elementen zonder padding of border die elkaar opvolgen, wordt de grootste marge van de twee gebruikt. De andere marge wordt genegeerd (vb. twee p-elementen waarvan de bovenste 30px margin-bottom heeft en de onderste 10px margin-top, zullen 30px marge t.o.v. elkaar hebben). Hetzelfde gebeurt met de margin-top van een parent en zijn eerste child en de margin-bottom van een parent en zijn laatste child.
+
+![Voorbeeld van margin collapse](./img/margin-collapse.png)
+
+De `overflow` property kan vier waarden aannemen:
+
+- `visible`: de tekst wordt buiten de box weergegeven
+- `hidden`: de tekst wordt verborgen
+- `scroll`: altijd schuifbalken
+- `auto`: schuifbalken als er overflow is
+
+_Als je enkel een horizontale/verticale balk wil kan je overflow-x/overflow-y gebruiken._
+
+`box-shadow: horizontale-offset verticale-offset blur spread kleur`<br>
+`text-shadow: horizontale-offset verticale-offset blur kleur`
+
+Text flow kan ingesteld worden met `writing-mode` en `direction`. Omdat de writing-mode en direction kunnen veranderen, bestaan er naast de fysieke properties (width, height, top, bottom, etc.) ook logical properties die mee veranderen met de writing-mode en direction.
+
+![Overzicht physical en logical properties](./img/physical-logical-properties.png)
+
+## Cursors
+
+![Cursor values](./img/cursors.png)
 
 # Visual Studio Code tips
 

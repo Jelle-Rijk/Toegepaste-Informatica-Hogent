@@ -1,0 +1,14 @@
+.alert {
+  padding: 0.75rem 1.25rem;
+  margin: 1em 40px;
+}
+
+.alert-info {
+  background-color: lightblue;
+  border: 6px darkblue solid;
+}
+
+.alert-danger {
+  background-color: lightpink;
+  border-left: 6px red solid;
+}
