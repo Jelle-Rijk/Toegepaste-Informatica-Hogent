@@ -1,0 +1,28 @@
+@startuml Bibliotheek
+left to right direction
+
+actor Lid
+actor Baliebediende
+
+rectangle Systeem {
+
+Lid --> (Ontleen boek)
+Lid --> (Breng boek terug)
+Lid --> (Zoek boek)
+Lid --> (Reserveer boek)
+Lid --> (Annuleer reservatie)
+
+Baliebediende --> (Vraag boetes op)
+Baliebediende --> (Vraag reservaties op)
+Baliebediende --> (Annuleer reservatie)
+
+(Breng boek terug) <.. (Betaal boete) : <<extends>>
+(Ontleen boek) <.. (Betaal boete) : <<extends>>
+(Vraag reservaties op) <.. (Annuleer reservatie) : <<extends>>
+
+}
+
+
+
+
+@enduml

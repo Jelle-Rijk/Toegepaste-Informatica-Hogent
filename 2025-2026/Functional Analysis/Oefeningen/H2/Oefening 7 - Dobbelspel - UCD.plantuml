@@ -1,0 +1,25 @@
+@@startuml Dobbelspel
+left to right direction
+
+' Actors
+actor Speler
+actor Spelleider
+
+rectangle Systeem {
+    ' Speler
+    Speler --> (Meld aan)
+    Speler --> (Log in)
+    Speler --> (Speel spel)
+    Speler --> (Speel tornooi)
+    Speler --> (Raadpleeg klassement)
+
+    ' Spelleider
+    Spelleider --> (Log in)
+    Spelleider --> (Organiseer tornooi)
+
+    ' Includes / Extends
+    (Speel tornooi) --> (Registreer voor tornooi) : <<include>>
+    (Speel tornooi) --> (Speel spel) : <<include>>
+}
+
+@@enduml

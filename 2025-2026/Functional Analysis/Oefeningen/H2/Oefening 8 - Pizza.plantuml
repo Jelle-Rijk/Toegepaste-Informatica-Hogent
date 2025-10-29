@@ -1,0 +1,20 @@
+@@startuml Pizza
+left to right direction
+
+actor Klant
+actor Telefonist
+actor Kok
+actor Eigenaar
+
+rectangle Systeem {
+    Klant --> (Bestel pizza)
+    Kok --> (Voeg pizza toe)
+    Kok --> (Verwijder pizza)
+    Telefonist  --> (Registreer klant)
+    Eigenaar --> (Registreer medewerker)
+    Eigenaar --> (Vraag overzicht bestellingen op)
+    
+    (Bestel pizza) --> (Betaal bestelling) : <<includes>>
+}
+
+@@enduml
