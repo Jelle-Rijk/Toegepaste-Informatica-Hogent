@@ -7,7 +7,6 @@
 - [Aanvallers](#aanvallers)
 - [Verdedigers](#verdedigers)
 - [Security vs. privacy](#security-vs-privacy)
-    - [Verdergaan bij 59:03 (les van hoofdstuk 2)](#verdergaan-bij-5903-les-van-hoofdstuk-2)
 
 # Cyberwetten
 
@@ -81,6 +80,22 @@ Organisaties zoals de FCCU (= Federal Computer Crime Unit) en Centre for Cyber S
 
 # Security vs. privacy
 
-Sommige overheden zetten druk op technologiebedrijven om de communicatie tussen burgers in te kijken (vb. via backdoors / encryptiesleutels). Burgers verwachten privacy. Het grote vraagstuk is waar de grens moet liggen, aangezien de privacy ook voor slechte doeleinden gebruikt kan worden.
+AVG / GDPR (= General Data Protection Regulation) is hier de belangrijkste wetgeving in Europa over.
 
-### Verdergaan bij 59:03 (les van hoofdstuk 2)
+- Verplicht om gegevens te kunnen opvragen / aanpassen / wissen.
+- Data moet beveiligd worden.
+- Data moet overgedragen kunnen worden.
+- Bedrijven moeten altijd toestemming vragen om je gegevens te gebruiken, mogen enkel nodige gegevens opvragen en mogen de data maar voor beperkte duur bijhouden.
+
+= zelfde wet als in onderwijs.
+
+Wordt in België door de gegevensbeschermingsautoriteit gecontroleerd.
+
+GDPR heeft regels over het geven van toestemming:
+
+- Moet expliciet zijn (dus wegklikken telt niet)
+- Moet duidelijk zijn en mag geen negatieve gevolgen hebben.
+- Kan enkel als je 13 of ouder bent.
+- Moet intrekbaar zijn.
+
+[Interessante link: privacyguides.org](https://www.privacyguides.org/)
