@@ -108,3 +108,21 @@ Als de kandidaatsleutel uit meerdere attributen bestaat, duiden we ze in het ERD
 Als ze uit een attribuut bestaan <u>onderlijnen</u> we het.
 
 Let op met ID's. Probeer vooral identificatienummers te gebruiken die ook in de echte wereld bestaan (vb. nummerplaat, ISBN-nummer, studentnummer, etc.). Je loopt namelijk het risico dezelfde records meerdere keren toe te voegen onder andere identificatienummers.
+
+# Zwak entiteitstype
+
+Dit zijn entiteitstypes die **bestaansafhankelijk** zijn van een ander entiteitstype (eg. minimumcardinaliteit = 1) en op zichzelf niet uniek kan geïdentificeerd worden.
+
+De identificatie gebeurt dan a.d.h.v. enkele attributen + de relatie met een specifieke entiteit.
+
+vb. Een episode kan niet als uniek geïdentificeerd worden a.d.h.v. seizoen en nummer (er bestaan meerdere series), maar wel aan seizoen en nummer in combinatie met de serie.
+
+Zwakke entiteitstypes hebben m.a.w. geen eigen kandidaatsleutelattribuut.
+
+## Historiek
+
+Je kan makkelijk historische gegevens bijhouden door een zwak entiteitstype toe te voegen. Je plaatst het tussen de twee entiteitstypes waarvoor een historiek bijgehouden moet worden. De sleutel bestaat dan uit bijvoorbeeld de datum en de twee relaties.
+
+## Ternaire relaties
+
+In dit vak komen geen ternaire relaties aan bod. We kunnen ze wel als binaire relaties voorstellen door: de drie entiteitstypes te verbinden met een zwak entiteitstype. De sleutel voor het zwak identiteitstype zal dan bestaan uit iets unieks (zoals een tijdstip) + de drie relaties.
