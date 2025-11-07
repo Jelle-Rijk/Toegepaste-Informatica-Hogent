@@ -25,9 +25,17 @@ main {
   width: 400px;
   height: 150px;
   padding: 10px;
+
+  position: absolute;
+  top: 150px;
+  justify-self: center;
 }
 
 .close-button {
   width: 2rem;
   height: 2rem;
+
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
 }

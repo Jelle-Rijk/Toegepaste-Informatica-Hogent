@@ -14,4 +14,24 @@
 
 /* Plaats je oplossing hieronder */
 
+.grid-container {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+}
 
+p {
+  margin: 0;
+}
+
+#grid1 {
+  justify-items: start;
+  align-items: center;
+}
+#grid2 {
+  justify-items: end;
+}
+#grid2 > p:last-of-type {
+  justify-self: start;
+  align-self: center;
+}

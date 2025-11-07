@@ -3,7 +3,7 @@
 }
 
 body {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   margin: 15px;
 }
 
@@ -14,3 +14,14 @@ h1 {
 }
 
 /* Plaats je oplossing hieronder */
+
+main {
+  display: block grid;
+  gap: 15px;
+
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+main > img {
+  max-width: 100%;
+}

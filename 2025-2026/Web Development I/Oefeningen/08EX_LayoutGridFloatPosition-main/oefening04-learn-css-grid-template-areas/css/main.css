@@ -16,12 +16,47 @@
   grid-template-areas.  */
   grid-auto-columns: 5rem;
   grid-auto-rows: 5rem;
-  gap: 0.2rem; 
+  gap: 0.2rem;
 }
-
 
 /* Plaats je oplossing hieronder */
 /*********************************/
 
+.grid-container {
+  grid-template-areas:
+    ". L . ."
+    ". E . ."
+    ". A . ."
+    "G R I D"
+    ". N . .";
+}
 
-
+.grid-container > div {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+#box1 {
+  grid-area: L;
+}
+#box2 {
+  grid-area: E;
+}
+#box3 {
+  grid-area: A;
+}
+#box4 {
+  grid-area: R;
+}
+#box5 {
+  grid-area: N;
+}
+#box6 {
+  grid-area: G;
+}
+#box7 {
+  grid-area: I;
+}
+#box8 {
+  grid-area: D;
+}

@@ -19,3 +19,28 @@ voorzien is hierbij niet nodig.*/
 
 /* Plaats je oplossing hieronder */
 /*********************************/
+
+#learn-grid-container {
+  display: block grid;
+  gap: 0.2rem;
+  grid-template: repeat(4, 5rem) / repeat(5, 5rem);
+}
+
+#learn-grid-container > div {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+
+  background-color: cyan;
+  border: 1px solid darkblue;
+  color: darkblue;
+  font-size: 2rem;
+}
+
+#learn-grid-container > div:nth-last-of-type(n + 4) {
+  grid-row: 2;
+}
+
+#learn-grid-container > div:nth-of-type(n + 6) {
+  grid-column: 4;
+}

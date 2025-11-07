@@ -1,14 +1,42 @@
-#container> * {
+#container > * {
   border: 1px solid #000;
   padding: 10px;
 }
 
 /* De titels allemaal even groot maken */
-h1, h2, #score, nav  {
+h1,
+h2,
+#score,
+nav {
   font-size: 2rem;
   font-weight: bold;
   margin: 0.67rem 0;
 }
 
 /*  Plaats je oplossing hieronder */
+#container {
+  display: block grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 10px;
+}
 
+/* stats */
+#stats {
+  grid-row: 2;
+  align-self: start;
+}
+
+#score {
+  grid-row: 3;
+}
+
+/* board */
+main {
+  grid-row-end: span 2;
+}
+
+/* controls */
+nav {
+  justify-self: center;
+}
