@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+.grid-container {
+  background-color: lightgrey;
+  margin: 2rem 0;
+}
+.grid-container > p {
+  border: 1px solid #000;
+  background-color: orange;
+  padding: 1em;
+}
+
+/* Plaats je oplossing hieronder */
+
+

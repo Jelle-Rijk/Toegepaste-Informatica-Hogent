@@ -1,0 +1,14 @@
+#container> * {
+  border: 1px solid #000;
+  padding: 10px;
+}
+
+/* De titels allemaal even groot maken */
+h1, h2, #score, nav  {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0.67rem 0;
+}
+
+/*  Plaats je oplossing hieronder */
+

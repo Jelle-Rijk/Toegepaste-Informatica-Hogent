@@ -1,10 +1,49 @@
 <h1> NOTITIES </h1>
 
-# Algemeen
+- [Algemene conventies](#algemene-conventies)
+  - [Mappen en bestanden](#mappen-en-bestanden)
+- [HTML](#html)
+  - [Cheatsheet](#cheatsheet)
+    - [Generic](#generic)
+    - [Block elements](#block-elements)
+    - [Inline elementen](#inline-elementen)
+    - [Tabellen](#tabellen)
+    - [Formulieren](#formulieren)
+    - [Speciale karakters](#speciale-karakters)
+    - [Paginastructuur](#paginastructuur)
+  - [Handige info](#handige-info)
+    - [Globale attributen](#globale-attributen)
+    - [Organisaties](#organisaties)
+    - [Link elementen](#link-elementen)
+      - [Speciale hyperlinks](#speciale-hyperlinks)
+    - [Afbeeldingen](#afbeeldingen)
+  - [Termen](#termen)
+- [CSS](#css)
+  - [Termen](#termen-1)
+  - [Cascade en inheritance](#cascade-en-inheritance)
+    - [Hoe de browser CSS verwerkt](#hoe-de-browser-css-verwerkt)
+  - [Properties](#properties)
+    - [Tekst](#tekst)
+  - [Selectors](#selectors)
+  - [Handige info](#handige-info-1)
+    - [Shorthands](#shorthands)
+    - [Achtergronden](#achtergronden)
+    - [Lettertype](#lettertype)
+  - [Box model](#box-model)
+  - [Cursors](#cursors)
+  - [Flex](#flex)
+  - [Grid](#grid)
+  - [Floating elements (vlotten)](#floating-elements-vlotten)
+  - [Position](#position)
+- [Visual Studio Code tips](#visual-studio-code-tips)
+  - [Hotkeys](#hotkeys)
+  - [HTML-specifiek](#html-specifiek)
+- [Interessante links](#interessante-links)
+  - [CSS](#css-1)
 
-## Conventies
+# Algemene conventies
 
-### Mappen en bestanden
+## Mappen en bestanden
 
 Naamgeving:
 
@@ -240,8 +279,6 @@ Het title-attribuut zorgt voor een tooltip.
 - Block element: Start op een nieuwe regel en neemt volledige breedte in
 - Inline element: Start niet op een nieuwe regel, neemt enkel de nodige breedte in
 
-## Conventies
-
 # CSS
 
 = Cascading Style Sheets
@@ -475,6 +512,89 @@ Shorthand `flex: flex-grow flex-shrink flex-basis`
 **Relatieve flex items** kunnen ook een flex-basis waarde `auto` hebben (`flex: 1 1 auto`). De ingenomen ruimte wordt dan bepaald door de oorspronkelijke grootte (= ingestelde width of max-content) van de flex-items.
 
 Met `margin: auto` kan je bepalen aan welke kant vrije ruimte terecht komt.
+
+## Grid
+
+Terminologie:
+
+- Grid line = waar de gap komt (worden genummerd vanaf 1, negatieve cijfers tellen achterwaarts)
+- Grid cell = 1 cel
+- Grid area = meerdere cellen
+- Block axis: standaard van boven naar beneden (=> align-items / align-self)
+- Inline axis: standaard van links naar rechts (=> justify-items / justify-self)
+
+Op container (alle children zijn grid items):
+
+| CSS                     | Beschrijving                                |
+| ----------------------- | ------------------------------------------- |
+| `display: block grid;`  | Grid container maken als block element      |
+| `display: inline grid;` | Grid container maken als inline element     |
+| `grid-template-columns` | kolommen definiëren                         |
+| `grid-template-rows`    | rijen definiëren                            |
+| `grid-template-areas`   | grid areas definiëren                       |
+| `grid-auto-rows`        | grootte van extra toegevoegde rijen         |
+| `grid-auto-columns`     | grootte van extra toegevoegde kolommen      |
+| `column-gap`            | verticale gutters                           |
+| `row-gap`               | verticale gutters                           |
+| `gap: col row`          | shorthand                                   |
+| `align-items`           | stelt de align-self voor alle grid-items in |
+
+Je kan grid areas definiëren met `grid-template-areas` in de vorm van:
+
+```css
+.grid-container {
+  display: block grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 100px);
+  grid-template-areas:
+    "one three two" /* één rij per string, één kolom per woord*/
+    "one . two"
+    "one four four";
+}
+
+.grid-item-one {
+  grid-area: one; /* naam van de area in je grid-template-areas*/
+}
+```
+
+- auto-fill: Maakt zo veel mogelijk kolommen/rijen aan.
+- auto-fit: Maakt eerst zo veel mogelijk kolommen/rijen aan, collapset de niet-gebruikte kolommen en breidt de gebruikte kolommen/rijen uit zodat ze over de hele breedte/hoogte lopen.
+
+Op grid items
+
+| CSS                                                    | Beschrijving                                   |
+| ------------------------------------------------------ | ---------------------------------------------- |
+| `grid-row: 3/5;`                                       | row-span inzetten van grid line 3 naar 5       |
+| `grid-column: 2;`                                      | startkolom definiëren                          |
+| `grid-row-start: 2;`                                   | startrij op 2 zetten                           |
+| `grid-row-end: 4;`                                     | eindrij op 4 zetten                            |
+| `grid-row-end: span 3`                                 | overspant drie tracks van de grid              |
+| `grid-column: start <end>`                             | shorthand                                      |
+| `grid-row: start <end>`                                | shorthand                                      |
+| `grid-area: row-start / col-start / row-end / col-end` | shorthand                                      |
+| `align-self`                                           | positioneren binnen cel/area langs block axis  |
+| `justify-self`                                         | positioneren binnen cel/area langs inline axis |
+
+## Floating elements (vlotten)
+
+Het element wordt tegen de opgegeven rand geplaatst, andere elementen vullen de ruimte errond. Zoekt eerst de bovenrand op en dan de opgegeven rand.
+
+Wordt ingesteld met `float` en kan de waarden `left`, `right` en `none` krijgen. Je moet altijd een breedte instellen (want anders nemen de block elementen de volledige parent container in).
+Met `clear: <left/right/both/none>` kan je een element onder de voorafgaande float plaatsen.
+
+Soms is het parent-element niet groot genoeg om de achtergrond onder alle elementen te expanden (vb. als alle children floats zijn). Je kan ofwel een leeg element toevoegen of het parent element instellen met `display: flow-root;`
+
+## Position
+
+Position verschuift het element waarop je het toepast.
+
+- `position: relative`: verschuiving relatief t.o.v. zijn positie in de normale flow (andere elementen worden niet beïnvloed, volgen gewoon de normale flow alsof het element daar nog staat)
+- `position: absolute`: verschuiving relatief t.o.v. eerste niet-static parent of de body (andere elementen negeren dit element om hun normale flow te bepalen). Element beweegt mee bij scrollen.
+- `position: fixed`: verschuiving relatief t.o.v. de browser (andere elementen negeren dit element om hun normale flow te bepalen). Element blijft op het scherm bij scrollen.
+
+Offsets stel je in met de properties `left`, `top`, `bottom` en `right`.
+
+Deze elementen ondersteunen `z-index`
 
 # Visual Studio Code tips
 
