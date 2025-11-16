@@ -10,7 +10,6 @@
   - [Browser hijacking](#browser-hijacking)
 - [Netwerkaanvallen](#netwerkaanvallen)
 - [Applicatie-aanvallen](#applicatie-aanvallen)
-    - [VERDERGAAN LES VC vanaf H3.5](#verdergaan-les-vc-vanaf-h35)
 - [APT's](#apts)
 - [Interessante links](#interessante-links)
 
@@ -135,7 +134,15 @@ Een voorbeeld van een man-in-the-middle attack is een **Rogue Access Point** mak
 
 # Applicatie-aanvallen
 
-### VERDERGAAN LES VC vanaf H3.5
+Applicatie-aanvallen zijn vaak webgebaseerd.
+
+| Naam                  | Beschrijving                                                                                                                                                                   |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Zero-day attack       | Gebruiken van een kwetsbaarheid in software die nog niet gekend is.                                                                                                            |
+| Cross-site scripting  | Je uploadt een script naar een website met een fout in. Die webserver slaat het op. Het slactoffer dat naar de website surft, zal het script dan via zijn browser uitvoeren.   |
+| Code injections       | Code laten uitvoeren door invoervelden te misbruiken.                                                                                                                          |
+| Buffer overflow       | Je vult het geheugen van een programma, zodat er een overflow ontstaat. Daardoor gebruik je het geheugen van een andere applicatie, wat kan leiden tot crashes of dataverlies. |
+| Remote Code Execution | Kwetsbaarheid gebruiken om code vanop afstand uit te voeren.                                                                                                                   |
 
 # APT's
 
