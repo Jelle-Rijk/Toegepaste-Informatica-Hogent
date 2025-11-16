@@ -144,7 +144,24 @@ Applicatie-aanvallen zijn vaak webgebaseerd.
 | Buffer overflow       | Je vult het geheugen van een programma, zodat er een overflow ontstaat. Daardoor gebruik je het geheugen van een andere applicatie, wat kan leiden tot crashes of dataverlies. |
 | Remote Code Execution | Kwetsbaarheid gebruiken om code vanop afstand uit te voeren.                                                                                                                   |
 
+Beschermen tegen applicatie-attacks:
+
+- Stabiele code schrijven (exceptions gebruiken om fouten op te vangen)
+- Beschouw alle user input als vijandig / kwaadaardig
+- Valideer en controleer alle user input
+- Regelmatig updates uitvoeren zodat zwaktes gepatcht worden.
+
 # APT's
+
+-> Advanced Persistent Threat
+
+Langdurige, doelgerichte cyberaanval. Deze blijft voor heel lange tijd onzichtbaar. Vaak gericht op landen en organisaties.
+
+Ze krijgen vaak een code die start met APT.
+
+> Voorbeeld: Stuxnet
+>
+> Worm die zichzelf verspreidde via vier ongekende zwaktes in Microsoft-servers (= advanced). Het bleef jaren ongedetecteerd en activeerde enkel als er centrifuges voor het verrijken van uranium op het netwerk waren (= persistent). Het zorgde ervoor dat de centrifuges iets sneller gingen draaien en zo kapot gingen (= threat).
 
 # Interessante links
 
