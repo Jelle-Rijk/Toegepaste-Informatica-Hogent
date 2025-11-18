@@ -10,6 +10,10 @@
     - [Public-key versleuteling (assymetrisch)](#public-key-versleuteling-assymetrisch)
       - [Diffie-Hellman](#diffie-hellman)
 - [Cryptanalyse](#cryptanalyse)
+- [Data verduisteren](#data-verduisteren)
+  - [Masking](#masking)
+  - [Steganografie](#steganografie)
+  - [Obfuscation](#obfuscation)
 - [Interessante links](#interessante-links)
 
 # Cryptografie
@@ -109,7 +113,52 @@ Wordt vaak vergeleken met verf:
 
 # Cryptanalyse
 
-= Uitzoeken welke cryptografische methodes iemand gebruikt heeft / cryptografie kraken.
+= cryptografie kraken.
+
+Kan in theorie met elk algoritme, maar in de praktijk hangt het af van:
+
+- De hoeveelheid tijd die je hebt voor het bericht irrelevant wordt
+- De bronnen die je kan gebruiken
+
+Voor cryptanalyse worden verschillende technieken gebruikt:
+
+- Op zoek gaan naar patronen (vb. Alan Turing - Enigma Code)
+- Dictionary attack: wordlists gebruiken en alles erin uitproberen
+- Brute-force: Alle mogelijke waarden proberen.
+- Rainbow tables: vooraf gemaakte, gesorteerde lijsten van ciphertext met bijhorende plaintext
+
+Kraken is tegenwoordig efficiënter en sneller met de GPU. In de toekomst zou AI een grote rol kunnen spelen bij het kraken van encryptie. Quantum computing zou veel algoritmen onbruikbaar kunnen maken.
+
+Tools:
+
+- John The Ripper (zelfde als bij HackTheBox): bruteforce en dictionary attacks via een hash - geoptimaliseerd voor CPU
+- Hashcat: zelfde als John maar via GPU
+
+# Data verduisteren
+
+## Masking
+
+= gevoelige data vervangen door niet-gevoelige (die op de gevoelige data lijkt)
+
+De niet gevoelige data zinvol houden gebeurt via:
+
+- Vervanging: gegevens worden vervangen door realistische, maar andere waarden.
+- Shuffling: data van gebruikers wordt verwisseld
+
+## Steganografie
+
+= gegevens verbergen in een ander bestand (vb. foto of audio)
+
+Belangrijke termen hierbij:
+
+- Ingebedde gegevens = geheim bericht
+- Omslagtekst/afbeeelding/audio = bestand waarin het bericht verborgen zit.
+- Stego-tekst = tekst van het embedded bericht
+- Stego-key = key die het verbergingsproces regelt
+
+## Obfuscation
+
+= gegevens verwarrend/dubbelzinnig maken zodat een systeem dit makkelijk door elkaar kan halen.
 
 # Interessante links
 
