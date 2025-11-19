@@ -1,18 +1,14 @@
 <h1> Zoeken en sorteren </h1>
 
 - [Complexiteit](#complexiteit)
-  - [Lineaire tijdscomplexiteit](#lineaire-tijdscomplexiteit)
-  - [Kwadratische tijdscomplexiteit](#kwadratische-tijdscomplexiteit)
-  - [Exponentiële tijdscomplexiteit](#exponentiële-tijdscomplexiteit)
-  - [Logaritmische tijdscomplexiteit](#logaritmische-tijdscomplexiteit)
-  - [Constante tijdscomplexiteit](#constante-tijdscomplexiteit)
 - [Zoeken in een array](#zoeken-in-een-array)
   - [Sequentieel zoeken (lineair zoeken)](#sequentieel-zoeken-lineair-zoeken)
   - [Binair zoeken](#binair-zoeken)
     - [In code](#in-code)
 - [Sorteren](#sorteren)
   - [Sorteren door selectie](#sorteren-door-selectie)
-    - [In code](#in-code-1)
+  - [Sorteren door tussenvoegen](#sorteren-door-tussenvoegen)
+  - [Sorteren door samenvoegen](#sorteren-door-samenvoegen)
 
 # Complexiteit
 
@@ -23,35 +19,15 @@
 
 Bij het bepalen van het type algoritme, gaan we altijd uit van het slechtst mogelijke geval. Daarvoor wordt de big O-notatie gebruikt.
 
-## Lineaire tijdscomplexiteit
+| Naam         | Formule              | Beschrijving                                                                  |
+| ------------ | -------------------- | ----------------------------------------------------------------------------- |
+| Lineair      | T(n) = n             | Als de input verdubbelt, verdubbelt de uitvoeringstijd.                       |
+| Kwadratisch  | T(n) = n<sup>2</sup> | Als input verdubbelt, gaat de uitvoeringstijd maal 4.                         |
+| Exponentieel | T(n) = 2<sup>n</sup> | Als de input met één element verhoogd wordt, verdubbelt de uitvoeringstijd.   |
+| Logaritmisch | T(n) = log(n)        | Als de input verdubbelt, komt er een constante waarde bij de uitvoeringstijd. |
+| Constant     | T(n) = c             | Als input wijzigt, verandert de uitvoeringstijd niet.                         |
 
-T(n) = n
-
-Als de input verdubbelt, verdubbelt de uitvoeringstijd.
-
-## Kwadratische tijdscomplexiteit
-
-T(n) = n<sup>2</sup>
-
-Als input verdubbelt, gaat de uitvoeringstijd maal 4.
-
-## Exponentiële tijdscomplexiteit
-
-T(n) = 2<sup>n</sup>
-
-Als de input met één element verhoogd wordt, verdubbelt de uitvoeringstijd
-
-## Logaritmische tijdscomplexiteit
-
-T(n) = log(n)
-
-Als de input verdubbelt, komt er een constante waarde bij de uitvoeringstijd.
-
-## Constante tijdscomplexiteit
-
-T(n) = c
-
-Als input wijzigt, verandert de uitvoeringstijd niet.
+Complexiteit bepalen wordt meestal gedaan door de vaakst uit te voeren vergelijking te nemen en te kijken hoe vaak deze wordt uitgevoerd met verschillende groottes van arrays.
 
 # Zoeken in een array
 
@@ -59,7 +35,7 @@ We gaan er hier vanuit dat de array random accessable is.
 
 ## Sequentieel zoeken (lineair zoeken)
 
-**Tijdscomplexiteit -> T(n) = (O)n**
+**T(n) = (O)n**
 
 = alle elementen één voor één onderzoeken
 
@@ -69,7 +45,7 @@ Je moet enkel kunnen checken of elementen gelijk zijn aan elkaar of niet.
 
 ## Binair zoeken
 
-**Tijdscomplexiteit -> T(n) = O(log<sub>2</sub>(n))**
+**T(n) = O(log<sub>2</sub>(n))**
 
 -> Zoekt eerst het middelste item. Splitst dan op in twee gelijke helften tot er maar één element meer over is.
 
@@ -132,6 +108,8 @@ Sorteren is een belangrijke voorwaarde voor veel andere algoritmes (waaronder bi
 
 ## Sorteren door selectie
 
+**T(n) = O(n<sup>2</sup>)**
+
 Je zoekt het grootste element en plaatst het achteraan (wisselen met het laatste element). Je doet dit opnieuw met dezelfde rij maar negeert de al gesorteerde elementen. Dit doe je tot je alle elementen hebt gesorteerd.
 
 <figure>
@@ -139,9 +117,36 @@ Je zoekt het grootste element en plaatst het achteraan (wisselen met het laatste
 <figcaption> Je loopt van n - 1 tot en met 1 (want als er maar 1 element is, dan is het al gesorteerd). Elke keer neem je de laatste positie. Je zet die positie ook als waarde voor de max. Dan zoek je de max van alle elementen voor dat element. Als je een groter element vindt dan de huidige max, wordt dat de nieuwe max en wordt de index van dat element de nieuwe positie. Als je op het einde komt, verwissel je het element op positie met het element op de laatste positie (i)</figcaption>
 </figure>
 
-### In code
+## Sorteren door tussenvoegen
 
-```python
-def selection_sort(a):
-    pass
-```
+**T(n) = O(n<sup>2</sup>)**
+
+Je overloopt de array en laat al gesorteerde elementen staan. Als je een niet-gesorteerd element tegenkomt, plaats je het op de juiste plaats in het al gesorteerde deel. <br>
+Als je het element in het gesorteerde deel invoegt, swap je het element telkens naar voren tot het wel juist is.
+
+<img src="./img/insertion_sort.png">
+
+Insertion sort is te verkiezen boven selection sort, omdat insertion sort in bepaalde gevallen wel sneller is dan selection sort. De worst case time complexity is bij beide hetzelfde.
+
+## Sorteren door samenvoegen
+
+Je splitst de array op in twee helften. Je sorteert die helften en voegt dan terug samen.
+
+- Je sorteert recursief de eerste en tweede helft van de array.
+- Je mengt de gesorteerde deelrijen in één nieuwe gesorteerde array.
+
+<figure>
+<img src="./img/mergesort-driver.png">
+<figcaption>Driverfunctie</figcaption>
+</figure>
+
+<figure>
+<img src="./img/mergesort-recursive.png">
+<figcaption>Deze functie splitst de array recursief op en roept dan merge aan om de twee gesorteerde deelarrays samen te voegen. In de recursieve functies worden de originele array en enkele tellers meegegeven. Zo nemen de deelarrays geen extra geheugen in, het sorteren gebeurt in-place (we duiden de deelrij immers gewoon aan met de tellers).</figcaption>
+</figure>
+
+<figure>
+<img src="./img/mergesort-merge-vars.png">
+<img src="./img/mergesort-merge-function.png">
+<figcaption>Beide rijen en een hulprij worden doorlopen. Je vergelijkt beide eerste elementen en plaatst het kleinste in de hulprij. Tellers van de rij waarvan je genomen hebt en de hulprij gaan eentje omhoog. Als een rij leeg is, moet de overgebleven rest van de andere rij in één keer toegevoegd worden. Op het einde wordt de originele array vervangen door de nieuwe gesorteerde hulprij. Het gebruik van hulprijen zorgt ervoor dat er voor deze stap extra geheugen nodig is.</figcaption>
+</figure>
