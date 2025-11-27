@@ -15,6 +15,10 @@
 - [EERD - Extended Entity Relationship Diagram](#eerd---extended-entity-relationship-diagram)
   - [Specialisatie](#specialisatie)
   - [Generalisatie](#generalisatie)
+  - [Participatie en Disjoint constraint](#participatie-en-disjoint-constraint)
+- [Beperkingen van het ERD](#beperkingen-van-het-erd)
+  - [Fan trap](#fan-trap)
+  - [Chasm trap](#chasm-trap)
 
 # Fases in DB ontwerp
 
@@ -165,3 +169,44 @@ Subtype heeft geen kandidaatsleutelattribuuttype (zit al in het superentiteittyp
 ## Generalisatie
 
 Omgekeerde proces van specialisatie. Je maakt een supertype van een aantal gegeven entiteittypes.
+
+## Participatie en Disjoint constraint
+
+Participatieconstraint heeft twee mogelijke waarden:
+
+- Mandatory / Totale participatie: Elke entiteit van het supertype moet tot minstens één subtype behoren (gelijkaardig aan abstract class in Java)
+- Optional / Partiële participatie: Entiteiten kunnen ook van dit type zijn zonder tot een subtype te behoren.
+
+Disjointconstraint heeft ook twee mogelijke waarden:
+
+- AND / Overlappend: Entiteit kan meer dan één subtype hebben.
+- OR / Disjunct: Entiteit kan maar tot één subtype behoren.
+
+Die constraints plaats je in het EERD tussen {}.
+
+# Beperkingen van het ERD
+
+- Tijdelijke/Situationele beperkingen kunnen niet gemodelleerd worden (vb. project moet binnen een maand toegewezen worden / werknemer mag niet opnieuw werken in departement waar hij ooit manager was)
+- Je kan op een ERD geen consistentie tussen verschillende relatietypes garanderen (vb. werknemer moet werken voor departement waarvan hij manager is)
+- Op het ERD kan je geen mogelijke waarden vastleggen
+- Je kan er geen functies in opnemen
+
+-> Al deze zaken moeten wel gedocumenteerd worden. bn
+
+## Fan trap
+
+<figure>
+ <img src="./img/voorbeeld-fantrap.png">
+ <figcaption>Door de twee 1..N cardinaliteiten, is het hier niet duidelijk welke werknemers aan welke projecten werken.</figcaption>
+</figure>
+
+Oplossing = relaties herschikken (vb. 1 departement werkt aan 1..N projecten -> 1 project wordt uitgevoerd door 1..N werknemers)
+
+## Chasm trap
+
+<figure>
+ <img src="./img/voorbeeld-chasmtrap.png">
+ <figcaption>Doordat er tussen werknemer en project twee cardinaliteiten staan met een 0 in, kan het zijn dat er geen relatie tussen werknemer en project is, terwijl het wel aan een departement werd toegewezen.</figcaption>
+</figure>
+
+Oplossing = extra relatie toevoegen tussen project en departement
