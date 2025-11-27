@@ -4,4 +4,4 @@
 | [Binary search](./H1%20-%20Zoeken%20en%20sorteren.md)  | Zoeken   | O(log n)          | Gesorteerde array opdelen in twee helften en kijken of je in de linker- of rechterhelft verder moet zoeken.       |
 | [Selection sort](./H1%20-%20Zoeken%20en%20sorteren.md) | Sorteren | O(n<sup>2</sup>)  | Grootste element zoeken en swappen met het laatste unsorted element, je krijgt achteraan een gesorteerde rij.     |
 | [Insertion sort](./H1%20-%20Zoeken%20en%20sorteren.md) | Sorteren | O(n<sup>2</sup>)  | Je neemt het eerste niet-gesorteerde element en swapt het telkens met het voorgaande element tot het juist staat. |
-| [Merge sort](./H1%20-%20Zoeken%20en%20sorteren.md)     | Sorteren | O(n log n)        | Je sorteert recursieve deelrijen en voegt ze dan terug samen. = Heel snel maar memory-intensive                   |
+| [Merge sort](./H1%20-%20Zoeken%20en%20sorteren.md)     | Sorteren | O(n log(n))       | Je sorteert recursieve deelrijen en voegt ze dan terug samen. = Heel snel maar memory-intensive                   |

@@ -130,6 +130,8 @@ Insertion sort is te verkiezen boven selection sort, omdat insertion sort in bep
 
 ## Sorteren door samenvoegen
 
+**T(n) = O(n log(n))**
+
 Je splitst de array op in twee helften. Je sorteert die helften en voegt dan terug samen.
 
 - Je sorteert recursief de eerste en tweede helft van de array.

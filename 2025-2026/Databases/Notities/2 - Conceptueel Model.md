@@ -1,5 +1,21 @@
 <h1> Conceptueel Model </h1>
 
+- [Fases in DB ontwerp](#fases-in-db-ontwerp)
+  - [Fase 1 - Verzamelen en analyseren van de functionele / inhoudelijke vereisten](#fase-1---verzamelen-en-analyseren-van-de-functionele--inhoudelijke-vereisten)
+  - [Fase 2 - Conceptueel ontwerp](#fase-2---conceptueel-ontwerp)
+  - [Fase 3 - Logisch ontwerp](#fase-3---logisch-ontwerp)
+  - [Fase 4 - Fysiek ontwerp](#fase-4---fysiek-ontwerp)
+- [ERD - Entity Relationship Diagram](#erd---entity-relationship-diagram)
+  - [Relatietypes](#relatietypes)
+    - [Cardinaliteiten](#cardinaliteiten)
+  - [Attribuuttypes](#attribuuttypes)
+- [Zwak entiteitstype](#zwak-entiteitstype)
+  - [Historiek](#historiek)
+  - [Ternaire relaties](#ternaire-relaties)
+- [EERD - Extended Entity Relationship Diagram](#eerd---extended-entity-relationship-diagram)
+  - [Specialisatie](#specialisatie)
+  - [Generalisatie](#generalisatie)
+
 # Fases in DB ontwerp
 
 ![Fases voor het ontwerpen van een databank](./img/fases-db-ontwerp.png)
@@ -37,7 +53,7 @@ _Deze stap is dbms-onafhankelijk._
 
 De implementatie van het logisch ontwerp. Hier maak je tabellen en werk je met een specifieke DBMS. Je schrijft hier code om datarestricties op te leggen.
 
-# Entity Relationship Diagram
+# ERD - Entity Relationship Diagram
 
 Geïntroduceerd door Peter Chen (1976)
 
@@ -126,3 +142,26 @@ Je kan makkelijk historische gegevens bijhouden door een zwak entiteitstype toe 
 ## Ternaire relaties
 
 In dit vak komen geen ternaire relaties aan bod. We kunnen ze wel als binaire relaties voorstellen door: de drie entiteitstypes te verbinden met een zwak entiteitstype. De sleutel voor het zwak identiteitstype zal dan bestaan uit iets unieks (zoals een tijdstip) + de drie relaties.
+
+# EERD - Extended Entity Relationship Diagram
+
+=> Alle aspecten van ERD blijven behouden + 2 extra concepten: specialisatie en generalisatie
+
+## Specialisatie
+
+Entiteittype is een verzameling van entiteiten met gemeenschappelijke karakteristieken.
+
+- Komt overeen met een IS-EEN relatie (zoals een ervende klasse in Java)
+
+De gespecialiseerde entiteiten noemen we ook **sub(entiteit)types** de parent entiteit is van een **superentiteittype**.
+
+Subtype heeft geen kandidaatsleutelattribuuttype (zit al in het superentiteittype)
+
+<figure>
+    <img src="./img/voorbeeld-specialisatie.png">
+    <figcaption>Voorbeeld en notatie van specialisatie (hier twee niveaus diep). Het kandidaatsleutelattribuuttype bevindt zich hier in CrewMember.</figcaption>
+</figure>
+
+## Generalisatie
+
+Omgekeerde proces van specialisatie. Je maakt een supertype van een aantal gegeven entiteittypes.

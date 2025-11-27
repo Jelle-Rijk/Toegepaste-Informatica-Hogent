@@ -8,19 +8,38 @@ class QueueList:
 
 
     def __init__(self) -> None:
-        pass
+        self.kop = None
+        self.staart = None
 
     def is_empty(self):
-        pass
+        return self.kop == None
 
     def enqueue(self,data):
-        pass
+        nieuwe_knoop = self.Knoop(data)
+        if self.is_empty():
+            self.kop = self.staart = nieuwe_knoop
+        else:
+            self.staart.volgende = nieuwe_knoop
+            self.staart = nieuwe_knoop
 
     def front(self):
-        pass
+        return self.kop.data
 
     def dequeue(self):
-        pass
+        data = self.kop.data
+        self.kop = self.kop.volgende
+        return data
     
     def invert(self):
-        pass
+        huidige_knoop = self.kop
+        vorige_knoop = None
+
+        while huidige_knoop != None:
+            volgende_knoop = huidige_knoop.volgende
+            huidige_knoop.volgende = vorige_knoop
+            
+            vorige_knoop = huidige_knoop
+            huidige_knoop = volgende_knoop
+        
+        self.staart = self.kop
+        self.kop = vorige_knoop
