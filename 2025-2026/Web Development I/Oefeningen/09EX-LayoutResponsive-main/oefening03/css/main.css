@@ -29,7 +29,7 @@ h3 {
   flex-wrap: wrap;
 }
 
-.fotos>* {
+.fotos > * {
   padding: 0.6em;
   flex: 1 0 33%;
 }
@@ -46,7 +46,7 @@ footer {
   padding: 0.6em;
 }
 
-footer nav h3+ul {
+footer nav h3 + ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -82,4 +82,18 @@ footer nav div ul {
 .box2,
 .box3 {
   display: none;
+}
+
+@media screen and (min-width: 720px) {
+  .box2 {
+    display: block;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .box3 {
+    display: block;
+  }
+  .fotos > * {
+    flex-basis: 25%;
+  }
 }

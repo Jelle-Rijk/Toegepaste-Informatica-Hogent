@@ -1,12 +1,12 @@
 @import url(normalize.css);
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #111;
   background-color: #525252;
 }
@@ -109,7 +109,7 @@ td {
   text-align: center;
 }
 
-input[type='submit'] {
+input[type="submit"] {
   font-size: 1.2em;
   background-color: #424242;
   color: white;
@@ -140,4 +140,32 @@ textarea {
 
 .radios input {
   display: inline;
+}
+
+@media screen and (min-width: 600px) {
+  nav ul li {
+    flex: 0 1 auto;
+  }
+  nav ul {
+    padding: 1rem 0.3rem;
+    justify-content: space-around;
+  }
+
+  .afspraak form p:nth-last-of-type(n + 3) {
+    display: block flex;
+    gap: 4px;
+  }
+  .radios {
+    display: inline flex;
+    gap: 4px;
+  }
+
+  .flex-600px,
+  #over_ons {
+    display: block flex;
+    justify-content: space-between;
+  }
+  aside {
+    margin-left: 10px;
+  }
 }

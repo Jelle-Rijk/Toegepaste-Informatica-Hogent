@@ -1,15 +1,52 @@
 body {
-    display: block flex;
-    height: 100vh;
-    font-size: 1.2em;
-    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
-    background-color: honeydew;
+  display: block flex;
+  height: 100vh;
+  font-size: 1.2em;
+  font-family: "Calibri", "Trebuchet MS", sans-serif;
+  background-color: honeydew;
 }
 
 p {
-    margin: auto;
+  margin: auto;
 }
 
 #grootte::before {
-    content: "mobiel ";
+  content: "mobiel ";
+}
+
+@media screen and (min-width: 480px) {
+  #grootte::before {
+    content: "tablet ";
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #grootte::before {
+    content: "klein ";
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #grootte::before {
+    content: "groot ";
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #grootte::before {
+    content: "extra groot ";
+  }
+}
+
+@media screen and (orientation: landscape) {
+  body {
+    background-color: orangered;
+    color: white;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  body {
+    background-color: honeydew;
+  }
 }
