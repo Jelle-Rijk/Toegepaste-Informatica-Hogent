@@ -35,6 +35,13 @@
   - [Grid](#grid)
   - [Floating elements (vlotten)](#floating-elements-vlotten)
   - [Position](#position)
+  - [Responsive lay-outs](#responsive-lay-outs)
+    - [Media queries](#media-queries)
+      - [Best practices](#best-practices)
+    - [Responsive images](#responsive-images)
+      - [Formaten](#formaten)
+      - [Pixels](#pixels)
+      - [Verschillende afbeeldingen weergeven](#verschillende-afbeeldingen-weergeven)
 - [Visual Studio Code tips](#visual-studio-code-tips)
   - [Hotkeys](#hotkeys)
   - [HTML-specifiek](#html-specifiek)
@@ -298,6 +305,10 @@ Kan toegevoegd worden op drie manieren:
 - user agent stylesheet: De stylesheet die door de browser gebruikt wordt.
 - user stylesheet: Stylesheet die door gebruikers zelf toegepast wordt (komt niet vaak voor)
 - author stylesheet: Stylesheet die je zelf schrijft
+
+- viewport: deel van het document dat je aan het bekijken bent
+- visual viewport: deel van de pagina dat op dit moment op het scherm staat
+- layout viewport: alle elementen op een pagina
 
 ## Cascade en inheritance
 
@@ -595,6 +606,137 @@ Position verschuift het element waarop je het toepast.
 Offsets stel je in met de properties `left`, `top`, `bottom` en `right`.
 
 Deze elementen ondersteunen `z-index`
+
+## Responsive lay-outs
+
+Waarom?
+
+- betere UX
+- meer bezoekers
+- betere SEO
+- betere laadtijden
+- één keer developpen voor meerdere devices
+
+Mobile First = ontwikkelen vanuit een mobile perspectief en dan opschalen naar grotere schermen.
+
+Via: [grid](#grid), [flex](#flex), image resizing en media queries
+
+Een pagina wordt t.o.v. layout viewport breedte gebouwd = bepaald door browser manufacturer.
+
+Bij RWD (Responsive Web Design) moet je steeds de viewport width aan device width gelijkstellen.
+
+DIP = Device Independent Pixels
+
+### Media queries
+
+Aangegeven met @media tag <br>
+-> grootte vanaf wanneer het toegepast wordt = **breakpoint**
+
+True/False-expressie: De stijlregels worden enkel uitgevoerd bij True.
+
+Twee delen:
+
+- media type: all / print / screen
+- media features: width / height / aspect-ratio / orientation / resolution / color / pointer / etc.
+
+media type print = printers + devices in print-modus (vb. preview bij pagina printen), alles dat niet onder print valt is screen.
+
+operators: not, and
+
+> @media screen and (min-width: 800px) {} <br> > _Wordt enkel uitgevoerd als het scherm 800px of breder is._
+
+Media queries worden van boven naar onder geëvalueerd (dus onderste kan bovenste overschrijven)
+
+In de praktijk twee werkwijzes:
+
+- media queries + css in 1 bestand opnemen (= grotere bestanden)
+- apart css-bestand laden als media query true is (= meerdere bestanden)
+
+#### Best practices
+
+- tap-area voor buttons op vb. mobile devices = minstens 45\*45px
+- zo veel mogelijk relatieve waarden (%, vw, em, rem, ...)
+- images: gebruik `max-width: 100%;` om ze niet te laten overflowen
+
+### Responsive images
+
+Als je een afbeelding scalet = verlies van kwaliteit. + Grote bestanden verzenden is tragere laadtijd (= verlies van bezoekers = verlies van winst)
+
+Afbeeldingen zijn meer dan 60% van het dataverkeer.
+
+#### Formaten
+
+.bmp = bitmap based > raster van pixels, verliest kwaliteit bij schalen, fotorealistisch
+
+.svg = vector based > coördinaten en geometrische vormen, geen fotorealisme, kleine bestandsgrootte
+
+nieuwe formaten: webp, avif
+
+#### Pixels
+
+device / hardware pixels: fysieke pixels in het apparaat
+CSS / logische pixels: 1 pixel zoals in CSS gedefinieerd
+
+Retina-schermen hebben een hoge densiteit van pixels en daardoor komen de device en CSS pixels niet altijd overeen. -> Een grid van 2\*2 pixels is kleiner op een Retina-scherm
+
+#### Verschillende afbeeldingen weergeven
+
+-> Afbeelding moet scherp blijven dus de hogereresolutieschermen moeten grotere afbeeldingen ontvangen.
+
+Niet allebei inladen en dan via CSS-class kiezen welke gedisplayd wordt (= verspilling bandbreedte). Ook niet puur schalen (ofwel te grote afbeelding ofwel onzuivere afbeelding.)
+
+-> Oplossing: aantal versies aanbieden, browser kiest de versie zelf. Als dev voeg je nog info toe per afbeelding zodat de browser goed kan kiezen.
+
+In HTML via:
+
+```html
+<img
+  srcset="url/to/small.jpg 1x, url/to/large.jpg 2x"
+  src="url/to/small.jpg"
+  alt="Omschrijving"
+/>
+```
+
+_In dit geval gebaseerd op pixel density (1x, 2x). src wel nog toevoegen want oude browser ondersteunen srcset niet._
+
+Bovenstaande houdt geen rekening met de grootte waarop de afbeelding gerenderd wordt.
+
+```html
+<img
+  srcset="url/to/large.jpg 1024w, url/to/medium.jpg 640w, url/to/small.jpg 320w"
+  sizes="(min-width: 36em) 33.3vw, 100vw"
+  src="url/to/small.jpg"
+  alt="A rad wolf"
+/>
+```
+
+w-descriptor: geeft exacte breedte van afbeelding mee.
+
+**sizes-attribuut**: geeft aan hoeveel pixels er effectief nodig zijn voor de gerenderde afbeelding. Media query wordt aan een breedte gekoppeld. Wordt doorlopen van eerste naar laatste tot een media query true is. -> in dit geval: als de width van de viewport minimaal 36em is, moet de breedte een derde van de viewport zijn, anders moet de breedte de volledige viewport zijn. <br>
+notatie: `sizes="[media query 1] [breedte], [media query 2] [breedte], etc."`
+
+Sizes enkel gebruiken voor dezelfde afbeelding in verschillende formaten (je hebt zelf geen controle over welke afbeelding de browser kiest). Anders `<picture>` gebruiken.
+
+```html
+<picture>
+  <!-- images/breed.jpg wordt weergegeven bij een breed scherm -->
+  <source srcset="images/breed.jpg" media="(min-width: 1200px)" />
+  <!-- images/smal.jpg wordt weergegeven vanaf 700px breedte -->
+  <source srcset="images/smal.jpg" media="(min-width: 700px)" />
+  <!-- src van de img wordt enkel gebruikt als picture niet ondersteund wordt door de browser -->
+  <img src="images/fallback.jpg" alt="Man running along a pier." />
+</picture>
+```
+
+Picture kan ook gebruikt worden om nieuwe formaten te ondersteunen. Je plaatst dan een oud formaat in de fallback voor browsers die de nieuwe formaten nog niet ondersteunen. <br>
+Je moet dan wel een type-attribuut toevoegen: `type="image/avif"`
+
+Binnen elke `<source />` kan je ook weer bij `srcset` gebruik maken van meerdere URLs voor resolution switching.
+
+<figure>
+ <img src="./img/picture-src-samengevat.png" alt="samenvatting picture en srcset">
+ <figcaption> Samenvatting van het bovenstaande </figcaption>
+</figure>
 
 # Visual Studio Code tips
 
