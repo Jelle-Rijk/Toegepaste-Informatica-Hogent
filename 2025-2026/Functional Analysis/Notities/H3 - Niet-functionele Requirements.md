@@ -57,3 +57,12 @@ NFR's worden volgens ISO 25010 onderverdeeld in 8 categorieën die elk enkele su
 - Onderhoudbaarheid: Mate waarin de code modulair, herbruikbaar, analyseerbaar, wijzigbaar en testbaar is.
 - Betrouwbaarheid: De mate waarin het systeem bepaalde functies gaat uitvoeren binnen een specifieke tijd (vb. availability)
 - Overdraagbaarheid: Mate waarin het systeem effectief tussen software- of hardware-omgevingen kan overgezet worden.
+
+# NFR's noteren via SMART
+
+In het sjabloon vul je de volgende zaken in:
+
+- NFR: Categorie volgens ISO25010
+- Indicator: Subcategorie volgens ISO25010
+- Meetvoorschrift: Wijze waarop NFR gemeten kan worden.
+- Norm: Verwacht resultaat van de meting.
