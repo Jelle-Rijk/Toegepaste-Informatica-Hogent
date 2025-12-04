@@ -110,3 +110,69 @@ U(<u>t1</u>, u1) <br> _IR: t1 verwijst naar T.t1, verplicht_
 I(<u>t1</u>, i1) <br> _IR: t1 verwijst naar T.t1, verplicht_
 
 O(<u>o1</u>, o2, i1) <br> _IR: i1 verwijst naar I.i1, verplicht, uniek_
+
+# Oefening 8 - Boeken
+
+Klant(<u>klantNr</u>, voornaam, achternaam, geboortedatum, isAfhaalKlant, isLeverKlant, voornaamAfhaler, achternaamAfhaler, leveradres_straat, leveradres_nummer, leveradres_gemeente, leveradres_land)
+
+Bestelling(<u>klantNr, datum, tijdstip</u>, EAN) <br>
+_IR: klantNr verwijst naar Klant.klantNr, verplicht <br>
+IR: EAN verwijst naar Product.EAN, verplicht_
+
+Product(<u>EAN</u>, prijs)
+
+DigitaalBoek(<u>EAN</u>, grootte) <br>
+_IR: EAN verwijst naar Product.EAN, verplicht_
+
+Boek(<u>EAN</u>, titel) <br>
+_IR: EAN verwijst naar Product.EAN, verplicht_
+
+Drukkerij(<u>btwNummer</u>, naam, hoofddrukkerij)
+_IR: hoofddrukkerij verwijst naar Drukkerij.btwNummer, optioneel, uniek_
+
+Drukkerij_Boek(<u>EAN</u>, <u>btwNummer</u>, leverDatum, aantal, prijs) <br>
+<i>IR: EAN verwijst naar Boek.EAN, verplicht <br>
+IR: btwNummer verwijst naar Drukkerij.btwNummer, verplicht</i>
+
+# Oefening 9 - Sportclub
+
+Amateur(<u>aansluitingsNr</u>, voornaam, achternaam, adres, kostenvergoeding)
+
+Prof(<u>aansluitingsNr</u>, voornaam, achternaam, adres, licentieNr, wedde)
+
+Amateur_Club(<u>speler</u>, <u>club</u>, periodeVan, periodeTot) <br>
+<i>IR: speler verwijst naar Amateur.aansluitingsNr, verplicht <br> IR: club verwijst naar Club.stamnummer, verplicht</i>
+
+Prof_Club(<u>speler</u>, <u>club</u>, periodeVan, periodeTot) <br>
+<i>IR: speler verwijst naar Prof.aansluitingsNr, verplicht <br> IR: club verwijst naar Club.stamnummer, verplicht</i>
+
+Club(<u>stamnummer</u>, naam, logo, voorzitter, bloknummer)
+
+Team(<u>clubnummer</u>, <u>categorie</u>, afgevaardigde, trainer) <br>
+_IR: clubnummer verwijst naar Club.stamnummer, verplicht_
+
+Scheidsrechter(<u>aansluitingsNr</u>, voornaam, achternaam, straat, huisnummer, gemeente, club) <br>
+_IR: club verwijst naar Club.stamnummer, verplicht_
+
+Wedstrijd(<u>naam, datum</u>, scheidsrechter) <br>
+_IR: scheidsrechter verwijst naar Scheidsrechter.aansluitingsNR_, optioneel
+
+# Oefening 10 - Lokalen
+
+TheorieLokaal(<u>lokaalNummer</u>, gebouw, straat, huisnummer, gemeente, land, aantalPlaatsen)
+
+PraktijkLokaal(<u>lokaalNummer</u>, gebouw, straat, huisnummer, gemeente, land, aantalComputers, extraInfrastructuur, toegangTot)<br>_IR: toegangTot verwijst naar TheorieLokaal.lokaalNummer, optioneel, uniek_
+
+ComputerCursus(<u>cursusCode</u>, naam, docent)
+
+PraktijkLokaal_ComputerCursus(<u>lokaalNummer, cursusCode</u>) <br>
+<i>IR: lokaalNummer verwijst naar PraktijkLokaal.lokaalNummer, verplicht<br>IR: cursusCode verwijst naar ComputerCursus.cursusCode, verplicht</i>
+
+TheorieLokaal_Campus(<u>lokaalNummer, naam, postCode</u>) <br><i>IR: lokaalNummer verwijst naar TheorieLokaal.lokaalNummer, verplicht<br>IR: naam verwijst naar Campus.naam, verplicht<br>IR: postCode verwijst naar Campus.postCode, verplicht</i>
+
+PraktijkLokaal_Campus(<u>lokaalNummer, naam, postCode</u>) <br><i>IR: lokaalNummer verwijst naar TheorieLokaal.lokaalNummer, verplicht<br>IR: naam verwijst naar Campus.naam, verplicht<br>IR: postCode verwijst naar Campus.postCode, verplicht</i>
+
+Campus(<u>naam</u>, verantwoordelijke, telefoon, <u>postCode</u>) <br>
+_IR: postCode verwijst naar Stad.postCode, verplicht_
+
+Stad(<u>postCode</u>, stadsnaam, burgemeester)
