@@ -11,6 +11,14 @@
   - [Zwakke entiteiten mappen](#zwakke-entiteiten-mappen)
   - [Meerwaardige attributen mappen](#meerwaardige-attributen-mappen)
   - [Specialisaties mappen](#specialisaties-mappen)
+- [Normalisatie](#normalisatie)
+  - [Functionele afhankelijkheid](#functionele-afhankelijkheid)
+  - [Normalisatiestappen](#normalisatiestappen)
+    - [Stap 1 - R0 bepalen](#stap-1---r0-bepalen)
+    - [Stap 2 - R1 bepalen](#stap-2---r1-bepalen)
+    - [Stap 3 - R2 bepalen](#stap-3---r2-bepalen)
+    - [Stap 4 - R3 bepalen](#stap-4---r3-bepalen)
+    - [Stap 5 - Relationeel model opstellen op basis van R3](#stap-5---relationeel-model-opstellen-op-basis-van-r3)
 
 In deze cursus wordt ervan uitgegaan dat we een relationele database opstellen. Het logisch model is hier dus altijd een relationeel model.
 
@@ -135,3 +143,68 @@ Daarna map je deze relatie zoals je altijd bij M:N-relaties doet.
 **{Optional, OR}** -> Tabel met alle attributen van het supertype. Per subtype maak je een aparte tabel met de attributen van het subtype, hierin neem je de primaire sleutel van het supertype op.
 
 ![{Optional, OR}](./img/optional-or.png)
+
+# Normalisatie
+
+= proces om tabellen te evalueren en corrigeren (redundanties en anomalieën elimineren)
+
+Normalisatie werkt in stappen. Het is algemeen aanvaard dat normaalvorm 3 (3NF) voldoende is.
+
+Als je het EERD volledig correct opstelt en correct mapt, is normalisatie niet nodig.
+
+Belangrijkste doelen:
+
+- gegevensredundantie verminderen: redundantie leidt tot inconsistenties en vraagt meer plaats.
+
+- invoeganomalieën vermijden: moeilijk nieuwe gegevens toe te voegen zonder ook andere gegevens toe te voegen die nog niet beschikbaar zijn.
+- verwijderanomalieën vermijden: verwijderen van gegevens kan leiden tot onbedoelde verwijdering van andere gegevens.
+- modificatie-anomalieën vermijden: als dezelfde informatie op meerere plaatsen opgeslagen wordt, moet men de data overal bijwerken.
+
+Voorbeeld invoeg- en verwijderanomalie: Een departement kan niet bestaan zonder werknemers. Dat betekent dat we eerst een werknemer moeten aanmaken voordat we een departement kunnen maken (**invoeganomalie**). Als de laatste werknemer van een departement vertrekt, verliezen we ook de data van het departement (**verwijderanomalie**).
+
+Oplossing = tabellen uit elkaar trekken.
+
+## Functionele afhankelijkheid
+
+Drie types:
+
+| Naam                                    | Notatie     | Uitleg                                                                                   |
+| --------------------------------------- | ----------- | ---------------------------------------------------------------------------------------- |
+| gewone functionele afhankelijkheid      | A -> B      | Als A bekend is, is B bekend.                                                            |
+| partiële functionele afhankelijkheid    | A' -> B     | Als een deel van de primaire sleutel van A bekend is, is B bekend.                       |
+| transitieve functionele afhankelijkheid | A -> B -> C | Als je A kent, ken je B, als je B kent, ken je C. Dus C is transitief afhankelijk van A. |
+
+Determinant = linkerdeel in de notatie. Rechterdeel = functioneel afhankelijk
+
+## Normalisatiestappen
+
+In dit voorbeeld: R0 is de niet-genormaliseerde vorm. R1 is de eerste normaalvorm, R2 is de tweede normaalvorm, etc.
+
+### Stap 1 - R0 bepalen
+
+- Procesgegevens schrappen
+- Herhalende groepen identificeren
+- Identificatie van het document identificeren (= primaire sleutel)
+- Functionele afhankelijkheden bepalen
+
+### Stap 2 - R1 bepalen
+
+- Werk de procesgegevens weg
+- Splits de samengestelde gegevens op
+- Werk de herhalende groepen weg in een eigen tabel (neem de sleutel uit de oorspronkelijke tabel over en gebruik de FA om een nieuwe bijkomende sleutel te bepalen.)
+
+### Stap 3 - R2 bepalen
+
+- Werk partiële afhankelijkheden weg.
+- Maak een nieuwe tabel met de partiële afhankelijkheden. De determinant is de sleutel van de nieuwe tabel.
+
+### Stap 4 - R3 bepalen
+
+- Werk de transitieve afhankelijkheden weg.
+  - Verwijder de transitief afhankelijke attribuuttypes.
+  - Maak een nieuwe tabel met de transitief afhankelijke attribuuttypes en het attribuut waarvan ze afhankelijk zijn.
+
+### Stap 5 - Relationeel model opstellen op basis van R3
+
+- Geef de verzamelingen een naam.
+- Bepaal de integriteitsregels voor de vreemde sleutels.
