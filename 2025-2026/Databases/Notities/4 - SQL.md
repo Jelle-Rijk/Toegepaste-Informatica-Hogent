@@ -1,13 +1,19 @@
 <h1>SQL - Standard Query Language</h1>
 
 - [Standaarden en dialecten](#standaarden-en-dialecten)
-- [Select](#select)
-  - [WHERE](#where)
+- [SELECT](#select)
+  - [Voorwaarden stellen - WHERE](#voorwaarden-stellen---where)
   - [Resultaten formatteren](#resultaten-formatteren)
-    - [Sorteren](#sorteren)
-  - [Formatteren](#formatteren)
-    - [Alias](#alias)
-    - [Functies / Berekeningen](#functies--berekeningen)
+    - [Sorteren - ORDER BY](#sorteren---order-by)
+    - [Alias - AS](#alias---as)
+  - [Functies](#functies)
+  - [Groeperen en aggregaatsfuncties](#groeperen-en-aggregaatsfuncties)
+    - [GROUP BY en HAVING](#group-by-en-having)
+  - [Selecteren uit meerdere tabellen - JOIN / ON](#selecteren-uit-meerdere-tabellen---join--on)
+    - [INNER JOIN](#inner-join)
+    - [OUTER JOIN](#outer-join)
+    - [CROSS JOIN](#cross-join)
+  - [Resultaten van queries combineren - UNION](#resultaten-van-queries-combineren---union)
 
 # Standaarden en dialecten
 
@@ -20,7 +26,7 @@ Bestaat uit:
 - Data Control Language (DCL) -> Stelt de gegevensbeveiliging en autorisatie in. (GRANT, REVOKE, DENY)
 - Verschillende operatoren, functies en flow controls
 
-# Select
+# SELECT
 
 SELECT gebruik je om gegevens op te vragen.
 
@@ -55,7 +61,7 @@ Meerdere argumenten worden opgelijst met komma's.
 SELECT firstName, lastName  FROM customers;
 ```
 
-## WHERE
+## Voorwaarden stellen - WHERE
 
 Voorwaarden kunnen uit verschillende onderdelen bestaan.
 
@@ -112,7 +118,7 @@ SELECT companyname, region FROM supplies WHERE region IS NULL;
 
 ## Resultaten formatteren
 
-### Sorteren
+### Sorteren - ORDER BY
 
 ORDER BY sorteert de data volgens de opgegeven sorteervelden en operator (DEFAULT = ASC).
 
@@ -134,9 +140,7 @@ SELECT productname FORM products ORDER BY productname DESC;
 SELECT productid, productname, categoryid, unitprice FROM products ORDER BY categoryid, unitprice DESC;
 ```
 
-## Formatteren
-
-### Alias
+### Alias - AS
 
 Je kan een kolom in het resultaat een alias geven.
 
@@ -145,8 +149,6 @@ Je kan een kolom in het resultaat een alias geven.
 SELECT medewerkernr AS Regisseurnummer FROM employees WHERE role='director';
 ```
 
-### Functies / Berekeningen
-
 Je kan via aliassen ook berekende resultaten teruggeven. Hiervoor moet je de operatoren `+, -, /, *` gebruiken.
 
 ```sql
@@ -154,12 +156,13 @@ Je kan via aliassen ook berekende resultaten teruggeven. Hiervoor moet je de ope
 SELECT ProductName, UnitPrice * UnitsInStock AS InventoryValue FROM Products;
 ```
 
-Voor berekeningen kan je ook functies gebruiken:
+## Functies
+
+Je kan in de argumenten verschillende waarden berekenen. Heirvoor gebruik je functies:
 
 - Strings: concat, left, right, length, substring, replace,...
 - DateTime: dateAdd, dateDiff, day, month, year, now(), curDate(),...
 - Rekenkundig: round, floor, ceil, cos, sin,...
-- Aggregate: avg, sum, min, max,...
 - IFNULL(kolom, x): Vervang gevonden NULL-waardes in kolom door x.
 
 Dataconversies gebeuren voor sommige omzettingen impliciet, maar kan ook expliciet via CAST of CONVERT.
@@ -190,4 +193,122 @@ SELECT OrderId, Freight,
         ELSE 'Hoge verschepingskost'
     END AS 'Verschepingskost'
 FROM orders;
+```
+
+## Groeperen en aggregaatsfuncties
+
+Aggregaatsfuncties / Statistische functies returnen één antwoord per kolom en kunnen dus niet op rijniveau gebruikt worden (i.e. bij WHERE)
+
+SQL heeft er standaard 5:
+
+- SUM(expression)
+- AVG(expression)
+- MIN(expression)
+- MAX(expression)
+- COUNT([DISTINCT] kolomnaam) -> telt de entries in de kolom, met het keyword DISTINCT tellen enkel de unieke resultaten.
+
+-> NULL-waarden worden niet meegerekend in deze aggregaatfuncties.
+
+Met COUNT(\*) kan je alle rijen in de selectie tellen (onafhankelijk van niet-ingevulde kolommen).
+
+### GROUP BY en HAVING
+
+Groepeert rijen met gemeenschappelijke kenmerken -> Per groep, één rij weergegeven
+
+Op een groep kan je wel aggregaatsfuncties toepassen.
+
+```sql
+-- Groepeert alle producten met hetzelfde categoryID, telt ze en returnt het aantal + ID per groep.
+SELECT CategoryID, COUNT(productID) AS AANTAL FROM PRODUCTS GROUP BY CategoryID;
+```
+
+Als je een "gewoon veld" opgeeft na SELECT in combinatie met één of meerdere aggregatiefuncties, moeten alle gewone velden in GROUP BY geplaatst worden.
+
+HAVING werkt hetzelfde als WHERE, maar dan voor groepen.
+
+```sql
+-- Toont het aantal producten voor elke categorie die meer dan 10 producten in voorraad bevat.
+SELECT CategoryID, COUNT(productID) AS Aantal -- toon categoryID en het aantal producten per groep
+FROM Products
+WHERE UnitsInstock > 0 -- selecteer enkel producten die in voorraad zijn
+GROUP BY CategoryID -- groepeer de producten per categorie
+HAVING COUNT(*) > 10 -- selecteer enkel de categorieën die meer dan 10 producten bevatten
+```
+
+## Selecteren uit meerdere tabellen - JOIN / ON
+
+JOIN: kiest de tabellen die je samenvoegt <br>
+ON: beschrijft hoe je wil samenvoegen (voorwaarde)
+
+Resultaat = één resultset waarin de rijen uit de tabellen gekoppeld zijn.
+
+```sql
+-- Basissyntax
+SELECT uitdrukking FROM tabel JOIN andereTabel ON voorwaarde;
+
+-- Meerdere tabellen joinen
+SELECT uitdrukking FROM tabel JOIN andereTabel ON voorwaarde JOIN nogEenTabel ON voorwaarde;
+```
+
+Als je met meerdere tabllen werkt, kun je ze een alias geven door een spatie + alias na de tabelnaam in FROM of JOIN te zetten.
+
+Kolomnaam komt in meerdere tabellen voor -> altijd tabelnaam of alias meegeven.
+
+### INNER JOIN
+
+Koppelt rijen uit de ene tabel met rijen uit een andere tabel op basis van gemeenschappelijke waarden in beide kolommen. Je kan de relatie tussen de velden uitdrukken met vergelijkingsoperatoren, maar meestal heb je = nodig (EQUI-JOIN).
+
+```sql
+-- Selecteer alle orders waarbij Shipcountry niet België, Frankrijk of Duitsland is. Geef van die orders alle details terug (die in een andere tabel worden opgeslagen).
+
+SELECT orders.OrderID, ShipCountry, ProductID, Quantity
+FROM orders JOIN order_details -- tabel order_details wordt toegevoegd aan de resultaten
+    ON orders.OrderID = order_details.OrderID -- de rijen met dezelfde OrderID uit beide tabellen worden gekoppeld.
+WHERE ShipCountry not in ('Belgium', 'France', 'Germany');
+```
+
+Inner Joins tonen enkel de rijen die aan de ON-conditie voldoen.
+
+```sql
+-- INNER JOIN dus de supervisors (alias sv) die niet bij een werknemer (alias wn) horen, worden niet teruggegeven.
+SELECT sv.nr, vnaam, fnaam
+FROM supervisors sv JOIN werknemer wn
+ON sv.nr = wn.supervisor;
+```
+
+### OUTER JOIN
+
+Retourneert alle record van een tabel, ook als niet aan de voorwaarde in ON voldaan wordt.
+
+Drie types:
+
+- LEFT OUTER JOIN: Returnt alle rijen van de tabel voor het keyword JOIN.
+- RIGHT OUTER JOIN: Returnt alle rijen van de tabel na het keyword JOIN.
+- FULL OUTER JOIN (niet in MySQL): Returnt alle rijen uit beide tabellen.
+
+Als je keyword LEFT of RIGHT voor JOIN gebruikt, mag je OUTER ook weglaten.
+
+```sql
+-- OUTER JOIN dus de supervisors (alias sv) die niet bij een werknemer (alias wn) horen, zullen ook in de lijst staan.
+SELECT sv.nr, vnaam, fnaam
+FROM supervisors sv LEFT JOIN werknemer wn
+ON sv.nr = wn.supervisor;
+```
+
+### CROSS JOIN
+
+Een cross join returnt elke mogelijke combinatie van rijen in beide tabellen.
+
+Aantal rijen dat gereturnd wordt is: `aantalRijenTabel1 * aantalRijenTabel2`
+
+## Resultaten van queries combineren - UNION
+
+UNION combineert de resultaten, zo lang er even veel kolommen zijn van hetzelfde datatype. De getoonde namen voor de kolommen zijn de kolomnamen van de eerste query.
+
+```sql
+SELECT firstname + '' + lastname AS name, city, postalcode FROM Employees
+UNION
+SELECT companyname, city, postalcode FROM Customers;
+
+-- Returnt drie kolommen: name, city en postalcode waarin de gegevens van de Employees en Customers staan.
 ```
