@@ -42,6 +42,8 @@
       - [Formaten](#formaten)
       - [Pixels](#pixels)
       - [Verschillende afbeeldingen weergeven](#verschillende-afbeeldingen-weergeven)
+  - [Animaties](#animaties)
+    - [CSS transitions](#css-transitions)
 - [Visual Studio Code tips](#visual-studio-code-tips)
   - [Hotkeys](#hotkeys)
   - [HTML-specifiek](#html-specifiek)
@@ -737,6 +739,35 @@ Binnen elke `<source />` kan je ook weer bij `srcset` gebruik maken van meerdere
  <img src="./img/picture-src-samengevat.png" alt="samenvatting picture en srcset">
  <figcaption> Samenvatting van het bovenstaande </figcaption>
 </figure>
+
+## Animaties
+
+Twee opties:
+
+- CSS transitions
+- CSS animations
+
+### CSS transitions
+
+Transities zorgen voor een geleidelijke overgang tussen wijzigende waarden in je CSS (vb. als de kleur verandert omdat je op een button klikt).
+
+```css
+#element {
+  /* Dit moet je altijd instellen als je transities wil. */
+  transition-duration: 1s;
+
+  /* Animatie-properties met hun beginwaarden */
+  transition-property: all;
+  transition-duration: 0s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+#element-met-meerdere-transities {
+  transition-property: opacity, height;
+  transition-duration: 3s, 5s;
+}
+```
 
 # Visual Studio Code tips
 
