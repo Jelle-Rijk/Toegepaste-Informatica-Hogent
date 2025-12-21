@@ -1,7 +1,7 @@
 <h1>SQL - Standard Query Language</h1>
 
-- [Standaarden en dialecten](#standaarden-en-dialecten)
-- [SELECT](#select)
+- [Inleiding](#inleiding)
+- [Queries - SELECT](#queries---select)
   - [Voorwaarden stellen - WHERE](#voorwaarden-stellen---where)
   - [Resultaten formatteren](#resultaten-formatteren)
     - [Sorteren - ORDER BY](#sorteren---order-by)
@@ -14,8 +14,23 @@
     - [OUTER JOIN](#outer-join)
     - [CROSS JOIN](#cross-join)
   - [Resultaten van queries combineren - UNION](#resultaten-van-queries-combineren---union)
+  - [Subqueries](#subqueries)
+- [Andere DML - Data Manipulation Language](#andere-dml---data-manipulation-language)
+  - [Data toevoegen - INSERT](#data-toevoegen---insert)
+  - [Data wijzigen - UPDATE](#data-wijzigen---update)
+  - [Data verwijderen - DELETE](#data-verwijderen---delete)
+- [DDL - Data Definition Language](#ddl---data-definition-language)
+  - [Databanken manipuleren](#databanken-manipuleren)
+  - [Tabellen manipuleren](#tabellen-manipuleren)
+  - [Datatypes](#datatypes)
+  - [Constraints](#constraints)
+    - [AUTO_INCREMENT](#auto_increment)
+    - [Primaire sleutel](#primaire-sleutel)
+    - [Vreemde sleutels](#vreemde-sleutels)
 
-# Standaarden en dialecten
+# Inleiding
+
+SQL = Standard Query Language
 
 Standaard werd vastgelegd in ANSI/ISO-1992
 
@@ -26,7 +41,7 @@ Bestaat uit:
 - Data Control Language (DCL) -> Stelt de gegevensbeveiliging en autorisatie in. (GRANT, REVOKE, DENY)
 - Verschillende operatoren, functies en flow controls
 
-# SELECT
+# Queries - SELECT
 
 SELECT gebruik je om gegevens op te vragen.
 
@@ -311,4 +326,310 @@ UNION
 SELECT companyname, city, postalcode FROM Customers;
 
 -- Returnt drie kolommen: name, city en postalcode waarin de gegevens van de Employees en Customers staan.
+```
+
+## Subqueries
+
+Je voegt een extra SELECT toe tussen haakjes in de WHERE of HAVING clause van de buitenste query. De subquery wordt altijd eerst uitgevoerd en staat tussen haakjes.
+
+Returnt één of een lijst van waarde(n).
+
+```sql
+/*Subquery vs. Order By met een Limit
+We zoeken in beide gevallen het duurste product*/
+
+-- Subquery (zal alle producten returnen als er meerdere producten met de hoogste prijs zijn)
+SELECT ProductID, ProductName, UnitPrice as MaxPrice
+FROM Products
+WHERE UnitPrice = (SELECT MAX(UnitPrice) FROM PRODUCTS);
+
+-- LIMIT 1 (returnt maar één product, ook als er meerdere het duurst zijn)
+SELECT ProductID, ProductName, UnitPrice as MaxPrice
+FROM Products
+ORDER BY UnitPrice DESC
+LIMIT 1;
+
+/*Subquery die een kolom als lijst returnt, je kan daar dan in zoeken. We zoeken hier alle employees die een order verwerkt hebben.*/
+SELECT e.EmployeeID, CONCAT(e.FirstName, '', e.LastName) AS FullName -- Het resultaat is een ID en voor- + familienaam
+FROM Employees e
+WHERE e.EmployeeID IN (SELECT DISTINCT EmployeeID FROM Orders); -- De subquery returnt alle unieke IDs in de tabel Orders en gebruiken IN om de employees in de main query te filteren.
+```
+
+Subqueries kunnen velden uit de tabellen van de buitenste query gebruiken, andersom niet.
+
+Als de subquery afhankelijk is van info uit de buitenste query is dit een **gecorreleerde subquery**.
+
+Een gecorreleerde subquery wordt per rij van de buitenste query uitgevoerd en is daardoor een dure operatie. Probeer te vermijden (beter JOIN, CTE - Common Table Expression = leerstof tweede jaar - of eenvoudige subquery).
+
+```sql
+-- Niet-gecorreleerde subquery. We zoeken de producten die meer dan gemiddeld kosten.
+SELECT ProductId, ProductName, UnitPrice
+FROM Products
+WHERE UnitPrice > (SELECT AVG(UnitPrice) FROM Products); -- Subquery wordt eerst één keer berekend, returnt het resultaat. Dan wordt de buitenste query uitgevoerd.
+
+-- Gecorreleerde subquery. We zoeken de producten die meer kosten dan het gemiddelde van hun categorie.
+SELECT ProductId, ProductName, UnitPrice, CategoryId
+FROM Products p
+WHERE UnitPrice > (SELECT AVG(UnitPrice) FROM Products WHERE categoryId = p.categoryId); -- Deze lijn heeft informatie van de buitenste query nodig (p.categoryId - de categorie van het huidige product) en wordt dus per rij die gecheckt wordt door de buitenste query opnieuw berekend.
+```
+
+Je kan checken of een berekening in een subquery bestaat met EXISTS/NOT EXISTS.
+
+```sql
+-- EXISTS returnt true als er een resultaat in de subquery zit. Hieronder dus elke customer die een Order heeft.
+SELECT c.CustomerID, c.CompanyName
+FROM Customers c
+WHERE EXISTS (SELECT * FROM Orders WHERE CustomerID = c.customerID);
+
+-- NOT EXISTS returnt true als de subquery leeg is. Hieronder dus alle klanten zonder Order.
+SELECT c.CustomerID, c.CompanyName
+FROM Customers c
+WHERE NOT EXISTS (SELECT * FROM Orders WHERE CustomerID = c.customerID);
+
+-- Alternatief voor NOT EXISTS met JOIN
+SELECT c.CustomerID, c.CompanyName
+FROM Customers c
+  LEFT JOIN Orders O on c.CustomerId = o.CustomerID -- voeg de Orders toe aan de customers.
+WHERE o.CustomerID IS NULL -- Customers zonder order zullen een NULL in het veld CustomerID bij de orderinfo hebben.
+```
+
+# Andere DML - Data Manipulation Language
+
+## Data toevoegen - INSERT
+
+```sql
+-- Standaardnotatie
+
+-- Methode 1: Enkel de kolommen met niet-NULL waarden opgeven
+INSERT INTO tabelnaam (kolomnaam1, kolomnaam4)
+VALUES(value1, value2);
+-- = (value1, NULL, NULL, value2)
+
+-- Methode 2: Alle kolommen invullen
+INSERT INTO tabelnaam
+VALUES (value1, NULL, NULL, value2);
+
+-- Met alle optionele stukken
+INSERT LOW_PRIORITY IGNORE INTO tabel(col1, col2)
+VALUES (value1, value2)
+ON DUPLICATE KEY UPDATE assignment_list;
+```
+
+Als je geen kolomnaam opgeeft -> waarden volgens kolomvolgorde.
+
+Verplichte waarden moeten ingevuld zijn. Alle waarden moeten het juiste datatype of NULL zijn.
+
+Niet-ingevulde kolommen worden NULL, tenzij er in de constraints een defaultwaarde toegekend wordt.
+
+Auto-increment kolommen mogen nooit in een INSERT staan.
+
+## Data wijzigen - UPDATE
+
+```sql
+-- Standaardnotatie
+UPDATE tabel
+SET assignment_list;
+
+-- Alle opties
+UPDATE LOW_PRIORITY IGNORE tabel
+SET assignment_list
+WHERE condition
+ORDER BY order
+LIMIT row_count;
+```
+
+Een assignment list ziet er als volgt uit:
+
+```sql
+-- Alle rijen in een tabel wijzigen
+UPDATE Products
+SET unitprice = (unitprice*1.1);
+
+-- Specifieke rijen wijzigen
+UPDATE Products
+SET unitprice = (unitprice*1.1)
+WHERE productname = 'Koffie';
+
+-- Meerdere velden wijzigen
+UPDATE Products
+SET unitprice = (unitprice*1.1), unitsinstock = 0;
+
+-- Je kan waarden op NULL zetten met een voorwaarde via NULLIF
+UPDATE employees
+SET reportsTo = NULLIF(reportsTo, 101);
+-- Dit is een alternatief voor
+UPDATE employees
+SET reportsTO =
+  CASE WHEN reportsTO = 101 THEN NULL
+  END;
+```
+
+## Data verwijderen - DELETE
+
+```sql
+-- Standaardnotatie
+DELETE FROM tabel
+WHERE voorwaarde;
+
+-- Alle opties
+DELETE LOW_PRIORITY QUICK IGNORE
+FROM tabel[PARTITION(partition)]
+WHERE voorwaarde
+ORDER BY order
+LIMIT row_count;
+
+/*SPECIALE DELETES*/
+-- Verwijder alle rijen, auto-increment zal verderlopen
+DELETE FROM tabelnaam;
+
+-- Verwijder alle rijen, reset auto-increment (= table drop + create)
+TRUNCATE TABLE tabelnaam;
+```
+
+> **BELANGRIJK!** <br>
+> Vergeet nooit de WHERE-clausule anders delete je alles uit de tabel.
+
+# DDL - Data Definition Language
+
+DDL wordt gebruikt om het logisch model om te zetten naar een fysiek model.
+
+Fysiek model bestaat uit:
+
+- definitie van de tabellen
+- definities primaire sleutels
+- definities vreemde sleutels
+- definities van kolommen (vb. geen null-waarden)
+- definitie van indexen
+- toewijzen tablespace
+
+Noot bij integriteitsregels: Als de minimale cardinaliteit in het conceptuele model 1 was, moet deze vreemde sleutel altijd ingevuld zijn (en dus non-null zijn).
+
+Met DDL kan je databanken, tabellen, constraints en indexen definiëren. Je kan er ook datatypes mee vastleggen.
+
+## Databanken manipuleren
+
+```sql
+-- Database maken
+CREATE DATABASE naam;
+
+-- Database verwijderen
+DROP DATABASE naam;
+```
+
+## Tabellen manipuleren
+
+```sql
+-- Tabel maken
+CREATE TABLE tabelnaam (
+  kolomnaam1 [DATATYPE] [CONSTRAINTS],
+  kolomnaam2 [DATATYPE] [CONSTRAINTS]
+);
+
+-- Tabel wijzigen
+ALTER TABLE tabelnaam (
+  MODIFY COLUMN bestaandeKolom {wijzigingen} -- kolom wijzigen
+  ADD kolomnaam [DATATYPE] [CONSTRAINTS] -- kolom toevoegen
+  DROP kolomnaam -- kolom verwijderen
+  DROP CONSTRAINT constraintnaam -- constraint verwijderen
+);
+
+-- Tabel verwijderen
+DROP TABLE tabelnaam;
+```
+
+## Datatypes
+
+| Datatype       | Omschrijving                | Opmerking                                |
+| -------------- | --------------------------- | ---------------------------------------- |
+| int / integer  | Gehele getallen             | -2<sup>31</sup> tot 2<sup>31</sup> - 1   |
+| decimal        | Kommagetallen               | -10<sup>38</sup> tot 10<sup>38</sup> - 1 |
+| char(n)        | Tekst van vaste lengte n    | n is in [1, 8000]                        |
+| varchar[(n)]   | Tekst met variërende lengte | n is optioneel = maximumlengte           |
+| bool / boolean |                             | TRUE = 1, FALSE = 0                      |
+| date           | datum                       | yyyy-mm-dd                               |
+
+## Constraints
+
+Hieronder worden auto-increment, priimary key en foreign key besproken. Enkele andere constraints zijn:
+
+```sql
+-- Valide input checken. In dit geval moet de kolom Kolomnaam ofwel value1 of value2 bevatten:
+CONSTRAINT constraintnaam CHECK (Kolomnaam IN('value1','value2'))
+
+```
+
+### AUTO_INCREMENT
+
+Bevat voor elke rij een door het systeem gegenereerde (sequentiële) unieke waarde van datatype INT. (= telt op)
+
+Limieten:
+
+- Slechts 1 per tabel
+- Geen NULL-waarden
+- Kan je niet zelf aanpassen
+
+Je kan de laatst gecreëerde waarde opvragen met LAST_INSERT_ID().
+
+```sql
+-- AUTO_INCREMENT definiëren
+CREATE TABLE student(
+  studentnr INT NOT NULL AUTO_INCREMENT, -- studentnr start bij 1 en telt op
+  lastname CHAR(30) NOT NULL,
+  firstname CHAR(30) NOT NULL,
+  gender BOOLEAN NOT NULL
+)
+
+-- AUTO_INCREMENT op een andere waarde laten starten.
+ALTER TABLE student
+AUTO_INCREMENT = 100;
+```
+
+### Primaire sleutel
+
+=> 1 per tabel (kan wel uit meerdere kolommen bestaan = samengestelde sleutel)
+
+- Waarde moet uniek zijn
+- NULL niet toegestaan
+
+```sql
+-- Primary key definiëren bij het aanmaken / aanpassen van een kolom
+CREATE TABLE student (
+studentnr INT AUTO_INCREMENT PRIMARY KEY, -- primaire sleutel
+lastname CHAR(30) NOT NULL,
+firstname CHAR(30) NOT NULL,
+gender BOOLEAN NOT NULL
+);
+
+-- Samengestelde sleutel
+CREATE TABLE users (
+  user_id INT NOT NULL,
+  role_id INT NOT NULL,
+  PRIMARY KEY(user_id, role_id)
+);
+
+-- Constraint als aparte lijn toevoegen
+ALTER TABLE student
+  ADD CONSTRAINT PK_studentnr PRIMARY KEY(studentnr) -- PK_studentnr is de naam van de nieuwe constraint, studentnr - de kolom - wordt als primary key gebruikt.
+```
+
+### Vreemde sleutels
+
+Verbanden tussen relaties uitdrukken.
+
+- Meerdere per tabel toegelaten
+- NULL-waarden kunnen toegelaten zijn
+- Waarborgt integriteit
+  - Vreemde sleutels moeten verwijzen naar een primaire sleutel uit een tabel
+  - Niet-NULL waarde moet in de gerefereerde kolom aanwezig zijn.
+  - Legt cascading acties vast voor ON UPDATE en ON DELETE.
+
+```sql
+-- Tijdens tabelcreatie
+CREATE TABLE userroles(
+  user_id INT NOT NULL,
+  role_id INT NOT NULL,
+  PRIMARY KEY(user_id, role_id), -- combinatie user_id en role_id wordt als primaire sleutel gebruikt
+  FOREIGN KEY(user_id) REFERENCES users(user_id), -- relationeel model: user_id verwijst naar verzameling Users
+  FOREIGN KEY(role_id) REFERENCES roles(role_id)
+);
 ```
