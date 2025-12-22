@@ -1,5 +1,22 @@
 <h1> Red team </h1>
 
+- [Taken](#taken)
+- [De 5 fasen](#de-5-fasen)
+  - [Fase 1 - Reconnaissance](#fase-1---reconnaissance)
+  - [Fase 2 - Scanning en enumeration](#fase-2---scanning-en-enumeration)
+    - [Scanning](#scanning)
+      - [Poortscanners](#poortscanners)
+      - [Netwerkscanners](#netwerkscanners)
+      - [Vulnerability scanners](#vulnerability-scanners)
+    - [Enumeration](#enumeration)
+  - [Fase 3 t.e.m. 5 - Gaining access, maintaining access, covering tracks](#fase-3-tem-5---gaining-access-maintaining-access-covering-tracks)
+    - [Gaining access](#gaining-access)
+    - [Maintaining access](#maintaining-access)
+    - [Covering tracks](#covering-tracks)
+  - [Cyber attack cycle](#cyber-attack-cycle)
+- [Pentests](#pentests)
+  - [Audit report](#audit-report)
+
 # Taken
 
 - Proberen inbreken
