@@ -1,5 +1,20 @@
 <h1> Blue team </h1>
 
+- [Diepe verdediding](#diepe-verdediding)
+- [Systemen en apparaten beschermen](#systemen-en-apparaten-beschermen)
+  - [Fysieke toegang](#fysieke-toegang)
+  - [Gebruikersbeheer](#gebruikersbeheer)
+    - [Authenticatie](#authenticatie)
+    - [Autorisatie](#autorisatie)
+  - [Host hardening](#host-hardening)
+    - [Draadloos / Mobiel](#draadloos--mobiel)
+    - [Hostdata beschermen](#hostdata-beschermen)
+  - [Server hardening](#server-hardening)
+    - [Administratieve maatregelen](#administratieve-maatregelen)
+  - [Network hardening](#network-hardening)
+- [Assets management](#assets-management)
+- [Nood aan experten](#nood-aan-experten)
+
 # Diepe verdediding
 
 Een goede verdediging houdt rekening met de volgende zaken

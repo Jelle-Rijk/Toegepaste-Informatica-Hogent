@@ -1,5 +1,14 @@
 <h1> Availability </h1>
 
+- [Disaster Recovery Planning (DRP)](#disaster-recovery-planning-drp)
+- [High availability](#high-availability)
+- [Opslagmedia](#opslagmedia)
+  - [HDD](#hdd)
+  - [SSD](#ssd)
+  - [Cloud](#cloud)
+- [Backups](#backups)
+- [Interessante links](#interessante-links)
+
 # Disaster Recovery Planning (DRP)
 
 = maatregelen treffen om recovery bij rampen te verbeteren.
