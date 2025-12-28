@@ -35,7 +35,7 @@ Gezien het om tips gaat, kan het door iedereen in de wereld gebruikt worden.
 
 ![NIST-framework](./img/h2/nist.png)
 
-- Identify: Nadenken over de soorten software je gebruikt / welke zwaktes er kunnen zijn.
+- Identify: Nadenken over de soorten software die je gebruikt / welke zwaktes er kunnen zijn.
 - Protect: Zwaktes onderzoeken en kijken wat je kan doen om de zwaktes op te lossen of het gevaar ervan te minimaliseren.
 - Detecteren: Informatie krijgen over wat er gedaan wordt door aanvallers. (100% veilig kan namelijk nooit, dus moet je de aanvallen die wel gedaan worden, kunnen oplossen voor de toekomst).
 - Respond: Ervoor zorgen dat problemen in de cybersecurity snel worden opgelost.
