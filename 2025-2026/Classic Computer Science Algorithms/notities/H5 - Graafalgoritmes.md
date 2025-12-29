@@ -7,9 +7,10 @@
   - [Adjacentielijst](#adjacentielijst)
     - [Tijdscomplexiteit](#tijdscomplexiteit-1)
 - [Zoeken in grafen](#zoeken-in-grafen)
-- [Kortste Pad Algoritmen](#kortste-pad-algoritmen)
-- [Minimale Kost Opspannende Bomen](#minimale-kost-opspannende-bomen)
-- [Het Handelsreizigersprobleem](#het-handelsreizigersprobleem)
+  - [Generiek zoeken](#generiek-zoeken)
+  - [Breedte-Eerst Zoeken](#breedte-eerst-zoeken)
+  - [Diepte-Eerst Zoeken](#diepte-eerst-zoeken)
+  - [Toepassing: Topologisch sorteren](#toepassing-topologisch-sorteren)
 
 # Terminologie
 
@@ -91,10 +92,129 @@ Alle buren van een knoop vinden => O(n) <br> (zelfde als bij matrix)
 
 # Zoeken in grafen
 
-**VERDER VANAF PAGINA 136**
+## Generiek zoeken
 
-# Kortste Pad Algoritmen
+-> Zoeken naar knopen die bereikbaar zijn vanaf een bepaalde knoop.
 
-# Minimale Kost Opspannende Bomen
+Je volgt bogen waarvan één knoop wel ontdekt en de andere niet ontdekt is. Als er geen bogen meer zijn die aan die criterium voldoen, heb je alle bereikbare knopen.
 
-# Het Handelsreizigersprobleem
+```
+INVOER: Gerichte of ongerichte graaf G = (V,E), startknoop s. Knopen zijn genummerd van 1 tot n.
+UITVOER: Een array D met D[v] = true als er een pad van s naar v bestaat.
+
+function ZoekGeneriek(G,s)
+  D <- [false, false, ..., false]                   # initialiseer de array met alles op false
+  D[s] <- true                                      # er is een pad van en naar de startknoop
+  while ∃(u,v): D[u] = true ^ D[v] = false do       # => lees als: terwijl er een boog u, v bestaat waarvoor u in D true (eg. ontdekt) is en v niet ontdekt is
+    kies een boog (u,v) met D[u] = true ^ D[v] = false
+    D[v] <- true                                    # v is nu ontdekt gebied
+  end while
+  return D
+end function
+```
+
+Hier worden de bogen willekeurig gekozen.
+
+Andere zoekalgoritmes zijn op dit basisprincipe gebaseerd.
+
+## Breedte-Eerst Zoeken
+
+= Breadth-First Search
+
+Je bezoekt eerst de startknoop, dan alle knopen die één boog verwijderd zijn, dan alle knopen die twee bogen verwijderd zijn, etc.
+
+Gebruikt een FIFO wachtrij.
+
+Tijdscomplexiteit = O(n+m)
+
+```
+INVOER: Gerichte / ongerichte graaf G = (V,E). Startknoop s.
+UITVOER: Array D met D[v] = true als er een pad bestaat van s naar v.
+
+function BreedteEerst(G, s)
+  D <- [false, false, ..., false]
+  D[s] <- true
+  Q.init()                          # initialiseer de queue van knopen
+  Q.enqueue(s)
+  while Q != ∅ do
+    v <- Q.dequeue()                # v = huidige knoop
+    for all w ∈ buren(v) do         # overloop alle buren
+      if D[w] = false then
+        D[w] <- true                # ontdek de niet-ontdekte knoop
+        Q.enqueue(w)                # voeg de ontdekte knoop toe aan de queue
+      end if
+    end for
+  end while
+  return D
+end function
+```
+
+In Python:
+
+```python
+def breedte_eerst(graph, start_node):
+  ''nodes are numbered from 0 to n''
+  discovered_nodes = [false for x in graph.nodes()]
+  queue = Queue()
+
+  discovered_nodes[start_node] = true
+  queue.enqueue(start_node)
+
+  while not queue.is_empty():
+    curr_node = queue.dequeue()
+    for neighbor in curr_node.get_neighbors():
+      if discovered_nodes[neighbor] == false: # buur is nog niet ontdekt
+        discovered_nodes[neighbor] = true # buur is nu wel ontdekt
+        queue.enqueue(neighbor) # voeg buur toe aan de queue, zodat je later zijn buren ontdekt
+
+  return discovered_nodes
+```
+
+## Diepte-Eerst Zoeken
+
+= Depth-First Search
+
+We bekijken eerst de buren van de diepste ontdekte knoop.
+
+Dit algoritme gebruikt hiervoor een stack. In onderstaand recursief algoritme wordt de call-stack gebruikt.
+
+Pseudocode (recursief):
+
+```
+INVOER: Gerichte/Ongerichte gaaf G = (V, E). Startknoop s.
+UITVOER: Array D, met D[v] = true als er een pad is.
+
+function DiepteEerst(G, s)
+  D <- [false, false, ... false]
+  DiepteEerstRecursief(G, s, D)
+  return D
+end function
+
+function DiepteEerstRecursief(G, v, D)      # v is de huidige knoop
+  D[v] <- true
+  for all w ∈ buren(v) do
+    if D[w] = false then                    # de buur werd niet eerder ontdekt
+      DiepteEerstRecursief(G, w, D)
+    end if
+  end for
+end function
+```
+
+Python:
+
+```python
+def depth_first(graph, start_node):
+  discovered = [false for x in graph.nodes()]
+  depth_first_recursive(graph, start_node, discovered)
+  return discovered
+
+def depth_first_recursive(graph, current_node, discovered):
+  discovered[current_node] = true
+  for neighbor in current_node.neighbors():
+    if discovered[neighbor] = false:
+      depth_first_recursive(graph, neighor, discovered)
+```
+
+## Toepassing: Topologisch sorteren
+
+VERDER VANAF PAGINA 144
