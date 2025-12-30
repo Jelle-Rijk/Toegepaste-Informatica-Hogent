@@ -11,6 +11,10 @@
   - [Breedte-Eerst Zoeken](#breedte-eerst-zoeken)
   - [Diepte-Eerst Zoeken](#diepte-eerst-zoeken)
   - [Toepassing: Topologisch sorteren](#toepassing-topologisch-sorteren)
+- [Kortste Pad Algoritmen](#kortste-pad-algoritmen)
+  - [Kortste pad in een ongewogen graaf](#kortste-pad-in-een-ongewogen-graaf)
+  - [Dijkstra's Algoritme](#dijkstras-algoritme)
+    - [Implementatie met binaire hoop](#implementatie-met-binaire-hoop)
 
 # Terminologie
 
@@ -262,3 +266,72 @@ def dfs_topologisch(graaf, knoop: int, knoop_statussen: [int], topologische_sort
   knoop_statussen[knoop] = 2  # knoop is nu voltooid
   topologische_sortering.insert(0, knoop) # voeg knoop vooraan de sortering toe
 ```
+
+# Kortste Pad Algoritmen
+
+## Kortste pad in een ongewogen graaf
+
+=> Is steeds het pad met het kleinste aantal bogen.
+
+Via breedte-eerst: Markeer startknoop als lengte 0. De volgende laag is telkens de afstand van de vorige laag + 1.
+
+```
+Invoer: G = graaf, s = startknoop.
+Uitvoer: Array D, D[v] is kortste afstand f naar v.  ∞ = geen pad.
+function KortstePadOngewogen(G, s):
+  D <- [∞, ∞, ..., ∞]
+  D[s] <- 0                   # afstand naar startknoop = 0
+  Q.init()
+  Q.enqueue(s)
+  while Q ≠ ∅ do
+    v <- Q.dequeue()          # v = huidige knoop
+    for all w ∈ buren(v) do   # w = buur
+      if D[w] = ∞ then        # pad naar w werd nog niet uitgerekend.
+        D[w] <- D[v] + 1
+        Q.enqueue(w)
+      end if
+    end for
+  end while
+  return D
+end function
+```
+
+## Dijkstra's Algoritme
+
+Geeft het kortste pad in een gewogen graaf (= kleinste gewicht).
+
+Werkt enkel met positieve gewichten.
+
+- Verdeel de knopen in twee disjuncte verzamelingen: S = kortste afstand is gekend. Q = kortste afstand nog niet zeker.
+- In Q sla je de geschatte afstanden op van knopen die één boog van een bekende knoop verwijderd zijn. (eg. de afstand van de startknoop tot een bekende knoop + de afstand van de laatst-bekende knoop naar de onbekende knoop).
+- Haal de knoop met de kleinste afstand in Q uit Q en voeg toe aan S.
+- Bekijk of de geschatte afstand naar de buren van de verwisselde knoop aangepast moeten worden (eg. de nieuwe geschatte afstand is kleiner dan de oude).
+
+```
+INVOER: Gewogen graaf G = (V, E) met orde n > 0. Alle gewichten positief. Startknoop s. Knopen genummerd van 1 tot n.
+UITVOER: Array D, D[v] is de kortste afstand tussen s en v. ∞ betekent geen pad.
+
+function Dijkstra(G, s)
+  D <- [∞,∞,...,∞]                          # alle knopen als onbereikbaar beschouwen
+  D[s] <- 0
+  Q <- V                                    # Q bevat nu alle knopen van G
+  while 𝑄 ≠ ∅ do                            # algoritme loopt tot alle knopen verwijderd zijn.
+    zoek v ∈ Q waarvoor D[v] minimaal is    # kleinste geschatte afstand
+    verwijder v uit Q
+    for all w ∈ buren(v) ∩ 𝑄 do             # lees als: alle buren (w) van v die in Q zitten
+      if D[w] > D[v] + gewicht(v,w) then    # pad vanuit deze knoop (v) + boog naar w is korter dan het voordien geschatte pad naar w.
+        D[w] <- D[v] + gewicht(v,w)
+      end if
+    end for
+  end while
+  return D
+end function
+```
+
+### Implementatie met binaire hoop
+
+We moeten steeds het minimum bepalen -> binaire hoop zorgt ervoor dat dit efficiënt wordt. Q moet je dus implementeren als binaire hoop waarvan elk element de geschatte afstand heeft.
+
+Probleem: In een binaire hoop kan je enkel het minimale element opzoeken. We kunnen de waarden die eventueel verlaagd moeten worden niet meer opzoeken en aanpassen.
+
+Oplossing: Hou een array bij waarin de posities van de knopen in de binaire hoop aangegeven wordt. Je moet deze array dus ook aanpassen wanneer een element in de binary heap omhoog/omlaag bubbelt.
