@@ -19,6 +19,8 @@
 | Verzameling knopen | V       |
 | Verzameling bogen  | E       |
 | Graaf              | G       | Meestal genoteerd als G = (V, E) |
+| Orde               | n       | Aantal knopen in graaf           |
+| Grootte            | m       | Aantal bogen in graaf            |
 
 Een boog e tussen knoop v en knoop w schrijven we als `e = (v,w)`
 
@@ -26,8 +28,6 @@ Een boog e tussen knoop v en knoop w schrijven we als `e = (v,w)`
 - Incident -> Een boog hoort bij een (koppel) kno(o)p(en) / Een knoop hoort bij een boog.
 - Buren -> Alle adjacente knopen
 - Graad -> Aantal buren van een knoop
-- Orde -> Aantal knopen in een graaf (= #(V)), vaak genoteerd als _n_
-- Grootte -> Aantal bogen in een graaf (= #(E)), vaak genoteerd als _m_
 - Pad -> Opsomming van knopen zodat er een boog tussen de twee knopen ontstaat (lengte = aantal bogen). Een pad van een knoop naar zichzelf heeft lengte 0.
 - Enkelvoudige cykel -> pad dat begint en eindigt in dezelfde knoop, waarin alle bezochte knopen verschillend zijn en geen enkele boog meer dan een keer wordt overlopen (= lus). In een gerichte graaf worden beide richtingen als aparte bogen beschouwd.
 
@@ -57,7 +57,7 @@ Een adjacentiematrix is voor een ongerichte graaf steeds symmetrisch (=> boog is
 
 <figure>
     <img src='./img/adjacencymatrix.png'>
-    <figcaption>Een voorbeeld van een adjacentiematrix van een ongerichte graaf. <br> <em>Er is een boog van a naar b, niet van b naar a.</em></figcaption>
+    <figcaption>Een voorbeeld van een adjacentiematrix van een gerichte graaf. <br> <em>Er is een boog van a naar b, niet van b naar a.</em></figcaption>
 </figure>
 
 Bij een gewogen graaf, kan je het gewicht opslaan per boog i.p.v. een 1 of 0. Er moet dan wel een speciale waarde voorzien worden voor wanneer de knopen niet adjacent zijn.
@@ -217,4 +217,48 @@ def depth_first_recursive(graph, current_node, discovered):
 
 ## Toepassing: Topologisch sorteren
 
-VERDER VANAF PAGINA 144
+Precedentiegraaf: Gerichte graaf waarin de knopen taken voorstellen. Er staat een pijl van taken die eerst afgewerkt moeten zijn, naar taken die pas gestart kunnen worden als de eerste afgewerkt is.
+
+Topologische sortering: Elke knoop krijgt een nummer. Elke pijl moet van een kleiner naar een groter nummer gaan.
+
+Als er een cykel in de graaf zit, kan je niet topologisch sorteren.
+
+![Voorbeeld van topologische sortering](./img/topologisch_sorteren_voorbeeld.png)
+
+Algoritme is een aanpassing van depth-first search, waarin we een lijst van de knopen bijhouden. Elke knoop krijgt een statuscode:
+
+- 0 -> knoop is nog niet ontdekt
+- 1 -> knoop is ontdekt, maar nog niet aan de lijst toegevoegd
+- 2 -> knoop is afgewerkt
+
+_Als je tijdens het algoritme buren bekijkt en ze statuscode 1 hebben, dan is er een cykel._
+
+```python
+cycle_detected = False # globale variabele
+
+# graaf = gerichte graaf, knopen zijn ints van 1 tot n.
+def sorteer_topologisch(graaf) -> [int]:
+  'returnt de topologische sorterting of false indien er een cykel is'
+  knoop_statussen = [0 for knoop in graaf.knopen()]   # alle knopen zijn onontdekt
+  topologische_sortering = []
+
+  for knoop : int in graaf.knopen():
+    if knoop_statussen[knoop] == 0: # de knoop werd nog niet ontdekt.
+      dfs_topologisch(graaf, knoop, knoop_statussen, topologische_sortering)
+      if cycle_detected:
+        return False
+
+  return topologische_sortering
+
+def dfs_topologisch(graaf, knoop: int, knoop_statussen: [int], topologische_sortering: [int]):
+  knoop_statussen[knoop] = 1        # markeer knoop als bezig
+
+  for buur in knoop.buren():
+    if knoop_statussen[buur] == 0 and not cycle_detected: # buur is nog niet ontdekt
+      dfs_topologisch(buur) # ontdek de buur
+    elif knoop_statussen[buur] == 1: # er is een cykel
+      cycle_detected = True
+
+  knoop_statussen[knoop] = 2  # knoop is nu voltooid
+  topologische_sortering.insert(0, knoop) # voeg knoop vooraan de sortering toe
+```
