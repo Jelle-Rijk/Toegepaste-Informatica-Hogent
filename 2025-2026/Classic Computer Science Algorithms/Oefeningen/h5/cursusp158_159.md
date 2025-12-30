@@ -102,3 +102,62 @@ Vind voor de graaf in Figuur 5.14 (de lengte van) het kortste pad van deknoop �
 | c     | 5              | a,c     |
 | d     | 10             | a,c,b,d |
 | e     | 7              | a,c,e   |
+
+# Minimale Kost Opspannende Bomen
+
+Opspannende boom -> Een graaf waarin enkel de essentiële bogen overblijven (alle knopen moeten nog steeds verbonden zijn met elkaar) en er geen enkelvoudige cykels zijn.
+
+Heeft altijd evenveel knopen als de originele graaf en één boog minder dan dat er knopen zijn.
+
+Ongerichte grafen hebben meestal veel bogen. We willen bij gewogen grafen meestal de opspannende boom met het minimale gewicht (= minimum spanning tree / minimale kost opspannende boom).
+
+## Prims Algoritme
+
+Is een aanpassing van het algoritme voor generiek zoeken -> Generiek zoeken creëert al een opspannende boom. <br>
+Dus: Generiek zoeken toepassen, gekozen bogen bijhouden en de bogen _gulzig_ (= steeds het laagste gewicht) kiezen.
+
+Het algoritme werkt met elke startknoop.
+
+```
+INVOER: Ongerichte gewogen graaf G = (V, E) met orde n > 0. Knopen zijn genummerd van 1 tot n.
+UITVOER: Verzameling T met de bogen van de minimum spanning tree.
+
+function Prim(G)
+  D <- [false, false, ..., false]       # n keer
+  D[1] <- true                          # we gebruiken 1 als startknoop
+  T <- ∅                                # lege lijst - gekozen bogen
+  while ∃(u, v) ∶ 𝐷[u] = true ∧ 𝐷[v] = false do
+    kies (u, v) met 𝐷[u] = true ∧ 𝐷[v] = false met minimaal gewicht # = boog van bekend naar onbekend gebied
+    D[v] <- true
+    T <- T ∪ {(𝑢, 𝑣)}                   # = voeg (u,v) toe aan T
+  end while
+  return T
+end function
+```
+
+## Kruskals Algoritme
+
+=> Alternatief voor Prims algoritme. Ook een gulzig algoritme, maar de gekozen bogen zijn niet steeds met elkaar verbonden.
+
+Samengevat:
+
+- Sorteer eerst de bogen volgens stijgend gewicht.
+- Selecteer telkens de lichtste boog, op voorwaarde dat hierdoor geen cykel ontstaat met de reeds geselecteerde bogen.
+
+```
+INVOER: Ongerichte gewogen graaf G = (V, E) met orde n > 0. Knopen zijn genummerd van 1 tot n.
+UITVOER: Verzameling T met de bogen van de minimum spanning tree.
+
+function Kruskal(G)
+  T <- ∅
+  E' <- sorteer E volgens stijgend gewicht
+  for all e' ∈ E' do
+    if T ∪ e' heeft geen cykel then
+      T <- T ∪ e'
+    end if
+  end for
+  return T
+end function
+```
+
+> **Symbool ∪** <br> Betekent unie -> alle elementen van de verzameling links en rechts samengevoegd.

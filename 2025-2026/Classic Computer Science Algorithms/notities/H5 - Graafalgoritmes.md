@@ -15,6 +15,7 @@
   - [Kortste pad in een ongewogen graaf](#kortste-pad-in-een-ongewogen-graaf)
   - [Dijkstra's Algoritme](#dijkstras-algoritme)
     - [Implementatie met binaire hoop](#implementatie-met-binaire-hoop)
+- [Het handelsreizigersprobleem](#het-handelsreizigersprobleem)
 
 # Terminologie
 
@@ -335,3 +336,19 @@ We moeten steeds het minimum bepalen -> binaire hoop zorgt ervoor dat dit effici
 Probleem: In een binaire hoop kan je enkel het minimale element opzoeken. We kunnen de waarden die eventueel verlaagd moeten worden niet meer opzoeken en aanpassen.
 
 Oplossing: Hou een array bij waarin de posities van de knopen in de binaire hoop aangegeven wordt. Je moet deze array dus ook aanpassen wanneer een element in de binary heap omhoog/omlaag bubbelt.
+
+# Het handelsreizigersprobleem
+
+= Traveling salesman problem
+
+Je krijgt een complete (alle knopen zijn met alle andere knopen verbonden) gewogen ongerichte graaf. Je moet het kortste pad vinden dat alle knopen bezoekt en dan terugkeert naar de startknoop.
+
+Voorbeeld van een NP-compleet probleem -> Er bestaat geen algoritme dat alle gevallen correct kan oplossen. Je benadert de oplossing.
+
+Driehoeksongelijkheid: Gewichten van directe verbindingen in de graaf zijn altijd lager dan die van een omweg maken. (vb. bij fysieke afstanden)
+
+In het geval een graaf aan de driehoeksongelijkheid voldoet, geeft onderstaande werkwijze een oplossing terug die maximaal twee keer zo lang is als de optimale afstand:
+
+1. Bereken de minimum spanning tree voor de graaf.
+2. Kies een willekeurige wortel voor de tree.
+3. Doorloop de tree in preorder -> geef dit als cykel terug.
