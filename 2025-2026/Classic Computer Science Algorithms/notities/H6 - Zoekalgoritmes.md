@@ -269,7 +269,7 @@ Iteratief verdiepen is een compleet zoekalgoritme, niet-optimaal (behalve als al
 
 ## Uniforme kost zoeken
 
-=> Lost het probleem van breedte-eerst zoeken op (nl. het is niet-optimaal)
+=> Lost het probleem van [breedte-eerst zoeken](#breedte-eerst-zoeken) op (nl. het is niet-optimaal)
 
 Gaat hetzelfde te werk, maar de open lijst is een priority queue. Hoe kleiner de totale kost van een plan, hoe groter de prioriteit om te expanderen.
 
