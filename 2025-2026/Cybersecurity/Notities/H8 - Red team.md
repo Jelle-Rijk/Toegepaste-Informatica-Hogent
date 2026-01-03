@@ -55,7 +55,7 @@ Twee soorten:
 - Passief: Er is geen contact met het doelwit. Anoniem.
 - Actief: Er is contact met het doelwit. Doelwit krijgt informatie over de aanvaller, maar weet niet dat dit een toekomstige aanvaller is.
 
-Zoekmachines (meerdere want verschillende resultaten), social media, vacatures (gebruikte technologieën, posities) en openbare databanken (voor adressen, name, financiële data, etc.) worden vaak gebruikt voor passieve reconnaisance.
+Zoekmachines (meerdere want verschillende resultaten), social media, vacatures (gebruikte technologieën, posities) en openbare databanken (voor adressen, namen, financiële data, etc.) worden vaak gebruikt voor passieve reconnaisance.
 
 Om sociale media te scrapen, zijn er speciale tools: Pipl, Maltego, theHarvester, recon-ng, etc.
 
@@ -66,7 +66,7 @@ _Een website bezoeken zonder verdacht gedrag te vertonen, wordt gezien als passi
 
 Er bestaan nog handige tools:
 
-- [whois.domaintools.com](whois.domaintools.com): geeft informatie over domeinregistratie
+- [whois.domaintools.com](whois.domaintools.com): Geeft informatie over domeinregistratie.
 - [builtwith](www.builtwith.com): Toont de gebruikte technologie van een opgegeven website.
 - [censys](search.censys.io): Zoekmachine voor IP-adres, hostname, etc.
 - [Shodan](www.shodan.io): Zoekt publiek toegankelijke devicese - IoT is vaak slecht beveiligd.
@@ -110,7 +110,7 @@ Voorbeelden: LANState (Pro), PRTG Network Monitor, Solarwinds
 
 #### Vulnerability scanners
 
-Scant het netwerk naar gekende kwetsbaarden. Moet ook toegang hebben tot het netwerk.
+Scant het netwerk naar gekende kwetsbaarheden. Moet ook toegang hebben tot het netwerk.
 
 Voorbeelden: OpenVAS, Nessus, Metasploit
 
@@ -118,7 +118,7 @@ Voorbeelden: OpenVAS, Nessus, Metasploit
 
 = Informatie verzamelen op applicatie-niveau
 
-Je misbruikt netwerkrpotocollen voor informatie over netwerkschijven, loginsystemen en servers.
+Je misbruikt netwerkprotocollen voor informatie over netwerkschijven, loginsystemen en servers.
 
 ## Fase 3 t.e.m. 5 - Gaining access, maintaining access, covering tracks
 
@@ -152,7 +152,7 @@ Belangrijk om de persistence zo onzichtbaar mogelijk te houden.
 
 Bijvoorbeeld:
 
-- Gebruikte bestanden verwijden / verbergen
+- Gebruikte bestanden verwijderen / verbergen
 - Logs aanpassen (niet verwijderen want valt op)
 - Timestamps aanpassen
 

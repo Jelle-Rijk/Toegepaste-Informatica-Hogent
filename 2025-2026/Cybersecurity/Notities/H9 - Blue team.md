@@ -80,7 +80,7 @@ Je kan de configuratiebestanden en het OS ook nog beschermen door een Disk clone
 Installeer anti-malware (ook op mobiele apparaten). <br>
 _Let op met gratis antivirussen etc, ze bevatten vaak zelf malware._
 
-Je kan een host-gebaseerde firewaal opzetten om inkomend en uitgaan verkeer te regelen.
+Je kan een host-gebaseerde firewall opzetten om inkomend en uitgaand verkeer te regelen.
 
 Een Host Intrustion Detection System controleert verdachte activiteit op een toestel.
 

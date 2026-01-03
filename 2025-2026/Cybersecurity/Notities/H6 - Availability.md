@@ -68,15 +68,13 @@ Moeilijk data te recoveren als de schijf faalt.
 
 Handig voor off-site back-ups.
 
-Bedenkingen bij free tiers -> soms is je data hate product.
+Bedenkingen bij free tiers -> soms is je data het product.
 
 Let op: Synchronisatie is geen backup (ransomware wordt ook gesynct).
 
 # Backups
 
-Beste meerdere over een langere tijd bijhouden.
-
-Best automatiseren om niet te vergeten.
+Best meerdere over een langere tijd bijhouden en automatiseren om niet te vergeten.
 
 **Full backup** = volledige backup (copy-paste) <br>
 **Incrementele backup** = 1 kopie + alle delta's die daarna uitgevoerd zijn (gelijkaardig aan Git)
