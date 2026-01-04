@@ -24,7 +24,7 @@
   - [Tabellen manipuleren](#tabellen-manipuleren)
   - [Datatypes](#datatypes)
   - [Constraints](#constraints)
-    - [AUTO_INCREMENT](#auto_increment)
+    - [AUTO\_INCREMENT](#auto_increment)
     - [Primaire sleutel](#primaire-sleutel)
     - [Vreemde sleutels](#vreemde-sleutels)
 
@@ -173,7 +173,7 @@ SELECT ProductName, UnitPrice * UnitsInStock AS InventoryValue FROM Products;
 
 ## Functies
 
-Je kan in de argumenten verschillende waarden berekenen. Heirvoor gebruik je functies:
+Je kan in de argumenten verschillende waarden berekenen. Hiervoor gebruik je functies:
 
 - Strings: concat, left, right, length, substring, replace,...
 - DateTime: dateAdd, dateDiff, day, month, year, now(), curDate(),...

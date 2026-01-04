@@ -191,7 +191,7 @@ Die constraints plaats je in het EERD tussen {}.
 - Op het ERD kan je geen mogelijke waarden vastleggen
 - Je kan er geen functies in opnemen
 
--> Al deze zaken moeten wel gedocumenteerd worden. bn
+-> Al deze zaken moeten wel gedocumenteerd worden.
 
 ## Fan trap
 
