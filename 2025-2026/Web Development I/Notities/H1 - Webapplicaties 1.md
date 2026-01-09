@@ -107,7 +107,7 @@ Nemen de volledige width in. Je kan de width en height instellen via CSS.
 
 Algemeen element (als er geen specifieker bestaat): `<span>`
 
-Op inline elementen nemen altijd de width van de content aan. Je kan de width / height van een inline element niet instellen, dit wordt altijd door de content bepaald.
+Inline elementen nemen altijd de width van de content aan. Je kan de width / height van een inline element niet instellen, dit wordt altijd door de content bepaald.
 
 | Elementnaam                  | Tag       | Opmerking                               |
 | ---------------------------- | --------- | --------------------------------------- |
