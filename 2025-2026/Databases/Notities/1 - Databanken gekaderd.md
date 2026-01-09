@@ -85,7 +85,7 @@ Een datamodel is de weergaven van gegevens met hun kenmerken en relaties. In de 
 
 ## 3-lagen architectuur
 
-- Externe laag: Is een deelverza;eling van het logisch model, bevat views (deel van de data dat relevant is voor bepaalde gebruikers).
+- Externe laag: Is een deelverzameling van het logisch model, bevat views (deel van de data dat relevant is voor bepaalde gebruikers).
 - Middelste laag: Het conceptuele / logische model
 - Interne laag: Het fysieke datamodel dat de data fysisch organiseert en opslaat. (komt grotendeels overeen met de fysieke laag)
 

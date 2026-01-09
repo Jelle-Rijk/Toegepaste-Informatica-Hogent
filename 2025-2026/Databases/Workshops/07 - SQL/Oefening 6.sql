@@ -1,0 +1,55 @@
+DROP DATABASE WorkshopDDL;
+CREATE DATABASE WorkshopDDL;
+USE WorkshopDDL;
+
+CREATE TABLE IF NOT EXISTS Spel(
+Naam VARCHAR(20) PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS Doelkaart(
+Id CHAR(5) PRIMARY KEY,
+Naam VARCHAR(30)
+);
+
+CREATE TABLE IF NOT EXISTS Gangkaart(
+Id CHAR(5) PRIMARY KEY,
+Type VARCHAR(8),
+Schat VARCHAR(20)
+);
+
+CREATE TABLE IF NOT EXISTS Speler(
+Id INT AUTO_INCREMENT PRIMARY KEY,
+Naam VARCHAR(100) NOT NULL,
+Geboortejaar INT,
+IsAanDeBeurt BOOL,
+Kleur VARCHAR(10),
+HuidigVak CHAR(20),
+Spelnaam VARCHAR(20),
+CONSTRAINT FK_Speler_Spel FOREIGN KEY(Spelnaam) REFERENCES Spel(Naam),
+CONSTRAINT CH_Kleur_Zwart_Rood CHECK (Kleur in ('rood', 'zwart')) -- check de input
+);
+
+CREATE TABLE IF NOT EXISTS Spel_Gangkaart(
+Spelnaam VARCHAR(20),
+KaartId CHAR(5),
+Richting VARCHAR(20),
+Positie VARCHAR(20),
+CONSTRAINT PK_Spel_Gangkaart PRIMARY KEY (Spelnaam, KaartId),
+CONSTRAINT FK_Spel_Gangkaart_Spelnaam FOREIGN KEY (Spelnaam) REFERENCES Spel(Naam),
+CONSTRAINT FK_Spel_Gangkaart_KaartId FOREIGN KEY (KaartId) REFERENCES GangKaart(Id)
+);
+
+CREATE TABLE IF NOT EXISTS Speler_Doelkaart(
+SpelerId INT,
+KaartId CHAR(5),
+Volgorde INT,
+CONSTRAINT PK_Speler_Doelkaart PRIMARY KEY (SpelerId, KaartId),
+CONSTRAINT FK_Speler_Doelkaart_SpelerId FOREIGN KEY (SpelerId) REFERENCES Speler(Id),
+CONSTRAINT FK_Speler_Doelkaart_KaartId FOREIGN KEY (KaartId) REFERENCES Doelkaart(Id)
+);
+
+ALTER TABLE Speler ADD COLUMN Email VARCHAR(50);
+
+ALTER TABLE Speler MODIFY COLUMN Email VARCHAR(100);
+
+ALTER TABLE Speler DROP COLUMN Email;

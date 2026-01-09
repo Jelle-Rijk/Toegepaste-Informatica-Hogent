@@ -152,7 +152,7 @@ De niet gevoelige data zinvol houden gebeurt via:
 Belangrijke termen hierbij:
 
 - Ingebedde gegevens = geheim bericht
-- Omslagtekst/afbeeelding/audio = bestand waarin het bericht verborgen zit.
+- Omslagtekst/afbeelding/audio = bestand waarin het bericht verborgen zit.
 - Stego-tekst = tekst van het embedded bericht
 - Stego-key = key die het verbergingsproces regelt
 

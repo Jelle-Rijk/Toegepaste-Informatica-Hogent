@@ -10,8 +10,6 @@
 
 # Digitale handtekening
 
-verder vanaf les H4 deel 2 tot H5 hashing 45:46
-
 Goed voor controle van twee zaken:
 
 - het bestand is niet gewijzigd na het genereren van de handtekening
