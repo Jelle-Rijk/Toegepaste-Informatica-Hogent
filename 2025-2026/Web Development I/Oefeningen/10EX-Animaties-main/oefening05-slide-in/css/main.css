@@ -7,7 +7,25 @@ button {
   height: 70px;
   border-style: none;
   border-radius: 10px;
-  font-size: large;        
+  font-size: large;
   background-color: rebeccapurple;
   color: white;
+
+  transform-origin: 0, 0;
+  animation-name: slide-in;
+  animation-duration: 3s;
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translate(-200px, -200px);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(150px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }

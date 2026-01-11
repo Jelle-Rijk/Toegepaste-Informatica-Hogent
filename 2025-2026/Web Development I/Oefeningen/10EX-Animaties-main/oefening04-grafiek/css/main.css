@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 body {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 figcaption {
@@ -20,18 +21,31 @@ figcaption {
   font-size: small;
   height: 30px;
   margin-bottom: 5px;
-  display:flex;
+  display: flex;
   align-items: center;
-  padding-left:5px;
+  padding-left: 5px;
   color: white;
 }
 
 #bar1 {
-  width: 100px;        
+  width: 100px;
+  transition-duration: 2s;
 }
 #bar2 {
   width: 175px;
+  transition-duration: 2s;
 }
 #bar3 {
   width: 125px;
+  transition-duration: 2s;
+}
+
+.grafiek1:hover #bar1 {
+  width: 250px;
+}
+.grafiek1:hover #bar2 {
+  width: 350px;
+}
+.grafiek1:hover #bar3 {
+  width: 75px;
 }
