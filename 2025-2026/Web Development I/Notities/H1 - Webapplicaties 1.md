@@ -44,6 +44,9 @@
       - [Verschillende afbeeldingen weergeven](#verschillende-afbeeldingen-weergeven)
   - [Animaties](#animaties)
     - [CSS transitions](#css-transitions)
+      - [2D transform](#2d-transform)
+    - [CSS Animations](#css-animations)
+  - [Variabelen](#variabelen)
 - [Visual Studio Code tips](#visual-studio-code-tips)
   - [Hotkeys](#hotkeys)
   - [HTML-specifiek](#html-specifiek)
@@ -766,6 +769,86 @@ Transities zorgen voor een geleidelijke overgang tussen wijzigende waarden in je
 #element-met-meerdere-transities {
   transition-property: opacity, height;
   transition-duration: 3s, 5s;
+
+  /*Shorthand*/
+  transition: opacity 3s, height 5s;
+}
+```
+
+Timing functions:
+
+- ease
+- linear
+- cubic-bezier -> via dev tools kan je dit aanpassen
+
+Animaties bij hoveren: animatie op de element selector plaatsen, zal animeren bij binnen- en buitengaan van het element. Animatie op de element:hover selector enkel op het binnengaan.
+
+#### 2D transform
+
+```css
+div:nth-of-type(2) {
+  transform: translateX(300px) rotate(30deg);
+  /*De transform is t.o.v. de origin, standaard = 50% 50% / center center;*/
+  transform-origin: 0% 0%;
+}
+```
+
+Transform functions:
+
+- rotate();
+- scale();
+- translateX();
+- translateY();
+- translate(x, y);
+- skew(deg, deg);
+
+Transform werkt niet bij inline-elementen (behalve img).
+
+### CSS Animations
+
+Verschilt van transitions -> je kan keyframes meegeven.
+
+Default: CSS animation start bij laden webpagina.
+
+```css
+/*Animatie afspelen*/
+div {
+  animation-name: animatie-1;
+  animation-duration: 2s;
+  animation-delay: 0s;
+  animation-fill-mode: none; /*forwards = animatie bevriezen op laatste keyframe*/
+  animation-iteration-count: infinite; /*aantal keer afspelen (0 t.e.m. infinite)*/
+  animation-timing-function: ease;
+  animation-direction: alternate; /*Hiermee kan je de animatie reversen (alternate wisselt tussen voor- en achterwaarts)*/
+  animation-play-state: running; /*Andere waarde: paused*/
+}
+/*Let op: De timing function wordt op elke keyframe toegepast, daarom is deze meestal linear bij CSS animation. Je kan dan per keyframe nog een functie meegeven.*/
+
+/*Animatie definiëren*/
+@keyframes animatie-1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(100px, 0);
+  }
+  100% {
+    transform: translate(100px, 100px);
+  }
+}
+```
+
+## Variabelen
+
+Globale variabelen worden meestal in :root gedefinieerd
+
+```css
+:root {
+  --primary-color: rgb(10, 10, 10); /*definitie globale variabele*/
+}
+
+#container {
+  --max-width: 800 px; /*definitie lokale variabele - enkel beschikbaar in #container en zijn children*/
 }
 ```
 
