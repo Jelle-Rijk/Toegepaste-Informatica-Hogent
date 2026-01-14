@@ -15,6 +15,9 @@
   - [Kortste pad in een ongewogen graaf](#kortste-pad-in-een-ongewogen-graaf)
   - [Dijkstra's Algoritme](#dijkstras-algoritme)
     - [Implementatie met binaire hoop](#implementatie-met-binaire-hoop)
+  - [Minimale kost opspannende bomen](#minimale-kost-opspannende-bomen)
+    - [Prims algoritme](#prims-algoritme)
+    - [Kruskals Algoritme](#kruskals-algoritme)
 - [Het handelsreizigersprobleem](#het-handelsreizigersprobleem)
 
 # Terminologie
@@ -336,6 +339,47 @@ We moeten steeds het minimum bepalen -> binaire hoop zorgt ervoor dat dit effici
 Probleem: In een binaire hoop kan je enkel het minimale element opzoeken. We kunnen de waarden die eventueel verlaagd moeten worden niet meer opzoeken en aanpassen.
 
 Oplossing: Hou een array bij waarin de posities van de knopen in de binaire hoop aangegeven wordt. Je moet deze array dus ook aanpassen wanneer een element in de binary heap omhoog/omlaag bubbelt.
+
+## Minimale kost opspannende bomen
+
+Opspannende boom:
+
+- Elke vertex is verbonden met elke andere vertex.
+- Er is geen enkele cykel in de graaf aanwezig.
+
+### Prims algoritme
+
+Zoek een opspannende boom met minimale kost (gewogen graaf).
+
+```
+function Prim(G)
+  D <- [false, false, ..., false]     n keer
+  D[1] <- true                        1 = startknoop
+  T <- ∅                              spanning tree
+  while ∃(u, v): D[u] = true ^ D[v] = false do
+    kies de boog met minimale gewicht
+    D[v] <- true
+    T <- T ∪ {(u,v)}                  voegt u,v toe aan spanning tree
+```
+
+-> Kiest elke keer de goedkoopste uitbreiding. Nieuwe bogen zijn dus altijd aangrenzend aan ontdekte knopen.
+
+### Kruskals Algoritme
+
+- Bogen sorteren volgens stijgend gewicht.
+- Overloop die lijst en selecteer de bogen die geen cykel veroorzaken.
+
+```
+function Kruskal(G)
+  T <- ∅
+  E' <- sorteer E volgens stijgend gewicht
+  for all e' in E' do
+    if T U e' heeft geen cykel then
+      T <- T U e'
+    end if
+  end for
+end function
+```
 
 # Het handelsreizigersprobleem
 
