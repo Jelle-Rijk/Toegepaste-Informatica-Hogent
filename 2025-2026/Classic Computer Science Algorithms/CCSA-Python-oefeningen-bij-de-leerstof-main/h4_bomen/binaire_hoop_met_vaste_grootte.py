@@ -1,19 +1,22 @@
 class BinaryHeap:
 
     def __init__(self, max_size=10):
-        pass
+        self.max_size = max_size
+        self.elements = []
+
 
     def is_empty(self):
-        pass
+        return len(self.elements) == 0
+
     
     def get_min_elem(self):
-        pass
+        return self.elements[0]
 
     def insert_elem(self, item):
-        pass
+        self.elements.append(item)
 
     def remove_min_elem(self):
-        pass
+        min_elem = self.elements.pop(0)
 
     def __str__(self):
-        pass
+        return self.elements.__str__()

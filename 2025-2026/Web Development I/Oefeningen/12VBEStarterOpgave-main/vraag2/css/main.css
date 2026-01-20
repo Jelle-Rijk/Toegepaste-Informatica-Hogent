@@ -1,0 +1,59 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-family: Kablammo;
+  color: green;
+
+  animation-name: fade-in;
+  animation-duration: 5s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1fr;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.grid > div {
+  border: green dotted 2px;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+}
+
+h2 {
+  padding: 10px;
+  margin: 0;
+  background-color: grey;
+  color: white;
+  font-style: italic;
+}
+
+@media screen and (width > 600px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (width > 1200px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
