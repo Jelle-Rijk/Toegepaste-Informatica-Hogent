@@ -147,7 +147,7 @@ Iedereen beantwoordt drie vragen:
 - Wat ga je vandaag doen?
 - Welke obstakels ervaar je?
 
-Is belangrijk dit dagelijks gebeurt omdat het volledige team dan elke dag een volledig beeld van het project krijgt + creëert sociale druk om te doen wat je zegt.
+Is belangrijk dat dit dagelijks gebeurt omdat het volledige team dan elke dag een volledig beeld van het project krijgt + creëert sociale druk om te doen wat je zegt.
 
 ### Demo en Sprint review
 

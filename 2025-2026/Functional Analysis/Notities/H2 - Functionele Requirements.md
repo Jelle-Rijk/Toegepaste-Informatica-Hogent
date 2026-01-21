@@ -11,7 +11,7 @@
 
 ## Functionele Requirements
 
-= Vastelling en eenduidige definitie van de functionaliteiten
+= Vaststelling en eenduidige definitie van de functionaliteiten
 
 ## Use Cases
 
@@ -79,7 +79,7 @@ Richtlijnen:
 6. Zorg dat de set actiestappen aanvaardbaar is: Ze zijn opgesplitst en behoren allemaal tot een van de vier delen van een transactie.
 7. Controleer niet, maar valideer. If-statements worden vermeden. <br> _vb. "Stap 2: Systeem valideert paswoord. Stap 3: Systeem toont de toegelaten acties voor de gebruiker." (We gaan ervan uit dat de validatie oké was. Indien niet -> alternatief verloop)_
 8. User laat systeem A systeem B aansturen: Beschrijf geen interacties met de GUI, ook niet als de user via de GUI meerdere systemen aanroept. In plaats daarvan: "User laat het systeem achtergrondinfo ophalen bij systeem B"
-9. Gebruik geen calls als de UC een andere UC oproept. Schrijf niet: "De gebruiker bevestigt en gaat naar <a>Betalen winkelmand</a>" "De gebruiker bevestigt en <a>betaalt winkelmand</a>". De andere use case moet nog steeds onderlijnd worden (kon niet in Markdown, daarom links gebruikt).
+9. Gebruik geen calls als de UC een andere UC oproept. Schrijf niet: "De gebruiker bevestigt en gaat naar <span style="text-decoration: underline">Betalen winkelmand</span>" maar "De gebruiker bevestigt en <span style="text-decoration: underline">betaalt winkelmand</span>".
 
 ### Use Cases - uitbreidingen
 
