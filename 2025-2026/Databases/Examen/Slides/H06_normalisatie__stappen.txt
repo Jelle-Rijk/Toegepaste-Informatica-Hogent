@@ -1,0 +1,22 @@
+R0 Opstellen
+- welke delen komen 1 keer voor? -> noteer die
+- welke delen zijn herhalend? -> ()*
+- processgegevens / berekende gegevens niet toevoegen
+- primaire sleutel aanduiden
+
+- FA opstellen.
+
+R0 --> R1
+- herhalende groep (*) wegwerken
+- samengestelde gegevens splitsen
+(- berekende gegevens verwijderen)
+
+R1 --> R2 (wegwerken van de partiële functionele afhankelijkheden)
+- velden die FA zijn van een deel van de primaire sleutel: in aparte tabel plaatsen
+
+R2 --> R3 (wegwerken van de transitieve functionele afhankelijkheden)
+- velden die FA van velden die niet behoren tot de PS: in een aparte tabel plaatsen.
+
+R3 --> RM
+- alle relaties een naam geven
+- IRs toevoegen (de pijlen worden vervangen door integriteitsregels)
