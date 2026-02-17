@@ -1,0 +1,29 @@
+body {
+  counter-reset: h1-counter;
+}
+
+thead td {
+  font-weight: bold;
+}
+
+section > table {
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+thead tr {
+  border-bottom: 1px grey solid;
+}
+
+table {
+  border: 1px grey solid;
+}
+
+tr td:first-of-type {
+  width: 200px;
+}
+
+h1::before {
+  counter-increment: h1-counter;
+  content: "Oefening " counter(h1-counter) " - ";
+}
