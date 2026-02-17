@@ -310,7 +310,7 @@ Niet-optimaal -> volgt de weg met de beste heuristieken en houdt geen rekening m
 Niet-compleet -> als de heuristische waarde van de vorige knoop de laagste is, kom je in een oneindige lus terecht
 
 Tijd- en ruimtecomplexiteit: O(b<sup>m</sup>)
-<br> _Dit is het slechtste geval, hoe beter de heuristie, hoe lager de werkelijke tijdscomplexiteit_
+<br> _Dit is het slechtste geval, hoe beter de heuristiek, hoe lager de werkelijke tijdscomplexiteit_
 
 ## A\* Zoekalgoritme
 
