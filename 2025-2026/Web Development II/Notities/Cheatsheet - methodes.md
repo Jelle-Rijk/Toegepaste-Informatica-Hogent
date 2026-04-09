@@ -41,3 +41,18 @@
 | getMinutes()  | returnt minuten                       |
 | getSeconds()  | returnt seconden                      |
 | getDay()      | returnt 0-based dag van de week       |
+
+# Arrays
+
+| Methode                                           | Omschrijving                                                                            |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| indexOf(element [, startIndex])                   | zoekt eerste index van element in array vanaf startIndex of index 0                     |
+| lastIndexOf(element [, fromIndex])                | zelfde als indexOf, maar laatste index                                                  |
+| concat()                                          | voegt 2 arrays samen, returnt nieuwe array                                              |
+| reverse()                                         | keert volgorde van array om                                                             |
+| slice(start, end)                                 | returnt nieuwe array van start tot end                                                  |
+| splice(start, numberOfItems, value1, value2, ...) | verwijdert numberOfItems vanaf start, voegt dan de nieuwe waarden vanaf index start toe |
+| sort()                                            | sorteert de elementen                                                                   |
+| join()                                            | voegt elementen samen in lange string                                                   |
+
+Van de muterende functies bestaan kopiërende versies die een nieuwe array returnen en de originele met rust laten. Meestal in de vorm van: `reverse()` -> `toReversed()`.
