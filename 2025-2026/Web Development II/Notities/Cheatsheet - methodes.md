@@ -56,3 +56,11 @@
 | join()                                            | voegt elementen samen in lange string                                                   |
 
 Van de muterende functies bestaan kopiërende versies die een nieuwe array returnen en de originele met rust laten. Meestal in de vorm van: `reverse()` -> `toReversed()`.
+
+# Object
+
+| Methode             | Omschrijving                         |
+| ------------------- | ------------------------------------ |
+| Object.keys(obj)    | returnt array van keys in obj        |
+| Object.values(obj)  | returnt array van values in obj      |
+| Object.entries(obj) | returnt array van [key, value] pairs |

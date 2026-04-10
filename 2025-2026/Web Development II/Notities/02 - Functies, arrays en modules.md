@@ -16,6 +16,8 @@ let value2 = functionName("Blabla"); // value2 = "Blabla"
 
 Als een parameter geen default waarde heeft en de call geen waarde doorgeeft voor die parameter, krijgt de parameter `undefined` als waarde.
 
+Rest parameters `(...paramName)` stellen een onbeperkt aantal parameters voor in array-vorm. Je kan dit enkel als laatste parameter gebruiken.
+
 Als je `undefined` meegeeft als argument aan een parameter met een default value, wordt deze op de default value ingesteld.
 
 Functies zijn pass by value -> de waarden van argument doorgegeven aan een kopie in de parameter = zelfde als Java.
@@ -30,6 +32,9 @@ const zegHallo = function () {
 };
 
 zegHallo(); // Print "Hallo!" naar de console.
+
+// Dit kan ook met de arrow notatie
+const zegVaarwel = (naam) => console.log(`Hallo ${naam}!`);
 ```
 
 ## Globale functions en properties
@@ -39,6 +44,12 @@ Al bekend: `isNaN()`, `parseInt()`, `parseFloat()`
 globalThis -> globale object (in browser hetzelfde als de window)
 
 Methodes en properties van globalThis, moeten niet voorafgegaan worden door globalThis(). Voorbeelden hiervan zijn: `alert()`, `confirm()`, `prompt()` `console`. Lijken daardoor sterk op built-in functions.
+
+## Functies als objects
+
+In JS zijn functies **first class objects**. Dat betekent dat je ze at run-time kan maken, dat je functies kan returnen uit andere functies en dat je ze ook kan gebruiken als functieargumenten.
+
+Je kan daardoor ook functies (inner functions) definiëren in een andere functie (outer function).
 
 # Hoisting
 
