@@ -59,8 +59,10 @@ Van de muterende functies bestaan kopiërende versies die een nieuwe array retur
 
 # Object
 
-| Methode             | Omschrijving                         |
-| ------------------- | ------------------------------------ |
-| Object.keys(obj)    | returnt array van keys in obj        |
-| Object.values(obj)  | returnt array van values in obj      |
-| Object.entries(obj) | returnt array van [key, value] pairs |
+| Methode              | Omschrijving                           |
+| -------------------- | -------------------------------------- |
+| Object.keys(obj)     | returnt array van keys in obj          |
+| Object.values(obj)   | returnt array van values in obj        |
+| Object.entries(obj)  | returnt array van [key, value] pairs   |
+| obj.toString()       | returnt string voor obj                |
+| obj.toLocaleString() | returnt gelokaliseerde string voor obj |
