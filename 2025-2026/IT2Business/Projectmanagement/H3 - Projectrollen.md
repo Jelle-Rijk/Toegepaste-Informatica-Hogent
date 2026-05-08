@@ -1,4 +1,4 @@
-<h1> Welke rollen en factoren leiden tot een sucessvolle oplevering? </h1>
+<h1>Projectrollen</h1>
 
 # Projecten succesvol uitvoeren en opleveren
 
@@ -19,7 +19,7 @@ Externe redenen: buiten bevoegdheid projectmanager._
 - Onervaren projectmanagers
 - Gebrek aan gestructureerde opvolging
 
-Digitiale initiatieven vergen een balans tussen noden, gebruikscriendelijkheid en technische oplossingen.
+Digitiale initiatieven vergen een balans tussen noden, gebruiksvriendelijkheid en technische oplossingen.
 
 # Rollen in een project
 

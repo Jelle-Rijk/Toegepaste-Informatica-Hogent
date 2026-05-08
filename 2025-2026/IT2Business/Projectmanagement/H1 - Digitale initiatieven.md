@@ -1,4 +1,4 @@
-<h1>Welkeplaats hebben digitale initiatieven in de hedendaagse business?</h1>
+<h1>Welke plaats hebben digitale initiatieven in de hedendaagse business?</h1>
 
 # Projecten, programma's, portfolio's en producten
 
