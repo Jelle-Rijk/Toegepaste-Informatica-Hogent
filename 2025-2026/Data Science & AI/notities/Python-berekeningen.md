@@ -49,6 +49,41 @@ waarden['Standardized_Residual'] = (waarden['Observed'] - waarden['Expected']) /
 Als de verwachte probability niet gegeven is -> skippen, behalve bij extra tijd (<a href="../labs-en-code/4-bivariate-qual/4.01-chi-squared.ipynb#Standardised-residuals
 ">zie voorbeeld standardized residuals</a>)
 
+## T-test voor twee independent samples
+
+```python
+# t handmatig berekenen - let op, het zijn sample means -> dus ddof=1 bij mean()
+t = (mean1 - mean2) / np.sqrt(std1**2/n1 + std2**2/n2)
+```
+
+```python
+stats.ttest_ind(a=groep1, b=groep2, alternative='less', equal_var=False)
+# equal_var=False betekent dat beide groepen niet per se dezelfde standaardafwijking hebben
+# alternative less -> a < b
+```
+
+## T-test voor twee paired samples
+
+vb. twee metingen van zelfde element
+
+```python
+t_value, p_value, df = stats.ttest_rel(resultaten_eerste_meting, resultaten_tweede_meting, alternative='less')
+# less -> eerste metingen liggen lager dan tweede metingen
+```
+
+## Cohen's d
+
+Geen functie in libraries, deze toevoegen:
+
+```python
+def cohen_d(a, b):
+    na = len(a)
+    nb = len(b)
+    pooled_sd = np.sqrt( ((na-1) * np.var(a, ddof=1) +
+                          (nb-1) * np.var(b, ddof=1)) / (na + nb - 2) )
+    return (np.mean(b) - np.mean(a)) / pooled_sd
+```
+
 # Data cleaning
 
 ## Ordinale waarden
@@ -60,8 +95,19 @@ dataframe['kolom'] = dataframe['kolom'].astype(datatype)
 
 # Gemaakte oefeningen
 
+## Chi2
+
 - <a href="../labs-en-code/4-bivariate-qual/lab-4.03-discrimination.ipynb\">Kijken of één kwalitatieve waarde aan de goodness of fit test voldoet (samenstelling blank-afro binnen een school) + standardized residual berekenen</a>
 - <a href="../labs-en-code/4-bivariate-qual/lab-4.05-survey.ipynb">Kijken of twee kwalitatieve waarden independent zijn (Australian survey)</a>
 - <a href="../labs-en-code/4-bivariate-qual/lab-4.06-music-wine.ipynb">Crosstab opstellen + plotten van dependent variables</a>
 - <a href="../labs-en-code/4-bivariate-qual/lab-4.07-digimeter-sample.ipynb">Goodness of fit test + mergen van categorieën binnen dataframe. (Digimeter)</a>
 - <a href="../labs-en-code/4-bivariate-qual/lab-4.08-off-days.ipynb">Lijst van namen omvormen naar namen + counts (en berekenen standardized residuals) (Employee Saturdays off)</a>
+
+## T-test paired
+
+- <a href="../labs-en-code/5-bivariate-qual-quant/lab-5.01-soft-drink-cans.ipynb">Boxplot maken voor paired samples + t-test berekenen (Oude vs nieuwe blikjes)</a>
+- - <a href="../labs-en-code/5-bivariate-qual-quant/lab-5.03-computer-training.ipynb">T-test paired samples + Cohen's D (Effect van computer training)</a>
+
+## T-test 2 independent samples
+
+- <a href="../labs-en-code/5-bivariate-qual-quant/lab-5.02-exercise-facilities.ipynb">T-test met 2 independent variabelen berekenen + Cohen's D (Exercise facilities)</a>
