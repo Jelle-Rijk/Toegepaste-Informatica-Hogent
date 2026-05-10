@@ -110,3 +110,7 @@ Niet rejecten als p-waarde hoger is dan alfa, of als chi-squared lager is dan de
 # Standardised residuals
 
 Hiermee kan je kijken welke waarden het meest afwijken.
+
+Formule:
+
+$r_i = \frac{o_i-e_i}{\sqrt{e_i (1-\pi_i)}}$
