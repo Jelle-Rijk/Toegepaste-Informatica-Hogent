@@ -1,4 +1,4 @@
-<h1>Van initiatie tot oplevering</h1>
+<h1>Fasen van een project</h1>
 
 # Rol van deliverable in kader van projectmatig werken
 
