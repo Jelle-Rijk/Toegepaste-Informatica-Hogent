@@ -84,6 +84,29 @@ def cohen_d(a, b):
     return (np.mean(b) - np.mean(a)) / pooled_sd
 ```
 
+# Twee kwantitatieve variabelen
+
+```python
+# Covariantie
+cov = np.cov(var1, var2, ddof=1)[0][1]
+
+# Pearson's R - correlatiecoëfficient
+r = np.corrcoef(var1, var2)[0][1]
+
+# R2 (twee manieren)
+r2 = r**2
+
+model = LinearRegression.fit(var1, var2)
+r2 = model.score(var1, var2)
+
+```
+
+## Scope en intercept berekenen
+
+```python
+scope, intercept = np.polyfit(x=independent, y=dependent, deg=1)
+```
+
 # Data cleaning
 
 ## Ordinale waarden
@@ -111,3 +134,9 @@ dataframe['kolom'] = dataframe['kolom'].astype(datatype)
 ## T-test 2 independent samples
 
 - <a href="../labs-en-code/5-bivariate-qual-quant/lab-5.02-exercise-facilities.ipynb">T-test met 2 independent variabelen berekenen + Cohen's D (Exercise facilities)</a>
+
+## Scatterplots + linear regression
+
+- <a href='../labs-en-code/6-regression-analyis/lab-6.01-cats.ipynb'>Basisoefeningen -> cov, r en r2 bepalen + alles plotten (katten)</a>
+- <a href='../labs-en-code/6-regression-analyis/lab-6.02-agriculture.ipynb'>Meer basisoefeningen (landbouw)</a> -<a href='../labs-en-code/6-regression-analyis/lab-6.03-movies.ipynb'>Plots naast elkaar zetten + data cleanen (nan handlen) + outliers verwijderen, limits berekenen (Films)</a>
+- <a href='../labs-en-code/6-regression-analyis/lab-6.04-production.ipynb'>Basisoefeningen (productie)</a>
