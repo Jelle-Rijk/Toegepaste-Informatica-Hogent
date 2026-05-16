@@ -116,6 +116,64 @@ datatype = CategoricalDtype(categories=["cat1", "cat2", "cat3"], ordered = True)
 dataframe['kolom'] = dataframe['kolom'].astype(datatype)
 ```
 
+# Time series / MAE berekenen
+
+Bij rekenen met time series altijd het argument `parse_dates=[date_col]` en dan `set_index(date_col)` gebruiken wanneer je een DataFrame inlaadt.
+
+## Constant model
+
+```python
+y_true = test_data.values
+y_predicted = [train_data.values.mean()] * len(y_true) # lijst gevuld met gemiddelden, heeft zelfde lengte als y_true
+mae = mean_absolute_error(y_true, y_predicted)
+```
+
+## Linear trend model
+
+```python
+y_true = test_data.values
+
+y = train_data.values
+x = np.arange(len(y))
+
+b1, b0 = np.polyfit(x=x, y=y, deg=1)
+y_predicted = [float(b0 + b1 * t) for t in range(len(y), len(y) + len(y_true))]
+
+mae = mean_absolute_error(y_true, y_predicted)
+```
+
+## SMA (Simple moving average)
+
+```python
+data['SMA6'] = data[data_col].rolling(6).mean().shift(1)
+
+y_true = data[data_col]
+y_predicted = data['SMA6']
+
+mae = mean_absolute_error(y_true, y_predicted)
+```
+
+## SES (Simple Exponential Smoothing)
+
+```python
+from statsmodels.tsa.holtwinters import SimpleExpSmoothing
+
+alpha # waarde tussen 0 => alles zelfde gewicht en 1 => meest recente wegen veel zwaarder door
+data_ses = SimpleExpSmoothing(df['data_col']).fit(smoothing_level=alpha, optimized=False)
+df['SES_waarde'] = data_ses.level
+
+# forecast
+data_ses.forecast(aantal_momenten) # zullen altijd gelijk zijn aan meest recente level, dus toont een rechte in plots.
+
+n = aantal voorspelde waarden
+y_true = df['data_col'][-n:].values
+y_predicted = [float(data['SES_waarde'].iloc[-n-1])] * n
+mae = mean_absolute_error(y_true, y_predicted)
+
+#fitted values toevoegen in dataframe
+data['SES_predicted_value'] = data_ses.fittedvalues # zet Lt-1 naast Yt
+```
+
 # Gemaakte oefeningen
 
 ## Chi2
