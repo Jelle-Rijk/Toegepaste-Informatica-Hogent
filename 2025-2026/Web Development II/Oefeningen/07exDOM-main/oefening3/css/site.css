@@ -1,0 +1,11 @@
+.notread {
+  background-color: black;
+}
+
+.read {
+  background-color: fuchsia;
+}
+
+.center {
+  text-align: center;
+}

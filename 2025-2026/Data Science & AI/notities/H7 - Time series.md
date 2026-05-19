@@ -107,3 +107,42 @@ $T_{t} = \beta(L_{t}-L_{t-1}) + (1-\beta)T_{t-1}$
 
 Forecast:  
 $F_{t+k} = L_t + kT_t$
+
+&beta; is een variabele tussen 0 en 1 die vergelijkbaar is met &alpha;, maar het zorgt voor smoothing in de trend.
+
+**Voordeel**: Houdt rekening met trends in de data. Relatief weinig data storage nodig. Voorspellingen zijn accurater dan SES als er een trend aanwezig is.
+
+**Nadeel**: Houdt geen rekening met seasonality. Zowel de keuze voor &alpha; als voor &beta; kunnen een groot effect hebben op het resultaat. Reageert slecht als de trend snel verandert.
+
+In python:
+
+```python
+from statsmodels.tsa.api import Holt
+
+data_des = Holt(training_data['data_col']).fit(smoothing_level=alpha, smoothing_trend=beta, optimized=False)
+
+df['DES'] = data_des.level
+```
+
+## Triple exponential smoothing - Holt-Winters method
+
+Level:  
+$L_{t} = \alpha (Y_{t} - S_{t-m}) + (1-\alpha) (L_{t-1} + T_{t-1})$
+
+Trend:  
+$T_{t} = \beta (L_{t} - L_{t-1}) + (1-\beta)T_{t-1}$
+
+Seasonal component:  
+$S_{t} = \gamma (Y_{t} - L_{t}) + (1-\gamma)S_{t-m}$
+
+Forecast for $k$ time units after the last observation:  
+$F_{t+k} = L_{t} + kT_{t} + S_{t-m+k}$
+
+Variabelen zijn:
+
+- &alpha; = gewicht meest recente observaties (vaak 0.1)
+- &beta; = smoothing van de trend (vaak 0.2)
+- &gamma; = smoothing van de seasonal component (vaak )
+- t = huidig moment in de tijd
+- Y = observatie
+- m = de lengte van de seasonal cycle (vb. 12 voor een jaar, 4 voor een kwartaal, 7 voor een week, etc.)

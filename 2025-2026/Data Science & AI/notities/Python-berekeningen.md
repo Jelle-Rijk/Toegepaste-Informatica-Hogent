@@ -120,6 +120,8 @@ dataframe['kolom'] = dataframe['kolom'].astype(datatype)
 
 Bij rekenen met time series altijd het argument `parse_dates=[date_col]` en dan `set_index(date_col)` gebruiken wanneer je een DataFrame inlaadt.
 
+Belangrijk, je kan de parameters van data in statsmodels altijd opvragen met `data_model.params_formatted`
+
 ## Constant model
 
 ```python
@@ -159,7 +161,7 @@ mae = mean_absolute_error(y_true, y_predicted)
 from statsmodels.tsa.holtwinters import SimpleExpSmoothing
 
 alpha # waarde tussen 0 => alles zelfde gewicht en 1 => meest recente wegen veel zwaarder door
-data_ses = SimpleExpSmoothing(df['data_col']).fit(smoothing_level=alpha, optimized=False)
+data_ses = SimpleExpSmoothing(training_data['data_col']).fit(smoothing_level=alpha, optimized=False)
 df['SES_waarde'] = data_ses.level
 
 # forecast
@@ -172,6 +174,34 @@ mae = mean_absolute_error(y_true, y_predicted)
 
 #fitted values toevoegen in dataframe
 data['SES_predicted_value'] = data_ses.fittedvalues # zet Lt-1 naast Yt
+```
+
+## TES (Triple Exponential Smoothing)
+
+```python
+from statsmodels.tsa.holtwinters import ExponentialSmoothing
+
+data_tes = ExponentialSmoothing(training_data, trend='add', seasonal='add', seasonal_periods=gamma, freq=frequency).fit()
+
+df['TES_Waarde'] = data_tes.level
+
+y_true = test_data
+y_predicted = data_tes.forecast(len(y_true)).values
+mae = mean_absolute_error(y_true, y_predicted)
+```
+
+### Forecast manueel berekenen
+
+```python
+season_length # vb. 12 voor een jaar
+last_level = data_tes.level.iloc[-1]
+last_trend = data_tes.trend.iloc[-1]
+last_season = data_tes.season.iloc[-season_length:]
+
+# t + 1 => 1 telkens vervangen in deze formule
+forecast_next = last_level + 1 * last_trend + last_season.iloc[-season_length + 1]
+
+
 ```
 
 # Gemaakte oefeningen
@@ -198,3 +228,12 @@ data['SES_predicted_value'] = data_ses.fittedvalues # zet Lt-1 naast Yt
 - <a href='../labs-en-code/6-regression-analyis/lab-6.01-cats.ipynb'>Basisoefeningen -> cov, r en r2 bepalen + alles plotten (katten)</a>
 - <a href='../labs-en-code/6-regression-analyis/lab-6.02-agriculture.ipynb'>Meer basisoefeningen (landbouw)</a> -<a href='../labs-en-code/6-regression-analyis/lab-6.03-movies.ipynb'>Plots naast elkaar zetten + data cleanen (nan handlen) + outliers verwijderen, limits berekenen (Films)</a>
 - <a href='../labs-en-code/6-regression-analyis/lab-6.04-production.ipynb'>Basisoefeningen (productie)</a>
+
+## Timeseries
+
+- <a href='../labs-en-code/7-time-series/lab-7.01-house-sales.ipynb'>MAE berekenen van SMA, SES en DES (Houses)</a>
+- <a href='../labs-en-code/7-time-series/lab-7.02-aircraft-engines.ipynb'>Forecast berekenen van SES a.d.h.v. gegeven vorige level</a>
+- <a href='../labs-en-code/7-time-series/lab-7.03-car-sales.ipynb'>Forecast berekenen van DES a.d.h.v. gegeven vorige level en trend</a> -<a href='../labs-en-code/7-time-series/lab-7.04-airline-tickets.ipynb'>Forecast maken en plotten met TES (airline tickets)</a>
+- <a href='../labs-en-code/7-time-series/lab-7.05-alcohol-sales.ipynb'>Forecast maken en plotten met TES (alcohol sales)</a>
+- <a href='../labs-en-code/7-time-series/lab-7.06-covid-19.ipynb'>Modellen trainen met DES en TES op grote datasets (Covid19)</a>
+- <a href='../labs-en-code/7-time-series/lab-7.07-golden-cross.ipynb'>Toepassing SMA (S&P500)</a>
