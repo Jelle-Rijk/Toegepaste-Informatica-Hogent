@@ -116,6 +116,94 @@ datatype = CategoricalDtype(categories=["cat1", "cat2", "cat3"], ordered = True)
 dataframe['kolom'] = dataframe['kolom'].astype(datatype)
 ```
 
+# Time series / MAE berekenen
+
+Bij rekenen met time series altijd het argument `parse_dates=[date_col]` en dan `set_index(date_col)` gebruiken wanneer je een DataFrame inlaadt.
+
+Belangrijk, je kan de parameters van data in statsmodels altijd opvragen met `data_model.params_formatted`
+
+## Constant model
+
+```python
+y_true = test_data.values
+y_predicted = [train_data.values.mean()] * len(y_true) # lijst gevuld met gemiddelden, heeft zelfde lengte als y_true
+mae = mean_absolute_error(y_true, y_predicted)
+```
+
+## Linear trend model
+
+```python
+y_true = test_data.values
+
+y = train_data.values
+x = np.arange(len(y))
+
+b1, b0 = np.polyfit(x=x, y=y, deg=1)
+y_predicted = [float(b0 + b1 * t) for t in range(len(y), len(y) + len(y_true))]
+
+mae = mean_absolute_error(y_true, y_predicted)
+```
+
+## SMA (Simple moving average)
+
+```python
+data['SMA6'] = data[data_col].rolling(6).mean().shift(1)
+
+y_true = data[data_col]
+y_predicted = data['SMA6']
+
+mae = mean_absolute_error(y_true, y_predicted)
+```
+
+## SES (Simple Exponential Smoothing)
+
+```python
+from statsmodels.tsa.holtwinters import SimpleExpSmoothing
+
+alpha # waarde tussen 0 => alles zelfde gewicht en 1 => meest recente wegen veel zwaarder door
+data_ses = SimpleExpSmoothing(training_data['data_col']).fit(smoothing_level=alpha, optimized=False)
+df['SES_waarde'] = data_ses.level
+
+# forecast
+data_ses.forecast(aantal_momenten) # zullen altijd gelijk zijn aan meest recente level, dus toont een rechte in plots.
+
+n = aantal voorspelde waarden
+y_true = df['data_col'][-n:].values
+y_predicted = [float(data['SES_waarde'].iloc[-n-1])] * n
+mae = mean_absolute_error(y_true, y_predicted)
+
+#fitted values toevoegen in dataframe
+data['SES_predicted_value'] = data_ses.fittedvalues # zet Lt-1 naast Yt
+```
+
+## TES (Triple Exponential Smoothing)
+
+```python
+from statsmodels.tsa.holtwinters import ExponentialSmoothing
+
+data_tes = ExponentialSmoothing(training_data, trend='add', seasonal='add', seasonal_periods=gamma, freq=frequency).fit()
+
+df['TES_Waarde'] = data_tes.level
+
+y_true = test_data
+y_predicted = data_tes.forecast(len(y_true)).values
+mae = mean_absolute_error(y_true, y_predicted)
+```
+
+### Forecast manueel berekenen
+
+```python
+season_length # vb. 12 voor een jaar
+last_level = data_tes.level.iloc[-1]
+last_trend = data_tes.trend.iloc[-1]
+last_season = data_tes.season.iloc[-season_length:]
+
+# t + 1 => 1 telkens vervangen in deze formule
+forecast_next = last_level + 1 * last_trend + last_season.iloc[-season_length + 1]
+
+
+```
+
 # Gemaakte oefeningen
 
 ## Chi2
@@ -140,3 +228,12 @@ dataframe['kolom'] = dataframe['kolom'].astype(datatype)
 - <a href='../labs-en-code/6-regression-analyis/lab-6.01-cats.ipynb'>Basisoefeningen -> cov, r en r2 bepalen + alles plotten (katten)</a>
 - <a href='../labs-en-code/6-regression-analyis/lab-6.02-agriculture.ipynb'>Meer basisoefeningen (landbouw)</a> -<a href='../labs-en-code/6-regression-analyis/lab-6.03-movies.ipynb'>Plots naast elkaar zetten + data cleanen (nan handlen) + outliers verwijderen, limits berekenen (Films)</a>
 - <a href='../labs-en-code/6-regression-analyis/lab-6.04-production.ipynb'>Basisoefeningen (productie)</a>
+
+## Timeseries
+
+- <a href='../labs-en-code/7-time-series/lab-7.01-house-sales.ipynb'>MAE berekenen van SMA, SES en DES (Houses)</a>
+- <a href='../labs-en-code/7-time-series/lab-7.02-aircraft-engines.ipynb'>Forecast berekenen van SES a.d.h.v. gegeven vorige level</a>
+- <a href='../labs-en-code/7-time-series/lab-7.03-car-sales.ipynb'>Forecast berekenen van DES a.d.h.v. gegeven vorige level en trend</a> -<a href='../labs-en-code/7-time-series/lab-7.04-airline-tickets.ipynb'>Forecast maken en plotten met TES (airline tickets)</a>
+- <a href='../labs-en-code/7-time-series/lab-7.05-alcohol-sales.ipynb'>Forecast maken en plotten met TES (alcohol sales)</a>
+- <a href='../labs-en-code/7-time-series/lab-7.06-covid-19.ipynb'>Modellen trainen met DES en TES op grote datasets (Covid19)</a>
+- <a href='../labs-en-code/7-time-series/lab-7.07-golden-cross.ipynb'>Toepassing SMA (S&P500)</a>
