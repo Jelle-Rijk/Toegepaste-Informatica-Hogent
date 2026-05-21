@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4-promises.all</title>
+    <link rel="stylesheet" href="../css/02-main.css" />
+  </head>
+  <body>
+    <h1>Promises.all()</h1>
+    <pre id="boektekst"></pre>
+    <script type="module">
+      const boektekst = document.getElementById('boektekst');
+
+      const promiseArray = [
+        fetch('../data/part1.txt').then((response) =>response.text()),
+        fetch('../data/part2.txt').then((response) =>response.text()),
+        fetch('../data/part3.txt').then((response) =>response.text())];
+
+      Promise.all(promiseArray).then((array) => {
+        boektekst.insertAdjacentText('beforeend', array[0]);
+        boektekst.insertAdjacentText('beforeend', array[1]);
+        boektekst.insertAdjacentText('beforeend', array[2]);
+      });
+    </script>
+  </body>
+</html>

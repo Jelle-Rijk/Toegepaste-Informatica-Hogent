@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3f-fetch-json-FINAL</title>
+    <link rel="stylesheet" href="../css/01-main.css" />
+  </head>
+  <body>
+    <h1>3f-fetch-json-FINAL</h1>
+    <p>Druk op &lt;Ctrl+Shift+j&gt; om de console weer te geven.</p>
+    <script type="module">
+      fetch('../data/data1.json')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((jsonResponse) => {
+          console.log('name:', jsonResponse.name);
+          console.log('age:', jsonResponse.age);
+        })
+        .catch((error) => alert(error));
+
+      console.log('Started request...');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>5b-create-promise-solution</title>
+    <link rel="stylesheet" href="../css/01-main.css" />
+  </head>
+  <body>
+    <h1>5b-create-promise-solution</h1>
+    <p>Druk op <kbd>&lt;Ctrl+Shift+j&gt;</kbd> om de console weer te geven.</p>>
+    <script>
+      // in welke volgorde worden de console.log's
+      // uitgevoerd?
+
+      //code in de promise wordt onmiddellijk uitgevoerd.
+      const p = new Promise((resolve, reject) => {
+        console.log('In promise'); // -1-
+        setTimeout(function () {
+          console.log('In setTimeout'); // -6-
+          resolve(100);
+        }, 2000);
+      });
+
+      console.log(p); // -2-
+      console.log('After promise'); // -3-
+
+      // een then is 'not blocking'!
+      const p2 = p.then((resolvewaarde) => {
+        console.log(`The resultvalue is ${resolvewaarde}`); // -7-
+        return resolvewaarde * 2;
+      });
+
+      p2.then((waarde) => {
+        // de promise is reeds resolved en pas nu subscriben we
+        // toch krijgen we nog het resultaat.
+        p.then(
+          (resolvewaarde) => console.log(`The resultvalue is ${resolvewaarde}`) // -9-
+        );
+        console.log('Endvalue: ', waarde); // -8-
+      });
+
+      console.log('End script'); // -4-
+      console.log('----------'); // -5-
+    </script>
+  </body>
+</html>

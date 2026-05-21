@@ -28,4 +28,19 @@ Twee soorten: <br>
 
 # JSON Object Storage
 
+Web Storage kan enkel strings opslaan, dus objecten moeten gestored worden als <attr title='JavaScript Object Notation'>JSON</attr>
+
+```javascript
+// Omzetten naar JSON
+JSON.stringify(data);
+// Omzetten van JSON naar JS object
+JSON.parse(data);
+
+// Opslaan in en ophalen van webstorage
+sessionStorage.setItem(key, JSON.stringify(data));
+data = JSON.parse(sessionStorage.getItem(key));
+```
+
+Objecten moeten een .toJSON() functie krijgen. Deze zet het object om naar een object literal.
+
 # WS API Event
