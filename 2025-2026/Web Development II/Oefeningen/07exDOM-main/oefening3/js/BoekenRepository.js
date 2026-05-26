@@ -1,5 +1,5 @@
-import Boek from './Boek.js';
-import { boeken } from './boekenArray.js';
+import Boek from "./Boek.js";
+import { boeken } from "./boekenArray.js";
 
 export default class BoekenRepository {
   #boeken = [];
@@ -22,5 +22,7 @@ export default class BoekenRepository {
   // geefBoeken retourneert een deel van de boeken in #boeken
   // parameter 'vanafBoek' is een nummer en geeft aan vanaf het hoeveelste boek (zero-based) we een deel nemen
   // parameter 'aantalBoeken' is een nummer en geeft aan hoeveel opeenvolgende boeken we in het deel stoppen
-  geefBoeken(vanafBoek, aantalBoeken) {}
+  geefBoeken(vanafBoek, aantalBoeken) {
+    return this.#boeken.slice(vanafBoek, vanafBoek + aantalBoeken);
+  }
 }
