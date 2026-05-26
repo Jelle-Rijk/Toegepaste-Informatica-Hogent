@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3a-fetch-response-promise-response-long</title>
+    <link rel="stylesheet" href="../css/01-main.css" />
+  </head>
+  <body>
+    <h1>3a-fetch-response-promise-response-long</h1>
+    <p>Druk op <kbd>&lt;Ctrl+Shift+j&gt;</kbd> om de console weer te geven.</p>
+    <script type="module">
+      const fetchPromise = fetch('../data/part1.txt');
+      console.log(fetchPromise);
+
+      fetchPromise.then((response) => {
+        console.log('response.status:', response.status);
+      });
+
+      console.log('Started request...');
+    </script>
+  </body>
+</html>
