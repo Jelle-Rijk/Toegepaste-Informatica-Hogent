@@ -1,5 +1,5 @@
-import Canvas from './Canvas.js';
-import UitgavenRepository from './UitgavenRepository.js';
+import Canvas from "./Canvas.js";
+import UitgavenRepository from "./UitgavenRepository.js";
 
 export default class BankComponent {
   #canvasCategorieen;
@@ -9,10 +9,9 @@ export default class BankComponent {
   constructor() {
     this.#canvasCategorieen = new Canvas(50);
     this.#storage = window.localStorage;
-    this.#aantalBezoeken = 1;
+    this.#getAantalBezoekenFromStorage();
     this.#uitgavenRepository = new UitgavenRepository();
 
-    this.#getAantalBezoekenFromStorage();
     this.#setAantalBezoekenInStorage();
     this.#toHtml();
   }
@@ -22,22 +21,41 @@ export default class BankComponent {
     this.#canvasCategorieen.tekenen(this.#uitgavenRepository);
   }
 
-  #tekstToHtml() {}
+  #tekstToHtml() {
+    document.getElementById("aantalBezoeken").innerText = this.#aantalBezoeken;
 
-  #getAantalBezoekenFromStorage() {}
+    const dataContainer = document.getElementById("data");
+    for (const uitgave of this.#uitgavenRepository.uitgaven) {
+      dataContainer.insertAdjacentHTML(
+        "beforeend",
+        `<div class="aankoop"><img src="images/${uitgave.categorie}.png"> <h4>${uitgave.omschrijving.toUpperCase()} - €${uitgave.bedrag}</h4><p>${uitgave.datum.datumNotatie()}</p></div>`,
+      );
+    }
+  }
 
-  #setAantalBezoekenInStorage() {}
+  #getAantalBezoekenFromStorage() {
+    const aantalBezoekenStorage = JSON.parse(
+      this.#storage.getItem("aantalBezoeken"),
+    );
+    this.#aantalBezoeken = aantalBezoekenStorage
+      ? aantalBezoekenStorage + 1
+      : 1;
+  }
+
+  #setAantalBezoekenInStorage() {
+    this.#storage.setItem("aantalBezoeken", this.#aantalBezoeken);
+  }
 }
 
 Date.prototype.datumNotatie = function () {
   const dagen = [
-    'Zondag',
-    'Maandag',
-    'Dinsdag',
-    'Woensdag',
-    'Donderdag',
-    'Vrijdag',
-    'Zaterdag',
+    "Zondag",
+    "Maandag",
+    "Dinsdag",
+    "Woensdag",
+    "Donderdag",
+    "Vrijdag",
+    "Zaterdag",
   ];
   return `${dagen[this.getDay()]} ${this.getDate()}/${
     this.getMonth() + 1

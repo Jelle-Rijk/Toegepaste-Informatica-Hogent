@@ -1,5 +1,6 @@
-<h1> Continuïteit en waardecreatie </h1>
+# Continuïteit en waardecreatie
 
+- [Continuïteit en waardecreatie](#continuïteit-en-waardecreatie)
 - [Business](#business)
   - [De continuïteitskring](#de-continuïteitskring)
   - [Waardecreatie](#waardecreatie)

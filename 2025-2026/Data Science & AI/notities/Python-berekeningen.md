@@ -1,10 +1,31 @@
 # Algemene berekeningen
 
+## Bepalen of twee variabelen afhankelijk zijn
+
+```python
+probability_a
+probability_b
+
+dependent = probability_a_and_b = probability_a * probability_b
+```
+
+## Berekenen van expected value:
+
+```python
+expected_value = waarde1 * probability_waarde1 + waarde2 * probability_waarde2  + ...
+```
+
+## Berekenen van variantie:
+
+````python
+variantie = (waarde1 - mean)**2 * probability_waarde1 + (waarde2 - mean)**2 * probability_waarde2 + ...
+```
+
 ## Cramér's V
 
 ```python
 stats.contingency.association(observed_values, method='cramer')
-```
+````
 
 Uitkomst:
 
