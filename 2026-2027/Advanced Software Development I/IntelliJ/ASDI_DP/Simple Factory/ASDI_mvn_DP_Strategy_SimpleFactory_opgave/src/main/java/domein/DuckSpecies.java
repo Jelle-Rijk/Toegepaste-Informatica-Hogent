@@ -1,5 +1,5 @@
 package domein;
 
-public enum DuckType {
+public enum DuckSpecies {
     MALLARD, REDHEAD, RUBBER, DECOY
 }

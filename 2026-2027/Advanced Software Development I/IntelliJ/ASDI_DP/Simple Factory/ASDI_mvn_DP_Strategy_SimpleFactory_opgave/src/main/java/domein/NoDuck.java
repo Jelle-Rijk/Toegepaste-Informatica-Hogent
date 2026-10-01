@@ -1,4 +1,7 @@
 package domein;
 
-public class NoDuck {
+public class NoDuck extends Duck {
+    public NoDuck() {
+        super(() -> "", () -> "", () -> "");
+    }
 }

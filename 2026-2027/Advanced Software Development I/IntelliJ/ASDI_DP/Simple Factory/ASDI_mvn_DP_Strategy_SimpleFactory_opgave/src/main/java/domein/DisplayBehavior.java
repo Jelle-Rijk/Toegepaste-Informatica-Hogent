@@ -1,6 +1,6 @@
 package domein;
 
 @FunctionalInterface
-public interface DisplayMethod {
+public interface DisplayBehavior {
     String display();
 }
