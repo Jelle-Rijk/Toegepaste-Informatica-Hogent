@@ -1,0 +1,54 @@
+package domein;
+
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.IntBinaryOperator;
+import java.util.stream.Collectors;
+
+import repository.ReductiebonDao;
+import repository.ReductiebonDaoJpa;
+
+public class ReductiebonBeheerder {
+
+    private ReductiebonDao reductiebonDao;
+    private List<Reductiebon> reductiebonLijst;
+
+    public ReductiebonBeheerder() {
+        reductiebonDao = new ReductiebonDaoJpa();
+        reductiebonLijst = reductiebonDao.findAll();
+    }
+
+    public List<Reductiebon> getReductiebonLijst() {
+        return Collections.unmodifiableList(reductiebonLijst);
+    }
+
+    // VRAAG1
+    public List<String> geefReductiebonCodes(int percentage) {
+        return reductiebonLijst.stream()
+                .filter(bon -> bon.getPercentage() > percentage)
+                .map(Reductiebon::getReductiebonCode).toList();
+    }
+
+    // VRAAG2
+    public void sorteerReductiebonnen() {
+        Collections.sort(reductiebonLijst, Comparator.comparing(Reductiebon::getPercentage)
+                .thenComparing(Reductiebon::getReductiebonCode, Comparator.reverseOrder()));
+    }
+
+    // VRAAG3
+    public double geefGemPercVanBonnenInToekomst() {
+        return reductiebonLijst.stream()
+                .filter(bon -> bon.getEinddatum().isAfter(LocalDate.now()))
+                .mapToInt(Reductiebon::getPercentage)
+                .average()
+                .orElseThrow();
+    }
+
+    // VRAAG4
+    public List<LocalDate> geefUniekeEinddatums() {
+        return reductiebonLijst.stream().map(Reductiebon::getEinddatum).distinct().sorted().toList();
+    }
+
+}
