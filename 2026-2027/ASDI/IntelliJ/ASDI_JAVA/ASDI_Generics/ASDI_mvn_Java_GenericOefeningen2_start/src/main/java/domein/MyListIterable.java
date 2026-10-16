@@ -1,12 +1,14 @@
 package domein;
 
 import exceptions.EmptyListException;
+
+import java.io.Serializable;
 import java.util.Iterator;
 
-public class MyListIterable implements Iterable<String> {
+public class MyListIterable<T extends Serializable> implements Iterable<T>, Serializable {
 
-	private Node firstNode;
-	private Node lastNode;
+	private Node<T> firstNode;
+	private Node<T> lastNode;
 	private String nameList;
 
 	public MyListIterable() {
@@ -34,8 +36,8 @@ public class MyListIterable implements Iterable<String> {
 		return buffer.toString();
 	}
 
-	public void insertAtFront(String data) {
-		Node aNode = new Node(data);
+	public void insertAtFront(T data) {
+		Node<T> aNode = new Node<>(data);
 		if (isEmpty()) {
 			firstNode = lastNode = aNode;
 		} else {
@@ -44,8 +46,8 @@ public class MyListIterable implements Iterable<String> {
 		}
 	}
 
-	public void insertAtBack(String data) {
-		Node aNode = new Node(data);
+	public void insertAtBack(T data) {
+		Node<T> aNode = new Node<>(data);
 		if (isEmpty()) {
 			firstNode = lastNode = aNode;
 		} else {
@@ -54,12 +56,12 @@ public class MyListIterable implements Iterable<String> {
 		}
 	}
 
-	public String removeFromFront() throws EmptyListException {
+	public T removeFromFront() throws EmptyListException {
 		if (isEmpty()) {
 			throw new EmptyListException(nameList);
 		}
 
-		String removedItem = firstNode.getData();
+		T removedItem = firstNode.getData();
 		if (firstNode == lastNode) {
 			firstNode = lastNode = null;
 		} else {
@@ -70,13 +72,13 @@ public class MyListIterable implements Iterable<String> {
 	}
 
 	@Override
-	public Iterator<String> iterator() {
+	public Iterator<T> iterator() {
 		return new MyIterator();
 	}
 
-	private class MyIterator implements Iterator<String> {
+	private class MyIterator implements Iterator<T> {
 
-		private Node nextToFetch = firstNode;
+		private Node<T> nextToFetch = firstNode;
 
 		@Override
 		public boolean hasNext() {
@@ -84,8 +86,8 @@ public class MyListIterable implements Iterable<String> {
 		}
 
 		@Override
-		public String next() {
-			String data = nextToFetch.getData();
+		public T next() {
+			T data = nextToFetch.getData();
 			nextToFetch = nextToFetch.getNext();
 			return data;
 		}

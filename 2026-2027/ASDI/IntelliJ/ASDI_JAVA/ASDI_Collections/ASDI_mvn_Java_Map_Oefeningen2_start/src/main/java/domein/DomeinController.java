@@ -13,44 +13,42 @@ public class DomeinController {
     }
 
     public String opzettenBierPerNaam() {
-        // Eigen oplossing
+        // Eigen oplossing - pre-generics
 //        StringBuilder sb = new StringBuilder();
 //        bierWinkel.opzettenOverzichtBierPerNaam().forEach((key, value) -> sb.append("%s = %s%n".formatted(key,
 //        value)));
 //        return sb.toString();
 
         // Modeloplossing
-        return bierWinkel.opzettenOverzichtBierPerNaam().entrySet().stream().
-                map(e -> "%s = %s".formatted(e.getKey(), e.getValue())).
-                collect(Collectors.joining("\n"));
+        return overzichtToString(bierWinkel.opzettenOverzichtBierPerNaam());
     }
 
     public String opzettenAantalBierenPerSoort() {
-        // Eigen oplossing
+        // Eigen oplossing - pre-generics
 //        StringBuilder sb = new StringBuilder();
 //        bierWinkel.opzettenAantalBierenPerSoort().forEach((key, value) -> sb.append("%s = %d%n".formatted(key,
 //        value)));
 //        return sb.toString();
-        return bierWinkel.opzettenAantalBierenPerSoort().entrySet().stream().
-                map(e -> "%s = %s".formatted(e.getKey(), e.getValue())).
-                collect(Collectors.joining("\n"));
+        return overzichtToString(bierWinkel.opzettenAantalBierenPerSoort());
     }
 
     public String opzettenOverzichtBierenPerSoort() {
-        // Eigen oplossing
+        // Eigen oplossing - pre-generics
 //        StringBuilder sb = new StringBuilder();
 //        bierWinkel.opzettenOverzichtBierenPerSoort()
 //                .forEach((key, value) -> sb.append("%s = %s%n".formatted(key, value)));
 //        return sb.toString();
-        return bierWinkel.opzettenOverzichtBierenPerSoort().entrySet().stream().
-                map(e -> "%s = %s".formatted( e.getKey(),e.getValue())).
-                collect(Collectors.joining("\n"));
+        return overzichtToString(bierWinkel.opzettenOverzichtBierenPerSoort());
+
     }
 
-
-    //TODO na hoofdstuk generics 
     //--> generieke oplossing "overzichtToString" methode
     //
-
+    public <K, V> String overzichtToString(Map<K, V> map) {
+        return map.entrySet()
+                .stream()
+                .map(e -> "%s = %s".formatted(e.getKey(), e.getValue()))
+                .collect(Collectors.joining("\n"));
+    }
 
 }

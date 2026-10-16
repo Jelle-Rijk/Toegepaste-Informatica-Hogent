@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Getter @Setter
-public class Bier  {
+public class Bier implements Serializable  {
 
 	private String bierNaam;
 	private double alcohol;

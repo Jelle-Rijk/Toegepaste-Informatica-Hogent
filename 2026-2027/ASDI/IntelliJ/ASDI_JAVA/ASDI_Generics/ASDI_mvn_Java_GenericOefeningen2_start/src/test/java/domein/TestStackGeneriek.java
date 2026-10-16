@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,14 +17,14 @@ import exceptions.EmptyListException;
 
 class TestStackGeneriek {
 
-	private MyStack<String> woordenStack;
-	private MyStack<Double> decGetallenStack;
+    private MyStack<String> woordenStack;
+    private MyStack<Double> decGetallenStack;
 
-	@BeforeEach
-	void setUp() {
-		woordenStack = new MyStack<>("woordenStack");
-		decGetallenStack = new MyStack<>("decimaleGetallenStack");
-	}
+    @BeforeEach
+    void setUp() {
+        woordenStack = new MyStack<>("woordenStack");
+        decGetallenStack = new MyStack<>("decimaleGetallenStack");
+    }
 
 // STAP2
 /*
@@ -55,78 +57,91 @@ class TestStackGeneriek {
 		}
 */
 
-/* Uit commentaar zetten
-	@Test
-	void toevoegenVerwijderenTesten() {
-		String[] woorden = { "lekker", "zijn", "wafels" };
-		Double[] decGetallen = { 12.5, 24.3, 30.5, 40.5 };
-		itemsToevoegenVerwijderen(woordenStack, woorden);
-		itemsToevoegenVerwijderen(decGetallenStack, decGetallen);
-	}
+    @Test
+    void toevoegenVerwijderenTesten() {
+        String[] woorden = {"lekker", "zijn", "wafels"};
+        Double[] decGetallen = {12.5, 24.3, 30.5, 40.5};
+        itemsToevoegenVerwijderen(woordenStack, woorden);
+        itemsToevoegenVerwijderen(decGetallenStack, decGetallen);
+    }
 
-	private TODO void itemsToevoegenVerwijderen(MyStack TODO myStack, TODO items)
+    private <T extends Serializable> void itemsToevoegenVerwijderen(MyStack<T> myStack, T[] items) {
+        Stream.of(items).forEach(myStack::push);
+        // EIGEN OPLOSSING
+//		for (int i = items.length - 1; i >= 0; i--) {
+//			assertEquals(items[i], myStack.pop());
+//            assertEquals(i == 0, myStack.isEmpty());
+//		}
+        // MODELOPLOSSING
+        List<T> listExpected = Arrays.asList(items);
+        Collections.reverse(listExpected);
 
+        listExpected.stream().limit(listExpected.size() - 1).forEach(expected -> {
+            assertEquals(expected, myStack.pop());
+            assertFalse(myStack.isEmpty());
+        });
 
-	}
-*/
-	
-	@Test
-	void stackLeeg() {
-		assertTrue(woordenStack.isEmpty());
-	}
+        assertEquals(listExpected.getLast(), myStack.pop());
+        assertTrue(myStack.isEmpty());
+    }
 
-	@Test
-	void woordenToevoegen() {
-		woordenStack.push("lekker");
-		woordenStack.push("zijn");
-		woordenStack.push("wafels");
-		assertFalse(woordenStack.isEmpty());
-	}
+    @Test
+    void stackLeeg() {
+        assertTrue(woordenStack.isEmpty());
+    }
 
-	@Test
-	void woordenDoorElkaarToevoegenVerwijderen() {
-		woordenStack.push("lekker");
-		woordenStack.push("zijn");
+    @Test
+    void woordenToevoegen() {
+        woordenStack.push("lekker");
+        woordenStack.push("zijn");
+        woordenStack.push("wafels");
+        assertFalse(woordenStack.isEmpty());
+    }
 
-		assertEquals("zijn", woordenStack.pop());
-		woordenStack.push("wafels");
+    @Test
+    void woordenDoorElkaarToevoegenVerwijderen() {
+        woordenStack.push("lekker");
+        woordenStack.push("zijn");
 
-		assertEquals("wafels", woordenStack.pop());
-		assertEquals("lekker", woordenStack.pop());
-		assertTrue(woordenStack.isEmpty());
-	}
+        assertEquals("zijn", woordenStack.pop());
+        woordenStack.push("wafels");
 
-	@Test
-	void woordenVerwijderen() {
-		woordenStack.push("lekker");
-		woordenStack.push("zijn");
-		woordenStack.push("wafels");
-		assertFalse(woordenStack.isEmpty());
-		assertEquals("wafels", woordenStack.pop());
-		assertEquals("zijn", woordenStack.pop());
-		assertEquals("lekker", woordenStack.pop());
-		assertTrue(woordenStack.isEmpty());
-	}
+        assertEquals("wafels", woordenStack.pop());
+        assertEquals("lekker", woordenStack.pop());
+        assertTrue(woordenStack.isEmpty());
+    }
 
-	@Test
-	void legeStackElementVerwijderen() {
-		assertThrows(EmptyListException.class, () -> {
-			woordenStack.pop();
-		});
-	}
+    @Test
+    void woordenVerwijderen() {
+        woordenStack.push("lekker");
+        woordenStack.push("zijn");
+        woordenStack.push("wafels");
+        assertFalse(woordenStack.isEmpty());
+        assertEquals("wafels", woordenStack.pop());
+        assertEquals("zijn", woordenStack.pop());
+        assertEquals("lekker", woordenStack.pop());
+        assertTrue(woordenStack.isEmpty());
+    }
 
-	@Test
-	void toonStack() {
-		woordenStack.push("lekker");
-		woordenStack.push("zijn");
-		woordenStack.push("wafels");
-		String zin = woordenStack.toString().replaceAll("\\s+", " ").trim();
-		assertEquals("The woordenStack is: wafels zijn lekker", zin);
-	}
+    @Test
+    void legeStackElementVerwijderen() {
+        assertThrows(EmptyListException.class, () -> {
+            woordenStack.pop();
+        });
+    }
 
-	@Test
-	void toonLegeStack() {
-		String zin = woordenStack.toString().replaceAll("\\s+", " ").trim();
-		assertEquals("woordenStack is empty", zin);
-	}
+    @Test
+    void toonStack() {
+        woordenStack.push("lekker");
+        woordenStack.push("zijn");
+        woordenStack.push("wafels");
+        String zin = woordenStack.toString().replaceAll("\\s+", " ").trim();
+        assertEquals("The woordenStack is: wafels zijn lekker", zin);
+    }
+
+    @Test
+    void toonLegeStack() {
+        String zin = woordenStack.toString().replaceAll("\\s+", " ").trim();
+        assertEquals("woordenStack is empty", zin);
+    }
 }
