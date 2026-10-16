@@ -9,11 +9,17 @@
     <persistence-unit name="school" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>domein.Docent</class>
+<<<<<<< HEAD
         <class>domein.Campus</class>
         <class>domein.Werkruimte</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:mysql://localhost:3306/schooldb2?serverTimezone=UTC"/>
+=======
+        <properties>
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/schooldb?serverTimezone=UTC"/>
+>>>>>>> c39e1c38c8c5d60ff0be1122d8d3f5413ca87126
             <property name="jakarta.persistence.jdbc.user" value="root"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.password" value="root"/>

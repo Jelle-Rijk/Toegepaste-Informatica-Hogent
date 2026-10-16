@@ -1,5 +1,6 @@
 package main;
 
+<<<<<<< HEAD
 import domein.Docent;
 
 import java.math.BigDecimal;
@@ -32,3 +33,7 @@ public class MAINoef1 {
     }
 
 }
+=======
+public class MAINoef1 {
+}
+>>>>>>> c39e1c38c8c5d60ff0be1122d8d3f5413ca87126

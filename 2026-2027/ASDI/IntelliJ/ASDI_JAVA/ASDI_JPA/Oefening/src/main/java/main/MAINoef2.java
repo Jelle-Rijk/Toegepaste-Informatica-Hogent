@@ -1,5 +1,6 @@
 package main;
 
+<<<<<<< HEAD
 import domein.Docent;
 import jakarta.persistence.EntityManager;
 import util.JPAUtil;
@@ -17,4 +18,7 @@ public class MAINoef2 {
             em.getTransaction().commit();
         }
     }
+=======
+public class MAINoef2 {
+>>>>>>> c39e1c38c8c5d60ff0be1122d8d3f5413ca87126
 }

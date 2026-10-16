@@ -1,5 +1,6 @@
 package domein;
 
+<<<<<<< HEAD
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,3 +38,7 @@ public class Werkruimte {
     }
 
 }
+=======
+public class Werkruimte {
+}
+>>>>>>> c39e1c38c8c5d60ff0be1122d8d3f5413ca87126

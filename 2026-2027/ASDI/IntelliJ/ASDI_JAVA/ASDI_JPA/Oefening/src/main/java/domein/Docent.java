@@ -1,5 +1,6 @@
 package domein;
 
+<<<<<<< HEAD
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -62,3 +63,7 @@ public class Docent {
 
 
 }
+=======
+public class Docent {
+}
+>>>>>>> c39e1c38c8c5d60ff0be1122d8d3f5413ca87126
