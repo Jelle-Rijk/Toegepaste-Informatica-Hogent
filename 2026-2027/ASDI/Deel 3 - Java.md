@@ -80,3 +80,31 @@ vb. `Collections.unmodifiableList(existingList);`
 Dienen als abstracte implementaties van de interfaces die als basis voor een zelfgemaakte collection implementatie kunnen dienen.
 
 vb. AbstractCollection, AbstractList, AbstractMap, AbstractSequentialList, AbstractSet
+
+# Generics
+
+De types bij generics => type parameters
+
+Type parameters kunnen geen primitieve datatypes zijn.
+
+Syntax bij methoden:
+
+```java
+            // upperbound       return type
+public <T extends Comparable<T>> T maximum(T x, T y, T z) {
+    return null;
+}
+
+// Normale methoden mogen generieke methoden overloaden
+public static <T> void printArray(T[] inputArray) {};
+public static void printArray(String[] inputArray) {};
+```
+
+Nieuwe objecten genereren => Kan niet via type parameter (= Type Erasure principe). Je moet Objects aanmaken, casten naar type parameter en de unchecked warnings suppressen met `@SuppressWarnings("unchecked")`
+
+Type Erasure default naar een Object. Als je ten minste één upperbound meegeeft wordt de eerste upperbound gebruikt i.p.v. Object.
+
+Syntax meerdere upperbounds: `class MultipleBound<T extends A & B>`
+
+- Upperbound: <T extends UpperBound> => T moet UpperBound of een subtype van UpperBound zijn.
+- Lowerbound: <T super LowerBound> => T moet LowerBound of een supertype van LowerBound zijn.
