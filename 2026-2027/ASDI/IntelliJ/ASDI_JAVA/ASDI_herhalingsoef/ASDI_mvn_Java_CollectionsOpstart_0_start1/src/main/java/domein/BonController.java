@@ -1,0 +1,34 @@
+package domein;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public class BonController {
+	private ReductiebonBeheerder reductiebonBeheerder;
+
+	public BonController() { 
+		reductiebonBeheerder = new ReductiebonBeheerder();
+	}
+	
+	public void  init() {
+
+		//versie A dient te werken
+//		reductiebonBeheerder.storeBon(new Reductiebon("kerstbon", 50, LocalDate.of(2026, 12,10)));
+//		reductiebonBeheerder.storeBon(new Actiebon("Kerstdagen", "kerst", 15, LocalDate.of(2026, 12, 31)));
+
+		//versie B dient te werken
+//		List<Reductiebon> bonnen = List.of(new Reductiebon("kerstbon", 50, LocalDate.of(2026, 12,1)),
+//				new Actiebon("Kerstdagen", "kerst", 15, LocalDate.of(2026, 12, 30)));
+//		reductiebonBeheerder.addReeks(bonnen);
+
+		//versie C dient te werken
+		/*List<Actiebon> bonnen = List.of(new Actiebon("Paasdagen", "paas", 50, LocalDate.of(2027, 4,1)),
+				new Actiebon("Kerstdagen", "kerst", 15, LocalDate.of(2026, 12, 31)));
+		reductiebonBeheerder.addReeks(bonnen);
+
+		Reductiebon bon = reductiebonBeheerder.retrieveBon();
+		IO.println(bon);
+		Reductiebon bon2 = reductiebonBeheerder.retrieveBon();
+		IO.println(bon2);*/
+	}
+}

@@ -307,3 +307,9 @@ Definiëren:
 ```
 
 Aanroepen met `createNamedQuery("NaamVanDeNamedQuery")`
+
+# Observer Pattern in Java
+
+PropertyChangeSupport => als attribuut toevoegen binnen het subject (de observable). Je kan via dit attribuut `pcs.firePropertyChange(String propertyName, Object oldValue, Object newValue)` callen.
+
+De observer implementeert de PropertyChangeListener interface. En ontvangt PropertyChangeEvents via de methode `propertyChange(PropertyChangeEvent evt)`
