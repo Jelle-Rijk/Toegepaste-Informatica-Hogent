@@ -7,10 +7,9 @@ import ui.ConsoleApplicatie;
 public class StartUp {
 	public void main() {
 		
-		new ConsoleApplicatie(new SportclubController());
-		
-		//TODO uncomment OEF GENERICS
-		//BonController bc = new BonController();
-		//bc.init();
+//		new ConsoleApplicatie(new SportclubController());
+
+		BonController bc = new BonController();
+		bc.init();
 	}
 }

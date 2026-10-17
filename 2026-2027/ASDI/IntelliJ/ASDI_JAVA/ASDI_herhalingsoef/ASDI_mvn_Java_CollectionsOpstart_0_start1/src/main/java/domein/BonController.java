@@ -22,13 +22,13 @@ public class BonController {
 //		reductiebonBeheerder.addReeks(bonnen);
 
 		//versie C dient te werken
-		/*List<Actiebon> bonnen = List.of(new Actiebon("Paasdagen", "paas", 50, LocalDate.of(2027, 4,1)),
-				new Actiebon("Kerstdagen", "kerst", 15, LocalDate.of(2026, 12, 31)));
-		reductiebonBeheerder.addReeks(bonnen);
+//		List<Actiebon> bonnen = List.of(new Actiebon("Paasdagen", "paas", 50, LocalDate.of(2027, 4,1)),
+//				new Actiebon("Kerstdagen", "kerst", 15, LocalDate.of(2026, 12, 31)));
+//		reductiebonBeheerder.addReeks(bonnen);
 
 		Reductiebon bon = reductiebonBeheerder.retrieveBon();
 		IO.println(bon);
 		Reductiebon bon2 = reductiebonBeheerder.retrieveBon();
-		IO.println(bon2);*/
+		IO.println(bon2);
 	}
 }
