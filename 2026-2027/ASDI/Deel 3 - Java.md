@@ -280,6 +280,8 @@ Joins => je hoeft de kolom niet aan te geven (JPA weet al waarop je moet joinen)
 
 ```java
 "SELECT new EmployeeInfo(e.name, e.salary) FROM Employee e WHERE SIZE(e.projects) > 5" // maakt nieuw EmployeeInfo object aan
+
+"SELECT a FROM auto a WHERE a.onderhoudsbeurten IS NOT EMPTY" // => kijken of een many-relatie associaties heeft
 ```
 
 Je kan een date aangeven met `{d'yyyy-mm-dd'}`
